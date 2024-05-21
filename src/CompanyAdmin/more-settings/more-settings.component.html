@@ -1,0 +1,412 @@
+<app-sidebar></app-sidebar>
+<app-employee-top-menu></app-employee-top-menu> 
+
+<div class="content">
+ <!-- First row of settings' grid -->
+ <div *ngIf="currentForm === 'form1'">
+  <div class="content-wrapper"> 
+  <h2><strong>More Settings</strong></h2>
+  <hr>
+  <div class="row"  >
+ 
+    <!-- First column -->
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h6 class="card-title" routerLink="/company-settings"><strong>Account</strong></h6>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ultricies dui. Integer non mi nec urna varius iaculis at eget ex. Quisque et nibh non est varius pharetra id at quam</p>
+          
+          <hr>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Second column -->
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h6 class="card-title"><strong (click)="toggleForms('auditLog')">Audit Log</strong></h6>
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ultricies dui. Integer non mi nec urna varius iaculis at eget ex. Quisque et nibh non est varius pharetra id at quam</p>
+
+          <hr>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Third column -->
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h6 class="card-title"><strong (click)="toggleForms('emailNotifications')">Email Notifications</strong></h6>
+
+          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ultricies dui. Integer non mi nec urna varius iaculis at eget ex. Quisque et nibh non est varius pharetra id at quam</p>
+
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <!-- Second row of settings' grid -->
+    <div class="row">
+      <!-- First column -->
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 class="card-title"><strong  (click)="toggleForms('licence')">Licence</strong></h6>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ultricies dui. Integer non mi nec urna varius iaculis at eget ex. Quisque et nibh non est varius pharetra id at quam</p>
+            
+            <hr>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Second column -->
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 class="card-title"><strong  (click)="toggleForms('branding')">Branding</strong></h6>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ultricies dui. Integer non mi nec urna varius iaculis at eget ex. Quisque et nibh non est varius pharetra id at quam</p>
+
+            <hr>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Third column -->
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 class="card-title"><strong  (click)="toggleForms('custFields')">Custom Fields</strong></h6>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a ultricies dui. Integer non mi nec urna varius iaculis at eget ex. Quisque et nibh non est varius pharetra id at quam</p>
+
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ </div>
+    
+
+<!--Audit Log-->
+
+<div *ngIf="currentForm === 'auditLog'">
+  
+    <div class="content-wrapper">
+        
+  <div class="" id="top">
+    <div class="row">
+      <h2><strong>Audit Log</strong></h2>
+       <hr>
+      <!-- First column -->
+      <div class="col-md-5">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 class="card-title"><strong>Added Customers</strong></h6>
+            <p class="form-header">User : <span class="customer-info" > User Name</span></p>
+            <p class="form-header">Date Added : <span class="customer-info" > dd - mm - yyyy</span></p>
+            <p class="form-header">Email : <span class="customer-info" > User's Email</span></p>
+            <hr>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row" id="top">
+      <!-- Second column -->
+      <div class="col-md-5">
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 class="card-title"><strong>Added Customers</strong></h6>
+            <p class="form-header">User : <span class="customer-info" > User Name</span></p>
+            <p class="form-header">Date Added : <span class="customer-info" > dd - mm - yyyy</span></p>
+            <p class="form-header">Email : <span class="customer-info" > User's Email</span></p>
+            <hr>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <button class=" closeButton" (click)="toggleForms('form1')">Back</button>
+    
+  </div>
+</div>
+
+
+    
+    
+</div>
+
+
+<!--Branding-->
+
+<div *ngIf="currentForm === 'branding'">
+  
+  <div class="content-wrapper">
+    <h2><strong>Branding</strong></h2>
+  <hr>
+        <div class="row">
+          <div class="col-5" id="top"> 
+
+           <span>Title</span>
+           <input type="text" placeholder="Title Here" id="top">
+
+           <div class="logoImage">
+            <h2><strong>Upload Logo</strong></h2>
+            <div class="row" id="distance">
+              <div class="col">
+                <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)"/>
+
+                <button type="button" class="attachButton" type="file" (click)="fileInput.click()">
+                  Choose File
+                </button>
+                <br>
+                <span>The file size should not be more than 2MB</span>
+              </div><br/>
+
+              <div class="col" class="logoBackground">
+
+                <div *ngIf="logoImage">
+                  <img *ngIf="logoImage" [src]="logoImage" alt="Logo Image" >
+                  </div>
+
+              </div>
+            </div>
+           </div>
+
+           <!--
+           <span id="heading">Color Settings</span>
+
+
+           <div class="row" class="bottom">
+            <div class="col" >
+              <span class="form-header" >Primary color</span>
+              <div id="top">
+                  <input matInput type="color" [(ngModel)]="primaryColor" placeholder="Choose a color">
+              </div>
+              
+            </div>
+            <div class="col">
+              <span class="form-header">Secondary color</span>
+              <div id="top">
+                <input matInput type="color" [(ngModel)]="secondaryColor" placeholder="Choose a color">
+            </div>
+
+            </div>
+
+           </div>-->
+
+
+           
+           <span id="heading">Contact Us</span>
+
+           <input type="email" id="top"> 
+
+
+           <span id="heading">Custom Link</span>
+
+           <input type="email" id="top"> 
+
+          </div>
+      
+      
+        
+      </div>
+      <button type="submit" class="nextButton">Save changes</button>
+    </div>
+    
+    
+</div>
+
+<!--Custom Fields-->
+
+<div *ngIf="currentForm === 'custFields'">
+  
+
+   
+          <div class="content-wrapper">
+            <div class="row">
+              <h2><strong>Custom Fields</strong></h2>
+              <hr>
+              <div class="col-13" id="content" >
+      
+                <div class="" >
+                      <div class="row">
+                     
+                          <table class="borderless-table">
+                              <thead>
+                                  <tr>
+                                      <th>No</th>
+                                      <th>Field Name</th>
+                                      <th>Field Type</th>
+                                      <th>Status</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          
+                      </div>
+                  </div>
+              </div>
+              <button class=" closeButton" (click)="toggleForms('form1')">Back</button>
+
+            </div>
+          </div>
+
+</div>
+
+
+<!--Email Notifications-->
+
+<div *ngIf="currentForm === 'emailNotifications'">
+  
+
+  
+        <div class="content-wrapper">
+          <h2><strong>Email Templates</strong></h2>
+          <hr>
+          <div class="row">
+           
+            <div class="col-13" id="content" >
+    
+              <div class="" >
+                    <div class="row">
+                      
+                        <table class="borderless-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Title</th>
+                                    <th>Last Updated</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="form-header">1</span></td>
+                                    <td><span class="form-header"></span></td>
+                                    <td><span class="form-header"></span></td>
+                                    <td><span class="form-header"></span></td>
+                                    <td><span class="form-header"></span></td>
+
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+            <button class=" closeButton" (click)="toggleForms('form1')">Back</button>
+
+          </div>
+        </div>
+
+</div>
+
+
+<!--License-->
+
+<div *ngIf="currentForm === 'licence'">
+  
+        <div class="content-wrapper">
+          <div class="row">
+            <h2><strong>Licence</strong></h2>
+            <hr>
+            <div class="col-13" id="content" >
+    
+              <div class="">
+                    <div class="row">
+                        <table class="borderless-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Expiry</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="form-header">1</span></td>
+                                    <td><span class="form-header">Essential</span></td>
+                                    <td><span class="form-header">24 - Oct - 2027</span></td>
+                                    <td><span class="form-header">Active</span></td>
+                                    <td><button class="edit" routerLink="">Renew</button> <button class="cancel">Upgrade</button></td>
+
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+          </div>
+          <button class=" closeButton" (click)="toggleForms('form1')">Back</button>
+
+        </div>
+
+</div>
+
+
+    
+    
+</div>

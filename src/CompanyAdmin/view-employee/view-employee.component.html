@@ -1,0 +1,93 @@
+<app-sidebar></app-sidebar>
+<app-employee-top-menu></app-employee-top-menu> 
+<div class="content">
+    
+
+    <div class="content-wrapper">        <h2 class="agents-name"><strong>Employee's Name</strong></h2>
+        <hr/>
+    <div class="row">  
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-body">
+             <ul class="settings-menu">
+                <li><a  class="form-header"> Profile</a></li>
+                <hr>
+                <li><a  class="form-header"> Tickets</a></li>
+                
+            </ul>
+         </div>
+         </div>
+         </div>
+   
+         
+        <div class="col-7">
+            <div>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="row">
+
+                    <h6 class="card-title">Employee's Details</h6>
+
+
+                               
+                
+                    
+                            
+                            <div class="row">
+                                <div class="col">
+                            <p class="form-header" style="margin-bottom: 5px; margin-top: 20px;">Name:</p>
+                            <p class="form-header" id="bottomParts">Phone number: </p>        
+                            <p class="form-header" id="bottomParts">Email: </p> 
+                            <p class="form-header" id="bottomParts">Department: </p>    
+                            
+                             </div>
+                             
+                             <div class="col">
+                                <p class="form-header"  style="margin-bottom: 5px; margin-top: 20px;">{{user.fullName +' '+user.lastName}}</p>
+                                <p class="form-header" id="bottomParts">{{user.contactNumber}} </p>
+                                <p class="form-header" id="bottomParts">{{user.email}} </p>
+                                 <p class="form-header" id="bottomParts">{{user.position}} </p>
+                                
+                                 </div>
+                             <br/>
+                             
+                        </div>
+                        </div>
+
+                        <!--Ticket Handler Container-->
+                        <div class="row">
+                            <h6 class="card-title">Ticket Handler</h6>
+                            
+                           
+
+                            <div class="col">
+                                
+                                <p class="form-header" style="margin-bottom: 5px; margin-top: 20px;">Ticket Solved:</p>
+                                <p class="form-header" id="bottomParts">Ticket Pending:</p>        
+                                <p class="form-header" id="bottomParts">Ticket in Progress:</p> 
+                            </div>
+            
+                            <br>
+                            <div class="col">
+                                <p class="form-header" style="margin-bottom: 5px; margin-top: 20px;">0000</p>
+                                <p class="form-header" id="bottomParts">0000</p>        
+                                <p class="form-header" id="bottomParts">0000</p> 
+                            </div>
+            
+                        </div>
+
+                    
+
+
+                    </div>
+                </div>
+
+            </div>
+         
+            
+        </div>
+    </div>
+
+
+       
+ </div>

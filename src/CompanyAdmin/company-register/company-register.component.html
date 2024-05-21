@@ -1,0 +1,153 @@
+
+
+<div class="container-fluid">
+      <div class="content-background">
+      <div style="display: flex; justify-content: center;">
+          <div class="row">
+            <div style="margin-top: 50px;">
+              <img src="../../../../assets/images/Icon.png" alt="Service Desk" style="text-align: center;">
+              <span class="Service-Desk" style="font-weight: bold;"> Service Desk</span>
+            </div>
+          </div>
+  
+        </div>
+
+        <div style="position: relative; height: 75px;"> <!-- Add position relative and height to the parent div -->
+          <span style="font-weight: bold; justify-content: center; margin-left: 15%; margin-top: 50px; position: absolute;">Create Account</span>
+      </div>
+
+        
+       
+        <br>
+        <div class="row">
+          <form [formGroup]="loginForm" class="col-md-6 mx-auto" *ngIf="currentForm === 'form1'">
+            <!--
+            <h5 class="form-header"><strong>Create Account</strong></h5>
+            <hr/>-->
+            <div class="form-group">
+                <input type="text" class="" id="firstname" formControlName="firstName" placeholder="First Name">
+                <div
+                *ngIf="register['firstName'].invalid && (register['firstName'].dirty || register['firstName'].touched)"
+                class="alert alert-danger">
+                <span *ngIf="register['firstName'].errors?.['required']" style="color:#f98f8f">First Name is required</span>
+                 </div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="" id="name" formControlName="lastName" placeholder="Last Name">
+            <div
+            *ngIf="register['lastName'].invalid && (register['lastName'].dirty || register['lastName'].touched)"
+            class="alert alert-danger">
+            <span *ngIf="register['lastName'].errors?.['required']" style="color:#f98f8f">Last Name is required</span>
+             </div>
+          </div>
+          <div class="form-group">
+            <input type="email" class="" id="email" formControlName="email" placeholder="Email Address">
+            <div
+            *ngIf="register['email'].invalid && (register['email'].dirty || register['email'].touched)"
+            class="alert alert-danger">
+            <span *ngIf="register['email'].errors?.['required']" style="color:#f98f8f">Email is required</span>
+            <span *ngIf="register['email'].errors?.['email']" style="color:#f98f8f">Please enter valid email</span>
+             </div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="" id="number" formControlName="contactNumber" placeholder="Contact Number">
+            <div
+            *ngIf="register['contactNumber'].invalid && (register['contactNumber'].dirty || register['contactNumber'].touched)"
+            class="alert alert-danger">
+            <span *ngIf="register['contactNumber'].errors?.['required']" style="color:#f98f8f">Contact number is required</span>
+            <span *ngIf="register['contactNumber'].errors?.['pattern']">Invalid contact number</span>
+
+             </div>
+          </div>
+
+          <!--       <input type="text" formControlName="phone_number" style="margin-bottom: 25px;">
+                            <div *ngIf="register['phone_number'].invalid && (register['phone_number'].dirty || register['phone_number'].touched)" class="alert alert-danger">
+                              <span *ngIf="register['phone_number'].errors?.['required']">Phone number is required</span>
+                              <span *ngIf="register['phone_number'].errors?.['pattern']">Invalid phone number</span>
+                            </div>-->
+
+          <button [disabled]="loginForm.invalid || isLoading" type="submit"
+    class="btn btn-primary btn-user btn-block mb-3" (click)="toggleForms()" style="height: 45px;">
+    <span *ngIf="isLoading" class="loader"></span>
+    <span *ngIf="!isLoading">Continue</span>
+</button>
+
+
+                  <div class="text-left">
+                      <span style="color: grey">Already have an account? <a routerLink="/company-login"  style="color:#54BEB8;text-decoration: none;">Login</a></span>
+                  </div> 
+          </form>
+        </div>
+
+
+        <!--Company Register Form-->
+
+        <div class="row" *ngIf="currentForm === 'form2'">
+          <form [formGroup]="companyRegisterForm" class="col-md-6 mx-auto" >
+            
+            <div class="form-group">
+              <input type="text" class="" id="companyName" formControlName="companyName" placeholder="Company Name">
+              <div
+              *ngIf="company['companyName'].invalid && (company['companyName'].dirty || company['companyName'].touched)"
+              class="alert alert-danger">
+              <span *ngIf="company['companyName'].errors?.['required']" style="color:#f98f8f">Company Name is required</span>
+               </div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="" id="company_email" formControlName="companyEmail" placeholder="Email Address">
+          <div
+          *ngIf="company['companyEmail'].invalid && (company['companyEmail'].dirty || company['companyEmail'].touched)"
+          class="alert alert-danger">
+          <span *ngIf="company['companyEmail'].errors?.['required']" style="color:#f98f8f">Email is required</span>
+          <span *ngIf="company['companyEmail'].errors?.['email']" style="color:#f98f8f">Please enter valid email</span>
+          <span *ngIf="company['companyEmail'].getError('emailsMatch')" class="alert alert-danger" style="color:#f98f8f">Password does not match</span>
+           </div>
+        </div>
+
+        
+                      
+            <div class="form-group">
+              <input type="password" class="" formControlName="password" placeholder="Password">
+                          <div
+                          *ngIf="company['password'].invalid && (company['password'].dirty || company['password'].touched)"
+                          >
+                          <div *ngIf="company['password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Password is required</div>
+                          <div *ngIf="company['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
+                          <div *ngIf="company['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
+
+                          </div>
+
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="" formControlName="confirm_password" placeholder="Confirm Password">
+                            <div
+                            *ngIf="company['confirm_password'].invalid && (company['confirm_password'].dirty || company['confirm_password'].touched)"
+                            >
+                            <div *ngIf="company['confirm_password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Please confirm your password</div>
+                            <div *ngIf="company['confirm_password'].getError('MustMatch')" class="alert alert-danger" style="color:#f98f8f">Password does not match</div>
+                            </div>
+            </div>
+          <button [disabled]="companyRegisterForm" type="submit"
+                      class="btn btn-primary btn-user btn-block mb-3" style="height: 45px;">
+                      Create Account
+                  </button>
+                 
+                  <div class="text-left">
+                      <span style="color: grey">Already have an account? <a routerLink="/company-login"  style="color:#54BEB8;text-decoration: none;">Login</a></span>
+                  </div> 
+          </form>
+        </div>
+
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+

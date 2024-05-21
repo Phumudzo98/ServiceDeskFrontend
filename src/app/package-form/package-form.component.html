@@ -1,0 +1,63 @@
+<div class="notification">
+
+    <h3 style="color: black"><strong>Add Package</strong></h3>
+    <hr>
+    
+    <form [formGroup]="subscriptionForm" >         
+      <fieldset>
+        <input type="text" id="name" name="subscription_name" formControlName="name" placeholder="Package Name">
+        <div
+        *ngIf="add_subscriber['name'].invalid && (add_subscriber['name'].dirty || add_subscriber['name'].touched)"
+        class="alert alert-danger"  >
+        <span *ngIf="add_subscriber['name'].errors?.['required']">Package name is required</span>
+        <span *ngIf="add_subscriber['name'].errors?.['containsNumbers']">Please enter valid Full name</span>
+         </div>
+
+         <input type="text" id="price" name="price" formControlName="price" placeholder="Price">
+         <div
+         *ngIf="add_subscriber['price'].invalid && (add_subscriber['price'].dirty || add_subscriber['price'].touched)"
+         class="alert alert-danger">
+         <span *ngIf="add_subscriber['price'].errors?.['required']">Price is required</span>
+         <span *ngIf="add_subscriber['price'].errors?.['notANumber']" >Invalid price entered</span>
+          </div>
+
+          <div class="dateInput">
+            <input matInput [matDatepicker]="picker" formControlName="expDate" placeholder="Expiry Date" style="width: 100%">
+            <mat-datepicker-toggle matSuffix [for]="picker" style="position: absolute; right: 0;"></mat-datepicker-toggle>
+          </div>
+          <mat-datepicker #picker panelClass="datepickerTwo"></mat-datepicker>
+          <div
+          *ngIf="add_subscriber['expDate'].invalid && (add_subscriber['expDate'].dirty || add_subscriber['expDate'].touched)"
+          class="alert alert-danger" >
+          <span *ngIf="add_subscriber['expDate'].errors?.['required']" >Expiry date is required</span>
+          </div>
+       
+        
+
+         <input type="text" id="Agents" name="Agents" formControlName="agents" placeholder="Agents">
+         <div
+         *ngIf="add_subscriber['agents'].invalid && (add_subscriber['agents'].dirty || add_subscriber['agents'].touched)"
+         class="alert alert-danger" >
+         <span *ngIf="add_subscriber['agents'].errors?.['required']" >Agents is required</span>
+         <span *ngIf="add_subscriber['agents'].errors?.['notANumber']" >Please enter valid number of agents</span>
+
+          </div>
+          
+          
+      </fieldset>
+      <button type="submit" class="nextButton" [disabled]="subscriptionForm.invalid || showSpinner" (click)="addPackage()">
+        <span *ngIf="!showSpinner">Add Package</span>
+        <div *ngIf="showSpinner" class="spinner"></div>
+      </button>
+
+  </form>
+
+  <div *ngIf="successMessage">
+    <div class="alert alert-success" role="alert">
+        {{ successMessage }}
+  </div>
+</div>
+
+<button class="closeButton" (click)=" closeWindow()">Close</button>
+
+    </div>

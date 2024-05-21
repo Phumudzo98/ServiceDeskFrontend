@@ -1,0 +1,101 @@
+
+  
+    .closeButton
+  {
+    color: #fff;
+    background-color: #E94435;
+      font-style: normal;
+      border-radius: 4px;
+      width: 100px;
+      height: 40px;
+      border: none;
+      margin-top: 0px;
+  }
+    
+   
+    .active-status
+    {
+      color: #0FB967;
+    }
+  
+  .borderless-table {
+      border-collapse: collapse;
+      margin-top: 15px; 
+      margin-bottom: 15px;
+      border-left: 0px;
+      border-right: 0px;
+      border-top: 0px;
+      padding: 50px;
+      width: 100%;
+      margin-top: 50px;
+
+  }
+  .borderless-table th,
+  .borderless-table td {
+      text-align: center; /* Align content in the center */
+      padding: 8px; /* Add padding for better spacing */
+      border-bottom:1px solid #E2E3E9;
+      border-top: 0px;
+      border-left: none;
+      border-right: none;
+    
+  }
+  
+  th {
+      height: 60px;
+      background-color: #F1F0FE;
+  }
+  
+  td {
+      height: 60px;
+      text-align: center;
+      padding: 8px; /* Add padding for better spacing */
+      word-wrap: break-word;
+  }
+  
+  
+  .edit{
+      color: #fff;
+          background-color: #3818D9;
+          font-style: normal;
+          height: 40px;
+          width: 100px;
+          border: 1px solid #3818D9;
+          padding: none;
+          border-radius: 4px;
+  }
+  
+  .cancel{
+      color: #fff;
+          background-color: #FFC145;
+          font-style: normal;
+          height: 40px;
+          width: 85px;
+          margin-left: 15px;
+          border: 1px solid #FFC145;
+          padding: none;
+          border-radius: 4px;
+  
+  
+  }
+  
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+     
+      
+    
+    
+    

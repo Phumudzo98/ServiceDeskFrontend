@@ -1,0 +1,147 @@
+<app-sidebar></app-sidebar>
+<app-employee-top-menu></app-employee-top-menu> 
+  
+  <div class="content">
+
+    <div class="content-wrapper">
+                    <h2><strong>Subscriptions</strong></h2>
+            <hr/>
+            <!--If the current package is Free-->
+            <div *ngIf="currentPackage===packageFree">
+                <p>Your current package: {{packageFree}}</p>
+                <table class="borderless-table">
+                  
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Essentials</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="edit" >Upgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Team</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="edit" >Upgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Enterprise</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="edit" >Upgrade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+    
+            </div>
+
+              <!--If the current package is Essentials-->
+              <div *ngIf="currentPackage===packageEssentials">
+                <p>Your current package: {{packageEssentials}}</p>
+                <p>You can upgrade: </p>
+                <table class="borderless-table">
+                  
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Free</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="closeButton" >Downgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Team</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="edit" >Upgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Enterprise</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="edit" >Upgrade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+    
+            </div>
+
+             <!--If the current package is Team-->
+             <div *ngIf="currentPackage===packageTeam">
+                <p>Your current package: {{packageTeam}}</p>
+                <table class="borderless-table">
+                  
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Free</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="closeButton" >Downgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Essentials</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="closeButton" >Downgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Enterprise</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="edit" >Upgrade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+    
+            </div>
+
+             <!--If the current package is Enterprise-->
+             <div *ngIf="currentPackage===packageEnterprise">
+                <p>Your current package: {{packageEnterprise}}</p>
+                <table class="borderless-table">
+                  
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Free</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="closeButton" >Downgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Essentials</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="closeButton" >Downgrade</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Team</td>
+                            <td>10 - 10- 2023</td>
+                            <td class="active-status">Active</td>
+                            <td><button class="closeButton" >Downgrade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+    
+            </div>
+       
+        </div>
+
+        
+       
+ </div>
+

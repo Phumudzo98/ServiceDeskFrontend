@@ -1,0 +1,124 @@
+<app-admin-sidebar></app-admin-sidebar>
+<app-admin-top-menu></app-admin-top-menu>  
+  
+  <div class="content">
+
+    <div class="content-wrapper">
+                    <h2><strong>Subscriptions</strong></h2>
+            <hr/>
+          <div class="row">
+            
+            <div class="col-13" id="content">
+               
+              
+    
+              <div class="container text-left">
+                    <div class="row">
+                      <div >
+                        <button class="addButton" (click)="toggleAddForms()">
+                          Add
+                      </button>
+                    </div>
+                    <app-package-form *ngIf="addVisible" (close)="addVisible = false"></app-package-form>
+
+
+                        <table class="borderless-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Expiry</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Enterprise</td>
+                                    <td>10 - 10- 2023</td>
+                                    <td class="active-status">Active</td>
+                                   
+                                    <td>
+                                        <button class="edit" routerLink="/edit-subscription">Edit</button>
+                                          <button class="cancel">Deactivate</button>
+                                    </td>
+                                 <tr>
+                                    <td>2</td>
+                                    <td>Enterprise</td>
+                                    <td>10 - 10- 2023</td>
+                                    <td class="active-status">Active</td>
+                                    <td>
+                                      <button class="edit" routerLink="/edit-subscription">Edit</button>
+                                        <button class="cancel">Deactivate</button>
+                                  </td>
+                                     <tr>
+                                        <td>3</td>
+                                        <td>Enterprise</td>
+                                        <td>10 - 10- 2023</td>
+                                        <td class="active-status">Active</td>
+                                        <td>
+                                          <div class="button-container">
+                                            <button class="edit" routerLink="/edit-subscription">Edit</button>
+                                            <div class="dropdown" [ngClass]="{ 'open': isDropdownOpen[2] }">
+                                              <button class="cancel" (click)="toggleDropdown(2)" [disabled]="isConfirmingDeactivation">
+                                                <ng-container *ngIf="!isConfirmingDeactivation">{{ buttonText }}</ng-container>
+                                                <ng-container *ngIf="isConfirmingDeactivation">
+                                                  <div class="simple-spinner-container">
+                                                    <span class="simple-spinner"></span>
+                                                  </div>                                                    
+                                                </ng-container>
+                                                
+                                                </button>
+                                            
+                                            
+                                                <div class="dropdown-content">
+                                                    <span>Are you sure you want to <strong>Deactivate?</strong></span>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <button (click)="confirmDeactivation()">Yes</button>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button (click)="closeDropdown()">No</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--Activate-->
+                                                <div class="dropdown-content" *ngIf="buttonText==='Activate'">
+                                                  <span>Are you sure you want to <strong>Activate?</strong></span>
+                                                  <hr>
+                                                  <div class="row">
+                                                      <div class="col">
+                                                          <button (click)="confirmDeactivation2()">Yes</button>
+                                                      </div>
+                                                      <div class="col">
+                                                          <button (click)="closeDropdown()">No</button>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      
+                                        
+                                        </td>
+                                      </tr>
+                                       </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+
+                
+            </div>
+
+         
+
+        </div>
+
+        </div>
+       
+          
+      </div>
+

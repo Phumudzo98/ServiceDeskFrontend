@@ -1,0 +1,139 @@
+
+  <app-sidebar></app-sidebar>
+  <app-employee-top-menu></app-employee-top-menu> 
+  <div class="content">
+    
+
+    <div class="content-wrapper"> 
+      <h2><strong>Dashboard</strong></h2>
+      <hr/>
+      <div class="row" id="content">
+        
+        <span class="form-header" style="margin-bottom: 5px; margin-top: 5px">Displaying Tickets Report</span>
+  
+            <div class="container text-left" style="margin-top: 15px;" >
+              
+          <div class="row">
+  
+           <!--New Tickets Bar graph-->
+  
+         <div class="col" id="details">
+          <div style="display: inline;">
+            <span class="form-header badge badge-success" id="statusID">Opened</span>
+            <span class="vertical-line"></span>
+            <span class="filter">Filters:</span>
+            <select id="filter" name="">
+              <option value="Type 1">Select</option>
+              <option value="7days"> 30 days</option>
+              <option value="14days">60 days</option>
+              <option value="21days">90 days</option>
+              <option value="Full Month">1 Year</option>
+            </select>
+  
+            <!--Apply filter Button -->
+            <button class="applyFilter">Apply Filter</button>
+  
+            <button class="export">Export CSV</button>
+            <p class="ticket-category"></p>
+          </div>
+          
+          <app-bar-graph></app-bar-graph>
+         </div>
+  
+           <!--End Of New Tickets Bar graph-->
+
+         <div class="col" id="details">
+          <div style="display: inline;">
+            <span class="form-header badge badge-warning" id="inprogress">In Progress</span>
+            <span class="vertical-line"></span>
+            <span class="filter">Filters:</span>
+            <!--Dropdown for filtering-->
+            <select id="filter" name="">
+              <option value="Type 1">Select</option>
+              <option value="7days"> 30 days</option>
+              <option value="14days">60 days</option>
+              <option value="21days">90 days</option>
+              <option value="Full Month">1 Year</option>
+            </select>
+             <!--End Of Dropdown for filtering 7 days-->
+
+               <!--Apply filter Button -->
+          <button class="applyFilter">Apply Filter</button>
+
+             
+            <button class="export">Export CSV</button>
+            <p class="ticket-category"></p>
+          </div>
+
+<app-in-progress></app-in-progress>
+</div>
+<!--End Of In Progress Bar graph-->
+  
+         <!--End Of Resolved Ticket Bar graph-->
+  
+        
+                </div>
+            </div>
+  
+          <!--In Progress Bar graph  <p class="form-header badge badge-danger" id="priorityID">Urgent</p>
+                  <p class="form-header badge badge-success" id="statusID"-->
+  
+            <div class="container text-left" style="margin-top: 15px;" >
+                <div class="row">
+  
+         <!--Un resolved Bar graph-->
+         <div class="col" id="details">
+          <div style="display: inline;">
+            <span class="form-header badge badge-danger" id="priorityID">Closed</span>
+            <span class="vertical-line"></span>
+            <span class="filter">Filters:</span>
+            <select id="filter" name="">
+              <option value="Type 1">Select</option>
+              <option value="7days"> 30 days</option>
+              <option value="14days">60 days</option>
+              <option value="21days">90 days</option>
+              <option value="Full Month">1 Year</option>
+            </select>
+              <!--Apply filter Button -->
+              <button class="applyFilter" (click)="applyFilters()">Apply Filter</button>
+            <button class="export">Export CSV</button>
+            <p class="ticket-category"></p>
+          </div>
+  
+  
+          <app-unresolved></app-unresolved>
+        </div>
+        <!--End Of Un resolved Bar graph-->
+  
+        <!--Resolved Tickets Bar graph-->
+        <div class="col" id="details">
+          <div style="display: inline;">
+            <span class="form-header badge badge-success" id="escalated">Escalated</span>
+            <span class="vertical-line"></span>
+            <span class="filter">Filters:</span>
+            <select id="filter" name="">
+              <option value="Type 1">Select</option>
+              <option value="7days"> 30 days</option>
+              <option value="14days">60 days</option>
+              <option value="21days">90 days</option>
+              <option value="Full Month">1 Year</option>
+            </select>
+              <!--Apply filter Button -->
+              <button class="applyFilter">Apply Filter</button>
+            <button class="export">Export CSV</button>
+            
+          </div>
+          
+          <app-escalated-graph></app-escalated-graph>
+         </div>
+
+                </div>
+            </div>
+
+        </div>
+       
+          
+      </div>
+        
+    </div>
+  

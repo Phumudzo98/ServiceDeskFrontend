@@ -1,0 +1,295 @@
+<app-employee-sidebar></app-employee-sidebar>
+<app-top-menu></app-top-menu>
+  
+  <div class="content">
+   
+    <p></p>
+    <div class="content-wrapper">
+      <div class="row">
+        <h2 ><strong>Settings</strong></h2>
+        <hr/>
+        
+        <div class="col-4">
+          <div class="card shadow">
+              <div class="card-body">
+
+                <h6 class="card-title"><strong>Account</strong></h6>
+                <hr/>
+           <ul class="settings-menu">
+            <li><a class="card-text" (click)="toggleForms('form1')"><img src="assets/images/iconamoon_profile-light.svg" style="margin-right: 25px;" > Edit Profile</a></li>
+            <li><a  class="card-text" (click)="toggleForms('form5')"><img src="assets/images/material-symbols_privacy-tip-outline.svg" style="margin-right: 25px;" > Security</a></li>
+            <li><a  class="card-text" (click)="toggleForms('form3')"><img src="assets/images/iconamoon_notification.svg" style="margin-right: 25px;" > Notifications</a></li>
+            <li><a  class="card-text" (click)="toggleForms('form4')"><img src="assets/images/ic_outline-lock.svg" style="margin-right: 25px;" > Privacy</a></li>
+          </ul>
+       </div>
+       </div>
+       </div>
+      
+        <div class="col-7">
+
+            <form [formGroup]="profileForm" *ngIf="currentForm === 'form1'" >
+               
+                <fieldset>
+              
+                  <label for="first-name">First Name</label>
+                  <input type="text" id="name" name="user_name" formControlName="firstName" placeholder="">
+                  <div
+                  *ngIf="profile['firstName'].invalid && (profile['firstName'].dirty || profile['firstName'].touched)"
+                  class="alert alert-danger" style=" width: 800px; border-radius: 4px;" >
+                  <span *ngIf="profile['firstName'].errors?.['required']" style="color:#f98f8f" >Fullname is required</span>
+                  <span *ngIf="profile['firstName'].errors?.['containsNumbers']" style="color:#f98f8f">Please enter valid Full name</span>
+                   </div>
+
+                   <label for="last-name">Last Name</label>
+                   <input type="text" id="name" name="user_name" formControlName="lastName" placeholder="">
+                   <div
+                   *ngIf="profile['lastName'].invalid && (profile['lastName'].dirty || profile['lastName'].touched)"
+                   class="alert alert-danger" style=" width: 800px; border-radius: 4px;" >
+                   <span *ngIf="profile['lastName'].errors?.['required']" style="color:#f98f8f" >Lastname is required</span>
+                    </div>
+
+                   <label for="email" class="input-fields">Email</label>
+                  <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Company Email">
+                  <div
+                  *ngIf="profile['email'].invalid && (profile['email'].dirty || profile['email'].touched)"
+                  class="alert alert-danger">
+                  <span *ngIf="profile['email'].errors?.['required']" style="color:#f98f8f">Email is required</span>
+                  <span *ngIf="profile['email'].errors?.['email']" style="color:#f98f8f">Please enter valid email</span>
+                   </div>
+                   <!--
+                    <label for="dob" class="input-fields">Date Of Birth</label>
+                    <div class="dateInput">
+                      <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="Choose a date" style="width: calc(100% - 24px); /* Subtracting the width of the toggler */">
+                      <mat-datepicker-toggle matSuffix [for]="picker" style="position: absolute; right: 0;"></mat-datepicker-toggle>
+                    </div>
+                    <mat-datepicker #picker panelClass="datepickerTwo"></mat-datepicker>
+                    <div
+                    *ngIf="profile['dob'].invalid && (profile['dob'].dirty || profile['dob'].touched)"
+                    class="alert alert-danger" style="width: 750px; border-radius: 4px;">
+                    <span *ngIf="profile['dob'].errors?.['required']" style="color:#f98f8f;">Date of birth is required</span>
+                    </div>
+
+                    <label for="country" class="input-fields">Country</label>
+                   <input type="text" id="country" name="user_country" formControlName="country">
+                   <div
+                   *ngIf="profile['country'].invalid && (profile['country'].dirty || profile['country'].touched)"
+                   class="alert alert-danger">
+                   <span *ngIf="profile['country'].errors?.['required']" style="color:#f98f8f">Country is required</span>
+                    </div>-->
+                    <label for="email" >Department</label>
+                    <input type="text" id="name" name="user_name" formControlName="department" placeholder="">
+                    <div
+                    *ngIf="profile['department'].invalid && (profile['department'].dirty || profile['department'].touched)"
+                    class="alert alert-danger" style=" width: 800px; border-radius: 4px;" >
+                    <span *ngIf="profile['department'].errors?.['required']" style="color:#f98f8f" >Department is required</span>
+                     </div>
+               
+               
+                  </fieldset>
+
+
+                <label for="country" class="input-fields"> Profile Image</label>
+
+                <input type="file" #fileInput style="display: none;" />
+
+                <button type="button" class="attachButton" type="file">
+                  Choose File
+                </button>  
+                
+                 
+               
+                <button type="submit" class="nextButton" [disabled]="profileForm.invalid || showSpinner" (click)="saveChanges()">
+                  <span *ngIf="!showSpinner">Save changes</span>
+                  <div *ngIf="showSpinner" class="spinner"></div>
+                </button>                
+            </form>
+
+            <!--Change password Form-->
+            <form [formGroup]="passwordForm" *ngIf="currentForm === 'form5'" >
+               
+              <fieldset>
+            
+               
+                 
+                 <label for="old_password" class="input-fields">Old Password</label>
+                 <input type="password" id="password" name="user_password" formControlName="old_password">
+                 <div
+                 *ngIf="password['old_password'].invalid && (password['old_password'].dirty || password['old_password'].touched)"
+                 >
+                 <div *ngIf="password['old_password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Old password is required</div>
+                 <div *ngIf="password['old_password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
+                 <div *ngIf="password['old_password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
+
+                  </div>
+
+                  <label for="new_password" class="input-fields">New Password</label>
+                  <input type="password" id="password" name="user_password" formControlName="new_password">
+                  <div
+                  *ngIf="password['new_password'].invalid && (password['new_password'].dirty || password['new_password'].touched)"
+                  >
+                  <span *ngIf="password['new_password'].errors?.['required']" class="alert alert-danger">New password is required</span>
+                  <div *ngIf="password['new_password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
+                  <div *ngIf="password['new_password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
+ 
+                
+                </div>
+
+                   <label for="confirm_password" class="input-fields">Confirm Password</label>
+                   <input type="password" id="password" name="user_password" formControlName="confirm_password">
+                   <div
+                   *ngIf="password['confirm_password'].invalid && (password['confirm_password'].dirty || password['confirm_password'].touched)"
+                   class="alert alert-danger">
+                   <span *ngIf="password['confirm_password'].getError('required')" style="color:#f98f8f">Please confirm your password</span>
+                   <span *ngIf="password['confirm_password'].errors?.['MustMatch']" style="color:#f98f8f">Password does not match</span>
+
+                    </div>
+                    
+
+               
+              </fieldset>
+ 
+              <button type="submit" class="nextButton" [disabled]="passwordForm.invalid || showSpinner" (click)="changesPassword()">
+                <span *ngIf="!showSpinner">Save Password</span>
+                <div *ngIf="showSpinner" class="spinner"></div>
+              </button>
+              
+          </form>
+           <!--Success message-->
+              
+           <div *ngIf="successMessage">
+            <div class="alert alert-success" role="alert" style="width: 800px">
+                {{ successMessage }}
+          </div>
+           </div>
+          
+
+            <!--Notifications-->
+            
+            <div *ngIf="currentForm === 'form3'">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h6 class="card-title">Notifications</h6>
+
+                <hr>
+
+                <ol>
+                  <!--Email Alerts-->
+                    <div>
+                      <span class="card-title"><strong>Email Alerts</strong></span>
+                      <div class="row">
+                        <div class="col">
+                      <span class="form-header" style="margin-top: 10px;">Ticket Notification:</span><br>
+                      <span class="form-header">Ticket Closure: </span><br>
+                      <span class="form-header">Ticket Response:</span><br>
+                      </div>
+
+                    <div class="col">
+                      <span class="form-header">On</span><br>
+                      <span class="form-header">On</span><br>
+                      <span class="form-header">On</span><br>
+
+                    </div>
+                    </div>
+                    </div>
+                   <!--End Of Email Alerts-->
+
+                <!--Updates Alerts-->
+                <div style="margin-top: 15px;">
+                  <span class="card-title"><strong>Updates Alerts</strong></span>
+                  <div class="row">
+                    <div class="col">
+                  <span class="form-header" style="margin-top: 10px;">Default (notifications on)</span><br>
+                
+                  </div>
+
+                <div class="col">
+                  <span class="form-header">On</span><br>
+            
+                </div>
+                </div>
+                </div>
+               <!--End Of Updates Alerts-->
+
+               
+                <!--Updates Alerts-->
+                <div style="margin-top: 15px;">
+                  <span class="card-title"><strong>Account Changes</strong></span>
+                  <div class="row">
+                    <div class="col">
+                  <span class="form-header" style="margin-top: 10px;">Default (notifications on)</span><br>
+                  <span class="form-header">Profile Changes:</span><br>
+                  <span class="form-header">Password Changes:</span><br>
+                  <span class="form-header">Privacy Changes:</span><br>
+
+
+                
+                  </div>
+
+                <div class="col">
+                  <span class="form-header">On</span><br>
+                  <span class="form-header">On</span><br>
+                  <span class="form-header">On</span><br>
+                  <span class="form-header" (click)="toggleState()">{{ buttonText }}</span><br>
+                </div>
+                </div>
+                </div>
+               <!--End Of Updates Alerts-->
+
+                    <button class="closeButton">Restore to default</button>
+
+                </ol>
+
+              </div>
+            </div>
+
+            </div>
+
+            <!--End of Notifications-->
+
+                 <!--Privacy-->
+                 <div *ngIf="currentForm === 'form4'">
+                  <div class="card shadow">
+                    <div class="card-body">
+
+                    <h6 class="card-title" id="top">Privacy</h6>
+
+                    <hr>
+    
+                    <ol>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </li>
+
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </li>
+
+                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </li>
+    
+                    </ol>
+    
+                    </div>
+                    </div>
+    
+    
+                </div>
+
+           
+
+            
+        </div>
+
+       
+      </div>
+     
+      </div>
+
+     
+
+    
+
+    
+  </div>
+  
+
+
+
