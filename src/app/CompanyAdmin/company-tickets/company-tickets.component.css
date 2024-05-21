@@ -1,0 +1,591 @@
+
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
+.card2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* slight shadow */
+  border: none; /* remove border */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFF;
+  text-decoration: none;
+  border: none;
+}
+
+.card-header a{
+  text-decoration: none;
+  margin: 0;
+}
+
+.date-view{
+  font-size: medium;
+}
+
+ /* dropdown.component.css */
+.dropdown {
+position: relative;
+display: inline-block;
+}
+a{cursor: pointer;}
+
+.dropbtn {
+background-color: #3498db;
+color: white;
+padding: 10px;
+font-size: 16px;
+border: none;
+cursor: pointer;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f9f9f9;
+width: 350px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+
+}
+
+.dropdown-content select, button{
+width: 300px;
+text-align: center;
+margin-left: 25px;
+}
+.dropdown-content p{
+color: #000;
+text-align: left;
+margin-left: 25px;
+margin-top: 20px;
+}
+
+.dropdown-content hr{
+margin-left: 10px;
+width: 330px;
+}
+.dropdown-content input{
+margin-left: 10px;
+width: 300px;
+margin-left: 25px;
+}
+
+
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+
+.dropdown-content.show {
+display: block;
+}
+
+.dateInput
+{
+position: relative; 
+width: 330px;
+display: flex;
+}
+.mat-datepicker-toggle{
+margin-left: 10px;
+margin-top: -2px;
+}
+.card {
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* slight shadow */
+border: none; /* remove border */
+}
+
+
+
+.nextButton
+{
+  color: #fff;
+  background-color: #3818D9;
+  font-style: normal;
+  border-radius: 5px;
+  width: 150px;
+  height: 40px;
+  margin-bottom: 10px;
+  border: 1px solid #3818D9;
+  padding-left: 5px;
+  margin-top: 25px;
+  margin-left: 27px;
+
+}
+
+
+
+
+.ticket-message {
+  margin-top: 20px;
+}
+
+.urgent-section {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.urgent-priority {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+#ticketID{
+  color:#000;
+margin-left: 10px;
+background-color: #ECECEC;
+border: 2px solid #9E9E9E;
+padding-left: 10px;
+padding-right: 10px;
+border-radius: 50px;
+
+}
+
+#statusID{
+  color:#03781D;
+margin-left: 10px;}
+
+#priorityID{
+  color:#BA1717;
+  margin-left: 10px;
+  background-color: #F9F2F2;
+  border: 2px solid #E2A1A1;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 50px;
+}
+
+.urgent-section {
+  display: flex;
+  align-items: center;
+}
+
+.urgent-priority {
+  font-size: smaller; /* Make the text smaller */
+  background-color: rgba(255, 0, 0, 0.3); /* Transparent red */
+  color: red;
+  border: 1px solid red;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 10px; /* Add margin to separate from ticket-id */
+}
+
+.ticket-id {
+  font-size: smaller; /* Make the text smaller */
+}
+
+
+form {
+  width: 380px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 8px;
+  word-wrap: break-word;
+  margin-top: 5px;
+  
+}
+
+
+h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+input,
+
+select {
+  background: white;
+  border: none;
+  font-size: 14px;
+  height: 40px;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 5px;
+  border: 1px solid #E7E7E7;
+   border-radius: 4px;
+}
+textarea{
+background: rgba(255,255,255,0.1);
+border: none;
+font-size: 14px;
+height: auto;
+margin: 0;
+outline: 0;
+padding: 15px;
+width: 100%;
+background-color: #fff;
+box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+margin-bottom: 5px;
+border: 1px solid #E7E7E7;
+border-radius: 4px;
+height: 150px;
+resize: none;
+}
+button {
+color: #FFF;
+background-color: #AE8EF1;
+font-style: normal;
+border-radius: 5px;
+width: 340px;
+border: 1px solid #AE8EF1;
+border-width: 1px 1px 3px;
+height: 50px;
+margin-bottom: 10px;
+text-align: center;
+margin-left: 1px;
+
+}
+
+
+select {
+  padding: 6px;
+  height: 40px;
+  border-radius: 2px;
+}
+
+
+
+fieldset {
+  margin-bottom: 5px;
+  border: none;
+}
+
+legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+font-size: 15px  }
+
+label.light {
+  font-weight: 300;
+  display: inline;
+}
+
+.number {
+  background-color: #5fcf80;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  border-radius: 100%;
+}
+
+@media screen and (min-width: 480px) {
+
+  form {
+    max-width: 480px;
+  }
+
+}
+
+.content-background
+{
+background-color:#F9F9FB;
+border-radius: 4px;
+width: 100%;
+height: auto;
+}
+.content {
+  margin-left: 250px; /* Same as the width of the sidebar */
+  padding: 20px;
+  width: calc(100% - 250px); /* Calculate width to fill remaining space */
+  height: 100vh; /* Calculate height to fill remaining space */
+  background-color: #F9F9FB;
+  }
+
+
+
+
+
+
+
+#details{
+background-color: white;
+border-radius: 4px;
+margin-right: 15px;
+padding: 15px;
+padding-top: 0px;
+word-wrap: break-word;
+height: 350px;
+width: 250px;
+}
+
+
+.ticket-header{
+color:#1255CC;
+font-weight: Bold;
+font-size: 15px;
+font-family:'Poppins', sans-serif;
+margin-left: -15px;
+
+
+}
+
+/* .ticket-message
+{
+
+border-radius: 4px;
+margin-left: 15px;
+margin-top: 15px;
+margin-bottom: 25px;
+} */
+
+.ticket-details{
+display: inline;
+margin-left: 15px;
+font-stretch: expanded;
+}
+
+.previous{
+color: #FFF;
+background-color: #AE8EF1;
+border: 1px solid #AE8EF1;
+font-weight: small;
+font-style: normal;
+border-radius: 5px;
+height: 30px;
+width: 40px;
+margin-bottom: 10px;
+margin-right: 10px;
+}
+.next{
+color: #2E2A40;
+background-color: #F9F9FB;
+font-weight: small;
+font-style: normal;
+border-radius: 5px;
+border: 1px solid #E7E7E7;
+height: 30px;
+width: 40px;
+margin-bottom: 10px;
+margin-right: 10px;
+}
+
+.filterButton
+{
+  color: #5F5F5F;
+  background-color: #ECECEC;
+  font-style: normal;
+  border-radius: 5px;
+  height: 40px;
+  margin-bottom: 10px;
+  border: none;
+  width: 150px;
+  margin-left: 10px;
+
+}
+
+.filterButton img{
+width: 15px;
+height: 15px;
+margin-bottom: 2px;
+margin-right: 15px;
+padding-left: 0;
+}
+
+nav input
+{
+margin-left: 10px;
+}
+
+
+body {
+display: flex;
+justify-content: space-between;
+}
+.sidebar {
+width: 20%;
+}
+
+.form-container {
+width: 50%;
+}
+ul, li {
+list-style-type: none;
+padding: 0;
+}
+img {
+width: 25px;
+height: 25px;
+}
+.menuImages {
+margin-right: 10px;
+}
+a {
+text-decoration: none;
+color: black;
+}
+.button {
+cursor: pointer;
+}
+input, select, textarea {
+display: block;
+width: 100%;
+margin-top: 5px;
+margin-bottom: 15px;
+}
+.top-menu2 {
+  margin-bottom: 50px;
+  margin-right: 5px;
+  border-bottom: 1px solid #E7E7E7;
+}
+
+.top-menu2 nav ul li a {
+  color: #9E9E9E; /* Default text color */
+}
+
+.top-menu2 nav ul li a:hover {
+  color: #000; /* Text color on hover */
+}
+
+.top-menu2 nav ul li a:not(.active):active,
+.top-menu2 nav ul li a:not(.active):focus {
+  color: #000; /* Text color on active/focus for non-active items */
+}
+
+.top-menu2 nav ul li.active a {
+  color: #000; /* Text color for active item */
+  border-bottom: 2px solid #3818D9; /* Border for active item */
+}
+
+
+.ticket-header {
+/* If there were specific styles, they would go here */
+}
+
+/* .form-header {
+margin-left: 550px;
+} */
+
+.ticket-message {
+/* If there were specific styles, they would go here */
+}
+
+.ticket-priority {
+/* If there were specific styles, they would go here */
+}
+
+.ticket-id {
+/* If there were specific styles, they would go here */
+}
+
+.previous, .next {
+/* Add specific styles for these if necessary */
+}
+
+.filterButton {
+/* Add specific styles for the filter button if necessary */
+}
+
+/* Add any other extracted styles below */
+
+.top-menu2 {
+margin-bottom: 50px;
+margin-right: 5px;
+border-bottom: 1px solid #E7E7E7;
+}
+
+/* .ticket-header, .form-header {
+display: block; /* Adjust as needed */
+
+
+/* .ticket-message .form-header {
+margin-left: 550px;
+} */
+
+.ticket-priority, .ticket-id {
+display: inline-block; /* Adjust based on actual need */
+}
+
+.pagination-container {
+margin-top: 50px;
+margin-left: 600px;
+display: flex;
+}
+
+.pagination-container .form-header {
+margin-right: 25px;
+}
+.dateInput {
+position: relative;
+width: 330px;
+display: flex;
+}
+.dateInput input::placeholder {
+color: rgba(0, 0, 0, 0.9) !important; /* Dark black color with higher opacity */
+}
+.dateInput input{
+color: #000;
+text-align: center;
+justify-content: center;
+}
+
+.input-container {
+position: relative;
+width: 100%;
+}
+
+input.mat-input {
+padding-right: 30px; /* Adjust according to the icon width */
+}
+
+.date-picker {
+position: absolute;
+right: -5%; /* Adjust according to your design */
+cursor: pointer;
+}
+.search-input {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 40%;
+  left: 10px; /* Adjust as needed */
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.search-icon img {
+  width: 25px; 
+  height: 25px;
+  margin-left: 10px; 
+}
+
+
+
+
+
+
+
+
+
+

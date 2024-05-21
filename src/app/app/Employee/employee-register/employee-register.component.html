@@ -1,0 +1,82 @@
+
+
+<div class="container-fluid" >
+    <div class="content-background">
+      <div style="display: flex; justify-content: center;">
+          <div class="row">
+            <div style="margin-top: 50px;">
+              <img src="../../../../assets/images/Icon.png" alt="Service Desk" style="text-align: center;">
+              <span class="Service-Desk" style="font-weight: bold;"> Service Desk</span>
+            </div>
+          </div>
+  
+        </div>
+        <div style="position: relative; height: 75px;"> <!-- Add position relative and height to the parent div -->
+          <span style="font-weight: bold; justify-content: center; margin-left: 25%; margin-top: 50px; position: absolute;">Create Account</span>
+      </div>
+       
+        <br>
+        <div class="row">
+          <form [formGroup]="loginForm" class="col-md-6 mx-auto">
+            <div class="form-group">
+
+
+               
+  
+              <input type="email" class="" id="email" formControlName="email" placeholder="Email Address">
+              <div
+              *ngIf="register['email'].invalid && (register['email'].dirty || register['email'].touched)"
+              class="alert alert-danger">
+              <span *ngIf="register['email'].errors?.['required']" style="color:#f98f8f">Email is required</span>
+              <span *ngIf="register['email'].errors?.['email']" style="color:#f98f8f">Please enter valid email</span>
+               </div>
+          </div>
+            <div class="form-group">
+              <input type="password" class="" formControlName="password" placeholder="Password">
+                          <div
+                          *ngIf="register['password'].invalid && (register['password'].dirty || register['password'].touched)"
+                          >
+                          <div *ngIf="register['password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Password is required</div>
+                          <div *ngIf="register['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
+                          <div *ngIf="register['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
+  
+                          </div>
+           
+             </div>
+
+             <div class="form-group">
+                <input type="password" class="" formControlName="confirm_password" placeholder="Confirm password">
+                            <div
+                            *ngIf="register['confirm_password'].invalid && (register['confirm_password'].dirty || register['confirm_password'].touched)"
+                            >
+                            <div *ngIf="register['confirm_password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Please confirm your password</div>
+                            <div *ngIf="register['confirm_password'].getError('MustMatch')" class="alert alert-danger" style="color:#f98f8f">Password does not match</div>
+                            <div *ngIf="register['confirm_password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
+                          <div *ngIf="register['confirm_password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
+                            </div>
+
+               </div>
+          
+      
+          <button [disabled]="loginForm.invalid" type="submit"
+                      class="btn btn-primary btn-user btn-block mb-3">
+                      Create Account
+                  </button>
+                 
+                  <div class="text-left">
+                      <span style="color: grey">Already have an account? <a routerLink="/employee-login"  style="color:#54BEB8;text-decoration: none;">Login</a></span>
+                  </div>
+  
+                  
+          </form>
+        </div>
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+

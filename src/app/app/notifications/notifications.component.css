@@ -1,0 +1,39 @@
+.notification {
+    position: fixed;
+    margin-bottom: 430px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    animation: slideIn 0.5s ease-out forwards;
+    border-radius: 4px;
+    width: 450px;
+    z-index: 9999;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .nextButton
+  {
+      color: #fff;
+      background-color: #3818D9;
+      font-style: normal;
+      border-radius: 5px;
+      width: 100px;
+      height: 40px;
+      margin-bottom: 10px;
+      border: 1px solid #3818D9;
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-top: 10px;
+  
+  }
+  

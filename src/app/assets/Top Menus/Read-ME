@@ -1,0 +1,5 @@
+The reason I created 3 top menus is because 
+We have 3 accounts(Employee, Supere Admin and Company Admin)
+Those accounts have different settings and logins
+So when the user logs out from the employee / any account
+It must throw them to that particular account's login Page

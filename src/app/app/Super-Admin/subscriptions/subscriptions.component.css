@@ -1,0 +1,323 @@
+
+  
+    
+    form {
+      width: 600px;
+      margin: 10px auto;
+      padding: 10px 20px;
+      border-radius: 8px;
+      word-wrap: break-word;
+      margin-left: 0px;
+      
+    }
+
+.addButton
+{
+  
+    color: #fff;
+    background-color: #3818D9;
+      font-style: normal;
+      border-radius: 5px;
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      width: auto;
+      border: none;
+      margin-right: 10px;
+       margin-top: -5px;
+       padding-left: 10px;
+       padding-right: 10px;
+      float: inline-end;
+      margin-top: 10px;
+}
+
+.addButton img
+{
+  width: 20px;
+   height:20px;
+  margin-right: 10px; 
+  margin-top: -5px;
+}
+
+    form   input,
+    select {
+      background: white;
+      border: none;
+      font-size: 14px;
+      height: 40px;
+      margin: 0;
+      outline: 0;
+      padding: 15px;
+      width: 750px;
+      background-color: #fff;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+      margin-bottom: 5px;
+      border: 1px solid #E7E7E7;
+       border-radius: 4px;
+    }
+
+    .option-status
+    {
+        width: 250px;
+    }
+
+    h1 {
+      margin: 0 0 30px 0;
+      text-align: center;
+    }
+    
+    input,
+    
+    select {
+      background: white;
+      border: none;
+      font-size: 12px;
+      height: 40px;
+      margin: 0;
+      outline: 0;
+      padding: 15px;
+      width: 120px;
+      background-color: #fff;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+      margin-bottom: 5px;
+      border: 1px solid #E7E7E7;
+       border-radius: 4px;
+    }
+
+    .nextButton
+    {
+        color: #fff;
+        background-color: #3818D9;
+        font-style: normal;
+        border-radius: 5px;
+        width: 100%;
+        height: 40px;
+        margin-bottom: 10px;
+        width: 85px;
+        border: none;
+        margin-left: 15px;
+        border: 1px solid #3818D9;
+        width:150px; 
+        margin-top: 25px;
+         margin-left: 600px
+        
+    }
+
+    
+    select {
+      padding: 6px;
+      height: 40px;
+      border-radius: 2px;
+    }
+    
+   
+    
+    fieldset {
+      margin-bottom: 5px;
+      border: none;
+    }
+    
+    legend {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    label.light {
+      font-weight: 300;
+      display: inline;
+    }
+   
+    
+    @media screen and (min-width: 480px) {
+    
+      form {
+        max-width: 480px;
+      }
+    
+    }
+  
+   
+    .content-background
+  {
+    background-color:#fff;
+    border-radius: 4px;
+    width: 900px;
+    height: auto;
+  }
+  
+  #content{
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    margin-right: 15px;
+    padding: 15px;
+    padding-top: 0px;
+    word-wrap: break-word;
+    height: 100%;
+  }
+  .content {
+    margin-left: 250px; /* Same as the width of the sidebar */
+    padding: 20px;
+    width: calc(100% - 250px); /* Calculate width to fill remaining space */
+    height: auto;  /* Calculate height to fill remaining space */
+    background-color: #F9F9FB;
+  }
+
+  .closeButton
+{
+  color: #fff;
+  background-color: #E94435;
+    font-style: normal;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    margin-top: 25px;
+    margin-left: 20px; 
+}
+  
+ 
+  .active-status
+  {
+    color: #0FB967;
+  }
+
+.borderless-table {
+    border-collapse: collapse;
+    margin-top: 15px; 
+    margin-bottom: 15px;
+}
+.borderless-table th,
+.borderless-table td {
+    border: 1px solid #E2E3E9;
+    text-align: center; /* Align content in the center */
+    padding: 8px; /* Add padding for better spacing */
+}
+
+th {
+    height: 60px;
+    background-color: #F1F0FE;
+}
+
+td {
+    height: 60px;
+    text-align: center;
+    padding: 8px; /* Add padding for better spacing */
+    word-wrap: break-word;
+}
+
+
+.edit{
+    color: #fff;
+        background-color: #3818D9;
+        font-style: normal;
+        height: 40px;
+        width: 85px;
+        margin-left: 15px;
+        border: 1px solid #3818D9;
+        padding: none;
+        border-radius: 4px;
+
+
+}
+
+.cancel{
+    color: #fff;
+        background-color: #FFC145;
+        font-style: normal;
+        height: 40px;
+        width: 120px;
+        margin-left: 15px;
+        border: 1px solid #FFC145;
+        padding: none;
+        border-radius: 4px;
+}
+.dateInput
+{
+  position: relative; 
+  width: 774.5px;
+  display: flex;
+}
+.mat-datepicker-toggle{
+  
+  margin-top: -7px;
+}
+
+.datepickerTwo {
+  background:lightblue;
+}
+#top{
+  margin-top: 15px;
+}
+.alert.alert-danger {
+  background-color: #f8d7da; /* Red color for error */
+  border-color: #f5c6cb; /* Border color */
+  color:#f98f8f; /* Text color */
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  width: 750px;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 260px;
+  padding: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content span {
+  margin-bottom: 10px;
+}
+
+.dropdown-content button {
+  display: block;
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdown-content button:hover {
+  background-color: #ddd;
+}
+
+.dropdown.open .dropdown-content {
+  display: block;
+}
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+   
+    
+  
+  
+  

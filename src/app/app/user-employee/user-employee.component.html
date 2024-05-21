@@ -1,0 +1,79 @@
+<div class="notification">
+
+    <h3 style="color: black"><strong>Add User</strong></h3>
+    <hr>
+    
+    <form [formGroup]="add_user_form[0]" (ngSubmit)="storeUser()" >         
+      <fieldset>
+         <input type="text" id="firstName" name="firstName" formControlName="firstName" placeholder="First Name">
+         <div
+         *ngIf="add['firstName'].invalid && (add['firstName'].dirty || add['firstName'].touched)"
+         class="alert alert-danger" >
+         <span *ngIf="add['firstName'].errors?.['required']" >First name is required</span>
+         <span *ngIf="add['firstName'].errors?.['containsNumbers']" >Please enter valid First name</span>
+          </div>
+
+          <input type="text" id="lastName" name="lastName" formControlName="lastName" placeholder="Last Name">
+          <div
+          *ngIf="add['lastName'].invalid && (add['lastName'].dirty || add['lastName'].touched)"
+          class="alert alert-danger" >
+          <span *ngIf="add['lastName'].errors?.['required']" >Last nDisaame is required</span>
+          <span *ngIf="add['lastName'].errors?.['containsNumbers']" >Please enter valid Last name</span>
+           </div>
+
+           <select formControlName="designation">
+            <option value="" disabled selected>Choose designation</option>
+            <option value="User" class="option-status"> Employee </option>
+            <option value="agent"> Agent </option>
+        </select>
+        
+        <div *ngIf="add['designation'].invalid && (add['designation'].dirty || add['designation'].touched)" class="alert alert-danger">
+            <span *ngIf="add['designation'].errors?.['required']">Please select designation</span>
+        </div>
+        
+        
+
+        <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Email Address">
+        <div
+        *ngIf="add['email'].invalid && (add['email'].dirty || add['email'].touched)"
+        class="alert alert-danger">
+        <span *ngIf="add['email'].errors?.['required']" >Email is required</span>
+        <span *ngIf="add['email'].errors?.['email']">Please enter valid email</span>
+         </div>
+        
+
+         <input type="text" id="phone_number" name="phone_number" formControlName="phone_number" placeholder="Phone Number">
+         <div
+         *ngIf="add['phone_number'].invalid && (add['phone_number'].dirty || add['phone_number'].touched)"
+         class="alert alert-danger">
+         <span *ngIf="add['phone_number'].errors?.['required']">Phone Number is required</span>
+         <span *ngIf="add['phone_number'].errors?.['pattern']">Invalid phone number</span>
+
+          </div>
+          
+          <input type="text" id="department" name="department" formControlName="department" placeholder="Department">
+          <div
+          *ngIf="add['department'].invalid && (add['department'].dirty || add['department'].touched)"
+          class="alert alert-danger" >
+          <span *ngIf="add['department'].errors?.['required']" >Department is required</span>
+           </div>
+          
+      </fieldset>
+      <button type="submit" class="nextButton">
+        <span *ngIf="!showSpinner">Save</span>
+        <div *ngIf="showSpinner" class="spinner"></div>
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+      <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+        {{ alertMessage }}
+      </div>
+
+  </form>
+
+  <div *ngIf="successMessage">
+    <div class="alert alert-success" role="alert">
+        {{ successMessage }}
+  </div>
+</div>
+
+    </div>
