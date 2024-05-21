@@ -14,7 +14,7 @@ export class ViewEmployeeComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+   t
   ) { }
 
   ngOnInit(): void {
