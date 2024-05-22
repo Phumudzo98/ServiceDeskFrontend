@@ -1,1 +1,0 @@
-export const Categories: string[] = ['Software','Hardware', 'Network','Server']

@@ -68,11 +68,11 @@ const routes: Routes = [
 
 
   //Company Admins' routes
-  {path:"company-dashboard",component:CompanyAdminDashboardComponent},
-  {path:"company-settings",component:CompanySettingsComponent},
-  {path:"company-reports",component:ReportsComponent},
-  {path:"company-tickets",component:CompanyTicketsComponent,},
-  {path:"more-settings",component: MoreSettingsComponent,},
+  {path:"company-dashboard",component:CompanyAdminDashboardComponent,canActivate: [AuthGuard]},
+  {path:"company-settings",component:CompanySettingsComponent,canActivate: [AuthGuard]},
+  {path:"company-reports",component:ReportsComponent,canActivate: [AuthGuard]},
+  {path:"company-tickets",component:CompanyTicketsComponent,canActivate: [AuthGuard]},
+  {path:"more-settings",component: MoreSettingsComponent,canActivate: [AuthGuard]},
   {path:'view-employee/:accountId',component: ViewEmployeeComponent,canActivate: [AuthGuard]},
   {path:'view-agents/:accountId',component: ViewAgentComponent,canActivate: [AuthGuard]},
   {path:"company-login",component: CompanyLoginComponent},
@@ -80,8 +80,8 @@ const routes: Routes = [
   {path:"change-password",component: CompanyChangePasswordComponent},
   {path:"forget-password",component: CompanyFgtPasswordComponent},
   {path: "", component: HomeComponent},
-  {path:"company-subscription", component: CompanySubscriptionsComponent},
-  {path: "ticket-details-com", component: CompanyTicketDetailsComponent}
+  {path:"company-subscription", component: CompanySubscriptionsComponent,canActivate: [AuthGuard]},
+  {path: "ticket-details-com", component: CompanyTicketDetailsComponent,canActivate: [AuthGuard]}
 
 ];
 

@@ -20,7 +20,7 @@
           <div class="dropdown-content" *ngIf="showDropdown">
             <!-- Dropdown content goes here -->
             <a routerLink="/company-settings">Settings</a>
-            <a routerLink="/company-login" >Logout</a>
+            <a (click)="logout()" routerLink="/company-login" >Logout</a>
           </div>
           
       </li>      
