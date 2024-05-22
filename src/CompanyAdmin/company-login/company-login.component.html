@@ -53,8 +53,7 @@
              class="btn btn-primary btn-user btn-block mb-3">
            <span *ngIf="!showSpinner">Sign In</span>
            <div *ngIf="showSpinner" class="spinner"></div>
-           <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-             <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+         
          </button>
          <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
            {{ alertMessage }}
