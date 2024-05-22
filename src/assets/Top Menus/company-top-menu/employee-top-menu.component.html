@@ -14,7 +14,7 @@
   
         <div class="dropdown">
         <li class="iconImages" (click)="toggleDropdown()">
-          <img  *ngIf="profileImage" [src]="profileImage" style="margin-left: -15px; border-radius: 50%;"  width="40px" height="40px" >
+          <img  *ngIf="profileImage" [src]="profileImage" class="profile-image">
           <strong style="margin-left: 10px;">{{ lastName }}</strong>
           <!-- Dropdown menu -->
           <div class="dropdown-content" *ngIf="showDropdown">

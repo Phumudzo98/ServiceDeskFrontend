@@ -36,8 +36,8 @@
                           *ngIf="login['password'].invalid && (login['password'].dirty || login['password'].touched)"
                           >
                           <div *ngIf="login['password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Password is required</div>
-                          <div *ngIf="login['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
-                          <div *ngIf="login['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 12 characters long.</div>
+                          <div *ngIf="login['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be 16 characters long.</div>
+                          <div *ngIf="login['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be 16 characters long.</div>
   
                           </div>
            

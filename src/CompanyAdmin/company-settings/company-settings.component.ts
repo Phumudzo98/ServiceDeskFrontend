@@ -501,25 +501,39 @@ resetButtonText(agentIndex: number) {
     formData.append('fullName', this.profileForm.value.firstName);
     formData.append('lastName', this.profileForm.value.lastName);
     formData.append('email', this.profileForm.value.email);
-    formData.append('position',this.profileForm.value.Department)
+    formData.append('position', this.profileForm.value.Department);
+    
+    const startTime = Date.now();
+  
     this.http.post<any>('http://localhost:8080/api/company/updateProfile', formData).subscribe(
       response => {
-        console.log('Response from server:', response);
-        this.showAlertMessage('success', response.message);
         const token = response.token;
-        this.showSpinner = false; // Hide the spinner when the request completes
-        sessionStorage.setItem('auth-user',token)
-        window.location.reload(); // Refresh the page
+        sessionStorage.setItem('auth-user', token);
+  
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = 5000 - elapsedTime;
+  
+        setTimeout(() => {
+          this.showSpinner = false;
+          this.showAlertMessage('success', 'Profile details updated successfully');
+          window.location.reload(); 
+        }, Math.max(0, remainingTime));
       },
       error => {
         console.error('Error updating profile:', error);
         this.showAlertMessage('error', 'Sorry, please verify all the fields');
+        
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = 5000 - elapsedTime;
+  
         setTimeout(() => {
           this.showSpinner = false;
-        }, 5000);
+        }, Math.max(0, remainingTime));
       }
     );
   }
+  
+  
   performSearchAgent(): void {
     if (this.searchQuery.trim() === '') {
       this.getAllAgents(); // Reset to show all agents if search query is empty

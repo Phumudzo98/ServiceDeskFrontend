@@ -57,9 +57,9 @@ export class CompanyLoginComponent {
           }, 1000);
         }, (error: HttpErrorResponse) => {
           console.error('Error logging in:', error);
-          let errorMessage = 'Sorry, something went wrong.';
+          let errorMessage = 'Invalid email address';
           if (error.status === 401) {
-            errorMessage = 'Invalid email or password.';
+            errorMessage = 'Invalid password.';
           } else if (error.status === 0) {
             errorMessage = 'Network error. Please check your internet connection.';
           }
