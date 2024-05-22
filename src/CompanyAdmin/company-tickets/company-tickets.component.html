@@ -97,63 +97,30 @@
         <!--Unresolved Tickets-->
         <div class="row" *ngIf="currentForm === 'opened'" >
 
-        <div style="margin-bottom: 20px;">
-          <div class="card" style="width: 100%;">
+        <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+          <div *ngIf="item.status=='Open'" class="card" style="width: 100%;">
             <div class="card-header">
               <!--Ticket Header-->
-              <span class="ticket-header">Cannot access my system</span>
+              <span class="ticket-header">{{item.category}}</span>
               <span class="form-header">
 
                 <!--Ticket Date & View details-->
-                07 - MAR | <a routerLink="/ticket-details-com">View</a>
+                {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
               </span>
             </div>
             <!--Ticket Message-->
             <div class="ticket-message">
-              <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
+              <span class="">{{item.description}}</span>
             </div>
             
             <!--Ticket ID and Priority-->
             <div class="urgent-section">
-              <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-              <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
+              <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+              <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
             </div>
           </div>
         </div>
 
-        <div style="margin-bottom: 20px;">
-          
-          <div class="card">
-            <div class="card-header">
-               <!--Ticket Header-->
-
-              <span class="ticket-header">Cannot access my system</span>
-              <span class="form-header">
-                <!--Ticket Date & View details-->
-                07 - MAR | <a routerLink="/ticket-details-com">View</a>
-              </span>
-            </div>
-
-            <!--Ticket Message-->
-            <div class="ticket-message">
-              <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
-            </div>
-
-             <!--Ticket ID and Priority-->
-            <div class="urgent-section">
-              <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-              <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
-            </div>
-          </div>
-          <div class="previous-next">
-            <button class="btn btn-primary btn-sm" style="width: 100px; height: 40px;">
-               Previous
-            </button>
-            <button class="btn btn-primary btn-sm ml-2" style="width: 100px; height: 40px;" >
-              Next 
-            </button>
-          </div>
-        </div>
 
       </div>
 
@@ -161,128 +128,62 @@
         <!--InProgress Tickets-->
         <div class="row" *ngIf="currentForm === 'inprogress'" >
 
-          <div style="margin-bottom: 20px;">
-            <div class="card" style="width: 100%;">
+          <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+            <div *ngIf="item.status=='In progress'" class="card" style="width: 100%;">
               <div class="card-header">
                 <!--Ticket Header-->
-                <span class="ticket-header">Cannot access my system</span>
+                <span class="ticket-header">{{item.category}}</span>
                 <span class="form-header">
   
                   <!--Ticket Date & View details-->
-                  07 - MAR | <a routerLink="/ticket-details-com">View</a>
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
                 </span>
               </div>
               <!--Ticket Message-->
               <div class="ticket-message">
-                <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
+                <span class="">{{item.description}}</span>
               </div>
               
               <!--Ticket ID and Priority-->
               <div class="urgent-section">
-                <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-                <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
+                <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
               </div>
             </div>
           </div>
   
-          <div style="margin-bottom: 20px;">
-            
-            <div class="card">
-              <div class="card-header">
-                 <!--Ticket Header-->
-  
-                <span class="ticket-header">Cannot access my system</span>
-                <span class="form-header">
-                  <!--Ticket Date & View details-->
-                  07 - MAR | <a routerLink="/ticket-details-com">View</a>
-                </span>
-              </div>
-  
-              <!--Ticket Message-->
-              <div class="ticket-message">
-                <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
-              </div>
-  
-               <!--Ticket ID and Priority-->
-              <div class="urgent-section">
-                <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-                <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
-              </div>
-            </div>
-            <div class="previous-next">
-              <button class="btn btn-primary btn-sm" style="width: 100px; height: 40px;">
-                 Previous
-              </button>
-              <button class="btn btn-primary btn-sm ml-2" style="width: 100px; height: 40px;" >
-                Next 
-              </button>
-            </div>
-          </div>
-  
+          
         </div>
 
         
         <!--Resolved Tickets-->
         <div class="row" *ngIf="currentForm === 'closed'" >
 
-          <div style="margin-bottom: 20px;">
-            <div class="card" style="width: 100%;">
+          <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+            <div *ngIf="item.status=='Closed'" class="card" style="width: 100%;">
               <div class="card-header">
                 <!--Ticket Header-->
-                <span class="ticket-header">Cannot access my system2</span>
+                <span class="ticket-header">{{item.category}}</span>
                 <span class="form-header">
   
                   <!--Ticket Date & View details-->
-                  07 - MAR | <a routerLink="/ticket-details-com">View</a>
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
                 </span>
               </div>
               <!--Ticket Message-->
               <div class="ticket-message">
-                <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
+                <span class="">{{item.description}}</span>
               </div>
               
               <!--Ticket ID and Priority-->
               <div class="urgent-section">
-                <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-                <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
+                <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
               </div>
             </div>
             
           </div>
   
-          <div style="margin-bottom: 20px;">
-            
-            <div class="card">
-              <div class="card-header">
-                 <!--Ticket Header-->
-  
-                <span class="ticket-header">Cannot access my system</span>
-                <span class="form-header">
-                  <!--Ticket Date & View details-->
-                  07 - MAR | <a routerLink="/ticket-details-com">View</a>
-                </span>
-              </div>
-  
-              <!--Ticket Message-->
-              <div class="ticket-message">
-                <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
-              </div>
-  
-               <!--Ticket ID and Priority-->
-              <div class="urgent-section">
-                <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-                <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
-              </div>
-            </div>
-            <div class="previous-next">
-              <button class="btn btn-primary btn-sm" style="width: 100px; height: 40px;">
-                 Previous
-              </button>
-              <button class="btn btn-primary btn-sm ml-2" style="width: 100px; height: 40px;" >
-                Next 
-              </button>
-            </div>
-          </div>
   
         </div>
 
@@ -290,63 +191,30 @@
 
         <div class="row" *ngIf="currentForm === 'escalate'" >
 
-          <div style="margin-bottom: 20px;">
-            <div class="card" style="width: 100%;">
+          <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+            <div *ngIf="item.status=='Escalate'" class="card" style="width: 100%;">
               <div class="card-header">
                 <!--Ticket Header-->
-                <span class="ticket-header">Cannot access my system</span>
+                <span class="ticket-header">{{item.category}}</span>
                 <span class="form-header">
   
                   <!--Ticket Date & View details-->
-                  07 - MAR | <a routerLink="/ticket-details">View</a>
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
                 </span>
               </div>
               <!--Ticket Message-->
               <div class="ticket-message">
-                <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
+                <span class="">{{item.description}}</span>
               </div>
               
               <!--Ticket ID and Priority-->
               <div class="urgent-section">
-                <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-                <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
+                <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
               </div>
             </div>
           </div>
   
-          <div style="margin-bottom: 20px;">
-            
-            <div class="card">
-              <div class="card-header">
-                 <!--Ticket Header-->
-  
-                <span class="ticket-header">Cannot access my system</span>
-                <span class="form-header">
-                  <!--Ticket Date & View details-->
-                  07 - MAR | <a routerLink="/ticket-details">View</a>
-                </span>
-              </div>
-  
-              <!--Ticket Message-->
-              <div class="ticket-message">
-                <span class="">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
-              </div>
-  
-               <!--Ticket ID and Priority-->
-              <div class="urgent-section">
-                <span class="form-header badge badge-danger" id="priorityID">Urgent</span>
-                <span id="ticketID" class="form-header badge badge-secondary">#1E233</span>
-              </div>
-            </div>
-            <div class="previous-next">
-              <button class="btn btn-primary btn-sm" style="width: 100px; height: 40px;">
-                 Previous
-              </button>
-              <button class="btn btn-primary btn-sm ml-2" style="width: 100px; height: 40px;" >
-                Next 
-              </button>
-            </div>
-          </div>
   
         </div>
 
