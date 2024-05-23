@@ -36,12 +36,11 @@
                           *ngIf="login['password'].invalid && (login['password'].dirty || login['password'].touched)"
                           >
                           <div *ngIf="login['password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Password is required</div>
-                          <div *ngIf="login['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be 16 characters long.</div>
                           <div *ngIf="login['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be 16 characters long.</div>
   
                           </div>
            
-         </div>
+            </div>
           
       
          <button [disabled]="loginForm.invalid || showSpinner" type="submit"
