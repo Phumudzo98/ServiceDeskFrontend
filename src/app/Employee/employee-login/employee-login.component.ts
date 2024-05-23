@@ -13,7 +13,7 @@ export class EmployeeLoginComponent {
   }
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('',Validators.compose([Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])),
-    password: new FormControl('', [Validators.required,Validators.minLength(16),Validators.maxLength(16),Validators.pattern(/^.{16}$/)]), 
+    password: new FormControl('',[Validators.required,Validators.maxLength(16),Validators.pattern(/^.{16}$/)]), 
    });
   get login (){return this.loginForm.controls;}
 

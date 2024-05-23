@@ -163,7 +163,7 @@
             
               </fieldset>
                  <!-- Display Message -->
-         <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+         <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'" style="width: 800px">
           {{ alertMessage }}
       </div>
               
