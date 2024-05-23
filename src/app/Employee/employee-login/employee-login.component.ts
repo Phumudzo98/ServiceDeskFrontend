@@ -15,7 +15,7 @@ export class EmployeeLoginComponent {
   }
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('',Validators.compose([Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])),
-    password: new FormControl('',[Validators.required,Validators.maxLength(17),Validators.pattern(/^.{17}$/)]), 
+    password: new FormControl('',[Validators.required, Validators.minLength(8), Validators.maxLength(20)]), 
    });
   get login (){return this.loginForm.controls;}
 
@@ -31,14 +31,14 @@ export class EmployeeLoginComponent {
     setTimeout(() => {
       this.showSpinner = false;
       this.loginUser();
-    }, 5000);
+    }, 2000);
 
   }
   submittingForm: boolean = false;
   private loginUrl = 'http://localhost:8080/api/auth/login';
 
   loginUser() {
-    this.submittingForm = true; // Set submittingForm flag to true
+    this.showSpinner = true; // Set submittingForm flag to true
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Credentials': 'true',
@@ -70,7 +70,7 @@ export class EmployeeLoginComponent {
             }
             this.showAlertMessage('error', errorMessage);
           }).add(() => {
-            this.submittingForm = false; // Set submittingForm flag to false when request completes
+            this.showSpinner= false; // Set submittingForm flag to false when request completes
           });
       } else {
         console.log('Form data is invalid. Please check the fields.');
