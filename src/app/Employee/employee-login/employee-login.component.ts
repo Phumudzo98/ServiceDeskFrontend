@@ -50,7 +50,7 @@ export class EmployeeLoginComponent {
         this.http.post<any>(this.loginUrl, this.loginForm.value, { headers })
           .subscribe((response: any) => {
             console.log('Login response:', response);
-            this.showAlertMessage('success', 'Logged in successfully');
+           // this.showAlertMessage('success', 'Logged in successfully');
             setTimeout(() => {
               this.authToken = response;
               this.storageService.saveUser(this.authToken.message);
