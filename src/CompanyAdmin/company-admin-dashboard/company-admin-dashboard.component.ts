@@ -47,7 +47,7 @@ export class CompanyAdminDashboardComponent {
   }
   ApplyFilters():void{
     if(this.barGraphComponent){
-      this.barGraphComponent.fetchDataAndCreateChart();
+      this.barGraphComponent.applyFilters();
     }
   }
 

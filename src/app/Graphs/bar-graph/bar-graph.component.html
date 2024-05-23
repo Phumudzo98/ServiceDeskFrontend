@@ -6,5 +6,5 @@
   <label for="endDate">End Date:</label>
   <input type="month" id="endDate" (change)="onEndDateChange($event)">
 </div>
-<button (click)="applyFilters()">Apply Filters</button>
+<button (click)="applyFilters()" [disabled]="!startDate || !endDate">Apply Filters</button>
 <canvas #barCanvas></canvas>

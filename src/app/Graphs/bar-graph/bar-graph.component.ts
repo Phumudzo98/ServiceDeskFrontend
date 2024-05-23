@@ -169,6 +169,11 @@ export class BarGraphComponent implements AfterViewInit {
 
   applyFilters(): void {
     console.log('Applying filters with start date:', this.startDate, 'and end date:', this.endDate);
+    if (!this.startDate || !this.endDate) {
+      console.log('Start date and end date must be specified.');
+      return;
+    }
+
     this.generateUpdatedAtDates(this.startDate, this.endDate);
 
     const requests = this.updatedAtDates.map(date =>
