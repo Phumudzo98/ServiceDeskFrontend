@@ -8,6 +8,14 @@ export class Login {
 export class Email { 
     email!: string;
  }
+
+export class RespondMessage{
+    sender!:String;
+    content!:String;
+    timestamp!:Date;
+    ticketId!:String;
+}
+
 export class UpdatePassword{
     email!:string;
     password!:any;

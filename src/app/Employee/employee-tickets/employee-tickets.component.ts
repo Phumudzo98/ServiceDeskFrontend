@@ -21,7 +21,6 @@ export class EmployeeTicketsComponent implements OnInit
   companyName:string ="";
 
 
-
   email:string="";
   newPassword: string = '';
   error!: string;
@@ -58,8 +57,6 @@ export class EmployeeTicketsComponent implements OnInit
     const customerId=decodedToken.accountId;
     this.companyName=decodedToken.companyId;
 
-
-
     this.ticketForm= new FormGroup({
 
       email: new FormControl(this.companyName,[Validators.required,Validators.email]),
@@ -83,7 +80,6 @@ export class EmployeeTicketsComponent implements OnInit
     )
     
   }
-
 
   activeTab: string = 'tab1';
 
@@ -111,17 +107,12 @@ export class EmployeeTicketsComponent implements OnInit
   applyFilters() {
     this.showDropdown=false
   }
-
- 
   
   get new_ticket (){return this.ticketForm.controls;}
-
-  
 
   createTicket():void
   {
     
-
     const token = this.storage.getUser();
     const decodedToken:any = jwtDecode(token);
     const companyNo=decodedToken.companyId;
@@ -135,7 +126,6 @@ export class EmployeeTicketsComponent implements OnInit
 
     let url2="http://localhost:8080/api/ticket/request-service/"+companyNo;
 
-    
 
     this.http.post<any>(url2,ticketCreate).subscribe(response=>
       {
