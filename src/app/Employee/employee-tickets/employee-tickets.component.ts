@@ -62,12 +62,15 @@ export class EmployeeTicketsComponent implements OnInit
 
     this.ticketForm= new FormGroup({
 
-      email: new FormControl(this.companyName,[Validators.required,Validators.email]),
-      type: new FormControl('',[Validators.required]),
-      priority_status: new FormControl ('',[Validators.required]),
-      ticketBody: new FormControl('', [Validators.required])
+      /*email: new FormControl('',[Validators.required,Validators.email]),
+    priority_status: new FormControl ('',[Validators.required]),*/
+    category: new FormControl('',[Validators.required]),
+    ticketBody: new FormControl('', [Validators.required]),
+    otherCategory: new FormControl('',[Validators.required])
   
     })
+
+
 
     let baseUrl:any="http://localhost:8080/api/ticket/get-user-tickets/";
 
@@ -82,6 +85,32 @@ export class EmployeeTicketsComponent implements OnInit
       }
     )
     
+  }
+
+  showOtherCategoryInput: boolean = false;
+
+  onCategoryChange() {
+    const categoryControl = this.ticketForm.get('category');
+    if (categoryControl) {
+      const selectedCategory = categoryControl.value;
+      if (selectedCategory === 'other') {
+        this.showOtherCategoryInput = true;
+        const otherCategoryControl = this.ticketForm.get('otherCategory');
+        if (otherCategoryControl) {
+          otherCategoryControl.setValidators(Validators.required);
+        }
+      } else {
+        this.showOtherCategoryInput = false;
+        const otherCategoryControl = this.ticketForm.get('otherCategory');
+        if (otherCategoryControl) {
+          otherCategoryControl.clearValidators();
+        }
+      }
+      const otherCategoryControl = this.ticketForm.get('otherCategory');
+      if (otherCategoryControl) {
+        otherCategoryControl.updateValueAndValidity();
+      }
+    }
   }
 
 
@@ -118,37 +147,34 @@ export class EmployeeTicketsComponent implements OnInit
 
   
 
-  createTicket():void
-  {
-    
-
+  createTicket(): void {
     const token = this.storage.getUser();
-    const decodedToken:any = jwtDecode(token);
-    const companyNo=decodedToken.companyId;
-    const empNo=decodedToken.accountId;
-
-    const ticketCreate={
-      'category':this.ticketForm.value.type,
-      'description':this.ticketForm.value.ticketBody,
-      'customerUserId':`${empNo}`
+    const decodedToken: any = jwtDecode(token);
+    const companyNo = decodedToken.companyId;
+    const empNo = decodedToken.accountId;
+  
+    let category = this.ticketForm.value.category;
+    if (category === 'other') {
+      category = this.ticketForm.value.otherCategory;
     }
-
-    let url2="http://localhost:8080/api/ticket/request-service/"+companyNo;
-
-    
-
-    this.http.post<any>(url2,ticketCreate).subscribe(response=>
-      {
-        console.log("Yes",response);
-        this.router.navigate(['/employee-tickets'])
-        location.reload();
-      },
-      error=>
-      {
-        console.log("No", error);
-      }
-      
-    )
+  
+    const ticketCreate = {
+      'category': category,
+      'description': this.ticketForm.value.ticketBody,
+      'customerUserId': `${empNo}`
+    };
+  
+    let url2 = "http://localhost:8080/api/ticket/request-service/" + companyNo;
+  
+    this.http.post<any>(url2, ticketCreate).subscribe(response => {
+      console.log("Yes", response);
+      this.router.navigate(['/employee-tickets']);
+      location.reload();
+    },
+    error => {
+      console.log("No", error);
+    });
   }
+  
 
 }

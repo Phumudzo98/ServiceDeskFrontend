@@ -182,36 +182,34 @@
           
             
           <fieldset>
-            <label>Request Ticket Type</label>
-            <select id="type" name="" formControlName="type">
-              <option value="Default">Choose Type</option>
-              <option value="Type 1">Type A</option>
-              <option value="Type 2">Type B</option>
-            </select>
-
-            <!--Validations-->
-            <div
-            *ngIf="new_ticket['type'].invalid && (new_ticket['type'].dirty || new_ticket['type'].touched)"
-            class="alert alert-danger" >  
-            <span *ngIf="new_ticket['type'].errors?.['required']" style="color:#f98f8f">Please select ticket type</span>
-            </div>
-             <!--End Of Validations-->
-
-            <label>Priority Status</label>
-            <select id="status" name="" formControlName="priority_status">
-              <option value="Default">Select Status</option>
-               <option value="Type 1">Type A</option>
-              <option value="Type 2">Type B</option>
+            <label for="category">Category</label>
+            <select id="category" formControlName="category" (change)="onCategoryChange()">
+              <option value="" disabled selected>Choose Category</option>
+              <option value="software">Software</option>
+              <option value="hardware">Hardware</option>
+              <option value="network">Network</option>
+              <option value="email">Email</option>
+              <option value="other">Other</option>
             </select>
 
              <!--Validations-->
              <div
-             *ngIf="new_ticket['priority_status'].invalid && (new_ticket['priority_status'].dirty || new_ticket['priority_status'].touched)"
+             *ngIf="new_ticket['category'].invalid && (new_ticket['category'].dirty || new_ticket['category'].touched)"
              class="alert alert-danger" >  
-             <span *ngIf="new_ticket['priority_status'].errors?.['required']" style="color:#f98f8f">Please choose status</span>
+             <span *ngIf="new_ticket['category'].errors?.['required']" style="color:#f98f8f">Please select ticket type</span>
              </div>
-              <!--End Of Validations-->
+          
+            <div *ngIf="showOtherCategoryInput">
+              <label for="otherCategory">Other Category</label>
+              <input type="text" id="otherCategory" formControlName="otherCategory" placeholder="Type Category">
+            </div>
 
+             <!--Other Category Validations-->
+             <div
+             *ngIf="new_ticket['otherCategory'].invalid && (new_ticket['otherCategory'].dirty || new_ticket['otherCategory'].touched)"
+             class="alert alert-danger" >  
+             <span *ngIf="new_ticket['otherCategory'].errors?.['required']" style="color:#f98f8f">Please type category</span>
+             </div>
           </fieldset>
           <fieldset>
             <label>Ticket Body</label>
@@ -226,9 +224,12 @@
              <!--End Of Validations-->
 
           </fieldset>
-          <button type="submit">Submit</button>
+          <button type="submit" [disabled]="ticketForm.invalid || showSpinner">
+            <span *ngIf="!showSpinner">Submit</span>
+            <div *ngIf="showSpinner" class="spinner"></div>
+          </button>
         </form>
-      </div>
+</div>
 
      </div>
   </div>
