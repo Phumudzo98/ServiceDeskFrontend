@@ -180,20 +180,28 @@ border: 1px solid #59699e;
 
   }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  .date-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Adjust the gap between the inputs as needed */
+  }
+  
+  .date-picker-container input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 140px;
+    height: 28px;
+  }
+  
+  .date-picker-container input::placeholder {
+    color: #999; /* Placeholder text color */
+  }
+  
+  .date-picker-container input:focus {
+    outline: none;
+    border-color: #007bff; /* Change to your preferred focus color */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional shadow effect */
+  }
+  
