@@ -152,6 +152,8 @@ validateNumber(control: AbstractControl): ValidationErrors | null {
   
    
         this.add_user_form[0].reset();
+          window.location.reload(); // Refresh the page
+
   
       },
       error => {

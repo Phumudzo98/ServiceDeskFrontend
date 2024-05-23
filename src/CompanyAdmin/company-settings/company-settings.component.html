@@ -107,7 +107,7 @@
             </button>
             
                 <!-- Display Message -->
-         <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+         <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'" style="width: 800px">
           {{ alertMessage }}
       </div>
                             
@@ -266,9 +266,8 @@
                 <div class="dropdown" [ngClass]="{ 'open': isDropdownOpen[agents.indexOf(agent)] }">
                   <button class="cancel" (click)="toggleDropdown(agent)" [disabled]="isConfirmingDeactivation">
                     <span *ngIf="!agent.showSpinner">{{ agent.buttonText }}</span>
-                    <span *ngIf="agent.showSpinner" class="spinner-container">
-                      <div *ngIf="showSpinner" class="spinner">
-                        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                    <span *ngIf="agent.showSpinner" class="simple-spinner-container">
+                      <div *ngIf="showSpinner" class="simple-spinner">
                       </div>
                     </span>
                   </button>
@@ -442,11 +441,8 @@
                 <div class="dropdown" [ngClass]="{ 'open': isDropdownOpen[users.indexOf(user)] }">
                     <button class="cancel" (click)="toggleDropdown1(user)" [disabled]="isConfirmingDeactivation">
                         <span *ngIf="!user.showSpinner">{{ user.buttonText }}</span>
-                        <span *ngIf="user.showSpinner" class="spinner-container">
-                          <div *ngIf="showSpinner" class="spinner">
-                          <div class="ripples buttonRipples"><span class="ripplesCircle">
-                            </span>
-                          </div>
+                        <span *ngIf="user.showSpinner" class="simple-spinner-container">
+                          <div *ngIf="showSpinner" class="simple-spinner">
                           </div>
                         </span>
                     </button>
