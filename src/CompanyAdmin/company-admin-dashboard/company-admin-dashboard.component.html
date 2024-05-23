@@ -22,18 +22,14 @@
             <span class="form-header badge badge-success" id="statusID">Opened</span>
             <span class="vertical-line"></span>
             <span class="filter">Filters:</span>
-            <select id="filter" name="">
-              <option value="Type 1">Select</option>
-              <option value="7days"> 30 days</option>
-              <option value="14days">60 days</option>
-              <option value="21days">90 days</option>
-              <option value="Full Month">1 Year</option>
+            <select id="yearSelect" (change)="onYearChange($event)">
+              <option *ngFor="let year of years" [value]="year">{{year}}</option>
             </select>
   
             <!--Apply filter Button -->
-            <button class="applyFilter">Apply Filter</button>
+            <button class="applyFilter" (click)=" ApplyFilters()">Apply Filter</button>
   
-            <button class="export">Export CSV</button>
+            <button class="export" (click)="DownloadCSVOpen()">Export CSV</button>
             <p class="ticket-category"></p>
           </div>
           

@@ -19,7 +19,7 @@
         <div class="row">
 
           
-          <form [formGroup]="loginForm" class="col-md-6 mx-auto">
+          <form [formGroup]="loginForm" class="col-md-6 mx-auto" (ngSubmit)="loginUser()">
             <div class="form-group">
   
               <input type="email" class="" id="email" formControlName="email" placeholder="Email Address">

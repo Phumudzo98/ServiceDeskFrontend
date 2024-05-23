@@ -3,6 +3,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-bar-graph',
   templateUrl: './bar-graph.component.html',
@@ -16,11 +17,17 @@ export class BarGraphComponent implements AfterViewInit {
   token: any;
 
   months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  years: number[] = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
+  years: number[] = Array.from({ length: 11 }, (_, i) => 2020 + i); // Range from 2020 to 2030
   selectedYear: number = new Date().getFullYear();
-  updatedAtDates: string[] = [];
+  createdAtDates: string[] = [];
   ticketData: number[] = [];
   chart: Chart | undefined;
+  startDate: string = '';
+  endDate: string = '';
+
+  // New properties to store filtered data
+  filteredDates: string[] = [];
+  filteredTicketData: number[] = [];
 
   private apiUrl = 'http://localhost:8080/api/ticket/tickets/open';
 
@@ -35,7 +42,7 @@ export class BarGraphComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.generateUpdatedAtDates();
+    this.generateInitialCreatedAtDates();
     this.fetchDataAndCreateChart();
   }
 
@@ -47,21 +54,36 @@ export class BarGraphComponent implements AfterViewInit {
     }
   }
 
-  generateUpdatedAtDates(): void {
-    console.log('Generating dates for year:', this.selectedYear);
-    const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-    this.updatedAtDates = months.map(month => `${this.selectedYear}-${month}-01`);
-    console.log('Updated dates:', this.updatedAtDates);
+  generateInitialCreatedAtDates(): void {
+    console.log('Generating dates for the current year up to the current month:', this.selectedYear);
+    const currentMonth = new Date().getMonth() + 1;
+    const months = Array.from({ length: currentMonth }, (_, i) => (i + 1).toString().padStart(2, '0'));
+    this.createdAtDates = months.map(month => `${this.selectedYear}-${month}-01`);
+    console.log('Initial dates:', this.createdAtDates);
   }
 
-  getTotalClosedTicketsForMonth(companyId: string, updatedAt: string): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}?companyId=${companyId}&updatedAt=${updatedAt}`);
+  generateCreatedAtDates(startDate: string, endDate: string): void {
+    console.log('Generating dates from', startDate, 'to', endDate);
+    this.createdAtDates = [];
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const current = new Date(start);
+
+    while (current <= end) {
+      const year = current.getFullYear();
+      const month = String(current.getMonth() + 1).padStart(2, '0');
+      this.createdAtDates.push(`${year}-${month}-01`);
+      current.setMonth(current.getMonth() + 1);
+    }
+    console.log('Filtered dates:', this.createdAtDates);
+  }
+
+  getTotalClosedTicketsForMonth(companyId: string, createdAt: string): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}?companyId=${companyId}&createdAt=${createdAt}`);
   }
 
   fetchDataAndCreateChart(): void {
-    this.generateUpdatedAtDates(); // Regenerate dates based on selected year
-
-    const requests = this.updatedAtDates.map(date =>
+    const requests = this.createdAtDates.map(date =>
       this.getTotalClosedTicketsForMonth(this.companyId, date).toPromise()
         .catch(() => 0) // If request fails, return 0 for that month
     );
@@ -69,28 +91,36 @@ export class BarGraphComponent implements AfterViewInit {
     Promise.all(requests).then(data => {
       this.ticketData = data.map(item => item as number);
       console.log('Fetched data:', this.ticketData); // Debugging line
-      this.createBarGraph();
+      this.createBarGraph(this.createdAtDates);
     }).catch(error => {
       console.error('Error fetching ticket data', error);
-      this.ticketData = Array(12).fill(0);
-      this.createBarGraph();
+      this.ticketData = Array(this.createdAtDates.length).fill(0);
+      this.createBarGraph([]);
     });
   }
 
-  createBarGraph(): void {
+  filterDates(startDate: string, endDate: string, dates: string[]): string[] {
+    return dates.filter(date => (!startDate || date >= startDate) && (!endDate || date <= endDate));
+  }
+
+  createBarGraph(filteredDates: string[]): void {
     const barCanvas = this.barCanvas.nativeElement;
     const ctx = barCanvas.getContext('2d');
     if (ctx) {
       if (this.chart) {
         this.chart.destroy();
       }
+      const labels = filteredDates.map(date => {
+        const [, month] = date.split('-');
+        return this.months[parseInt(month, 10) - 1]; // Only include the month
+      });
       this.chart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: this.months,
+          labels: labels,
           datasets: [{
             label: 'Tickets',
-            data: this.ticketData,
+            data: this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData,
             backgroundColor: '#00e400',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 0,
@@ -123,20 +153,57 @@ export class BarGraphComponent implements AfterViewInit {
   onYearChange(event: any): void {
     this.selectedYear = event.target.value;
     console.log('Year changed to:', this.selectedYear);
+    this.generateInitialCreatedAtDates(); // Regenerate dates for the selected year
+    this.fetchDataAndCreateChart(); // Fetch new data when year changes
+  }
+
+  onStartDateChange(event: any): void {
+    this.startDate = event.target.value;
+    console.log('Start date changed to:', this.startDate);
+  }
+
+  onEndDateChange(event: any): void {
+    this.endDate = event.target.value;
+    console.log('End date changed to:', this.endDate);
+  }
+
+  applyFilters(): void {
+    console.log('Applying filters with start date:', this.startDate, 'and end date:', this.endDate);
+    if (!this.startDate || !this.endDate) {
+      console.log('Start date and end date must be specified.');
+      return;
+    }
+
+    this.generateCreatedAtDates(this.startDate, this.endDate);
+
+    const requests = this.createdAtDates.map(date =>
+      this.getTotalClosedTicketsForMonth(this.companyId, date).toPromise()
+        .catch(() => 0) // If request fails, return 0 for that month
+    );
+
+    Promise.all(requests).then(data => {
+      this.filteredTicketData = data.map(item => item as number);
+      console.log('Filtered data:', this.filteredTicketData); // Debugging line
+      this.createBarGraph(this.createdAtDates);
+    }).catch(error => {
+      console.error('Error fetching ticket data', error);
+      this.filteredTicketData = Array(this.createdAtDates.length).fill(0);
+      this.createBarGraph(this.createdAtDates);
+    });
   }
 
   downloadCSV(): void {
-    const csvData = this.convertToCSV(this.updatedAtDates, this.ticketData);
+    // Use filtered dates and ticket data for CSV
+    const csvData = this.convertToCSV(this.createdAtDates, this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData);
     this.downloadFile(csvData, 'ticket_data.csv');
   }
 
   convertToCSV(dates: string[], data: number[]): string {
     let csvContent = 'Month,Year,Ticket Count\n';
-    this.months.forEach((month, index) => {
-      const date = dates[index];
+    dates.forEach((date, index) => {
+      const [year, month] = date.split('-');
       const ticketCount = data[index];
-      const year = date.split('-')[0];
-      csvContent += `${month},${year},${ticketCount}\n`;
+      csvContent += `${this.months[parseInt(month, 10) - 1]},${year},${ticketCount}\n`;
     });
     return csvContent;
   }

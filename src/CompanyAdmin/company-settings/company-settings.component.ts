@@ -343,7 +343,7 @@ confirmDeactivation2(user: any) {
       this.users[userIndex].buttonText = this.users[userIndex].statusAgent === 'Active' ? 'Disable' : 'Enable';
 
       // Send the request to update the agent status on the backend
-      this.http.post<any>('http://localhost:8080/api/users/changeUserStatus', { email: user.email, statusAgent: this.agents[userIndex].statusAgent })
+      this.http.post<any>('http://localhost:8080/api/users/changeUserStatus', { email: user.email, statusAgent: this.users[userIndex].statusAgent })
         .subscribe(
           (response) => {
             // Handle response if needed
