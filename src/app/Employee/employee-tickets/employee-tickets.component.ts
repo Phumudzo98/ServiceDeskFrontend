@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/utility/services/auth.service';
 export class EmployeeTicketsComponent implements OnInit
 {
 
-  currentMenuItem: string = 'unresolved'; // Initialize with the default active menu item
+  currentMenuItem: string = 'opened'; // Initialize with the default active menu item
   previousMenuItem: string = ''; // Initialize with empty value
   filterForm: FormGroup;
   ticketForm: any;
@@ -48,6 +48,8 @@ export class EmployeeTicketsComponent implements OnInit
     });
   }
   dataArray:any[]=[]
+  currentPage: number = 0;
+  pageSize: number = 2;
 
   ngOnInit(): void {
 
@@ -121,7 +123,7 @@ export class EmployeeTicketsComponent implements OnInit
   }
 
   //Toggling through the buttons
-  currentForm: string = 'unresolved';
+  currentForm: string = 'opened';
 
   toggleForms(form: string) {
     this.currentForm = form;
@@ -145,36 +147,90 @@ export class EmployeeTicketsComponent implements OnInit
   
   get new_ticket (){return this.ticketForm.controls;}
 
-  
-
+  successMessage: string = '';
   createTicket(): void {
+    this.showSpinner = true;
+    this.successMessage = '';
+
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyNo = decodedToken.companyId;
     const empNo = decodedToken.accountId;
-  
+
     let category = this.ticketForm.value.category;
     if (category === 'other') {
       category = this.ticketForm.value.otherCategory;
     }
-  
+
     const ticketCreate = {
       'category': category,
       'description': this.ticketForm.value.ticketBody,
       'customerUserId': `${empNo}`
     };
-  
+
     let url2 = "http://localhost:8080/api/ticket/request-service/" + companyNo;
-  
+
     this.http.post<any>(url2, ticketCreate).subscribe(response => {
       console.log("Yes", response);
-      this.router.navigate(['/employee-tickets']);
-      location.reload();
+      setTimeout(() => {
+        this.showSpinner = false;
+        this.successMessage = 'Ticket created successfully!';
+        this.router.navigate(['/employee-tickets']);
+        location.reload();
+      }, 5000); // 5 seconds delay
     },
     error => {
       console.log("No", error);
+      this.showSpinner = false;
     });
   }
+
+  //Reset The filter
+
+  startDate: Date = new Date("");
+  endDate: Date = new Date("");
+  priority: string = "";
+  status: string = "";
+
+  showSpinner2: boolean = false;
+
+  //Filtering
+  resetFilters() {
+      this.showSpinner2 = true;
+        setTimeout(() => {
+          this.startDate = new Date(""); 
+          this.endDate = new Date("");
+          this.priority = "";
+          this.status = "";
+          this.showSpinner2 = false;
+      }, 5000);
+  }
+
+
+  //Only displaying two tickets the next/previous will display other two tickets
   
+  get paginatedData() {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    return this.dataArray.slice(start, end);
+  }
+
+  nextPage() {
+    if ((this.currentPage + 1) * this.pageSize < this.dataArray.length) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+    }
+  }
+
+  
+   //Closing the window
+   closeWindow() {
+    this.showDropdown=false;
+  }
 
 }

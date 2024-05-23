@@ -597,8 +597,15 @@ input.mat-input {
 
 .previous-next
 {
-  margin-top: 20px;
-  float: inline-end;
+  margin-top: -5px;
+}
+.previous-next button{
+  width: 75px;
+  height: 35px;
+}
+
+.card {
+  transition: transform 0.5s ease-in-out;
 }
 
 
