@@ -55,8 +55,9 @@ export class BarGraphComponent implements AfterViewInit {
   }
 
   generateInitialUpdatedAtDates(): void {
-    console.log('Generating dates for the current year:', this.selectedYear);
-    const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    console.log('Generating dates for the current year up to the current month:', this.selectedYear);
+    const currentMonth = new Date().getMonth() + 1;
+    const months = Array.from({ length: currentMonth }, (_, i) => (i + 1).toString().padStart(2, '0'));
     this.updatedAtDates = months.map(month => `${this.selectedYear}-${month}-01`);
     console.log('Initial dates:', this.updatedAtDates);
   }
@@ -110,7 +111,7 @@ export class BarGraphComponent implements AfterViewInit {
         this.chart.destroy();
       }
       const labels = filteredDates.map(date => {
-        const [year, month] = date.split('-');
+        const [, month] = date.split('-');
         return this.months[parseInt(month, 10) - 1]; // Only include the month
       });
       this.chart = new Chart(ctx, {
