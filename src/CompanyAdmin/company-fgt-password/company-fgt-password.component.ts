@@ -47,7 +47,7 @@ export class CompanyFgtPasswordComponent {
         this.responseMessage = response.message;
         console.log('Email sent successfully:', response.message);
         // Handle success, e.g., show a success message to the user
- this.showAlertMessage( 'sucess',this.responseMessage = response.message)
+ this.showAlertMessage( 'success',this.responseMessage = response.message)
       },
       error => {
         console.error('Error sending email:', error);
