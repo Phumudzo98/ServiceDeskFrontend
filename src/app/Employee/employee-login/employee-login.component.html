@@ -19,7 +19,7 @@
         <div class="row">
 
           
-          <form [formGroup]="loginForm" class="col-md-6 mx-auto" (ngSubmit)="loginUser()">
+          <form [formGroup]="loginForm" class="col-md-6 mx-auto" >
             <div class="form-group">
   
               <input type="email" class="" id="email" formControlName="email" placeholder="Email Address">
@@ -36,12 +36,12 @@
                           *ngIf="login['password'].invalid && (login['password'].dirty || login['password'].touched)"
                           >
                           <div *ngIf="login['password'].errors?.['required']" class="alert alert-danger" style="color:#f98f8f">Password is required</div>
-                          <div *ngIf="login['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be 16 characters long.</div>
-                          <div *ngIf="login['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be 16 characters long.</div>
+                          <div *ngIf="login['password'].errors?.['minlength']" class="alert alert-danger" style="color:#f98f8f">Password must be at least 8 characters long.</div>
+                          <div *ngIf="login['password'].errors?.['maxlength']" class="alert alert-danger" style="color:#f98f8f">Password must be less then 20 characters long.</div>
   
                           </div>
            
-         </div>
+            </div>
           
       
          <button [disabled]="loginForm.invalid || showSpinner" type="submit"
@@ -50,6 +50,9 @@
             <span *ngIf="showSpinner" class="spinner" role="status" aria-hidden="true"></span>
             <span *ngIf="!showSpinner">Sign In</span>
           </button>
+          <div *ngIf="showAlert" [ngClass]="alertType === 'success' ? 'alert alert-success' : 'alert alert-danger'">
+            {{ alertMessage }}
+        </div>
                   <div class="text-left">
                     <span style="color: grey"><a routerLink="/employee-fgt-password"  style="color:#54BEB8;text-decoration: none;">Forgot your password? </a>
                     </span>

@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/utility/services/auth.service';
 import jwt_decode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs';
+
+
 interface UserRegistrationData {
   fullName: string;
   email: string;
@@ -428,52 +431,64 @@ resetButtonText(agentIndex: number) {
       );
     }
     resetPassword() {
-
       this.showSpinner = true; // Set submittingForm flag to true
-      // Get the value of the oldpassword field from the form
-   const oldPasswordValue = this.passwordForm.get('old_password')?.value;
-     this.authService.verifyOldPassword(this.email, oldPasswordValue)
-       .subscribe(
-         (response) => {
-           console.log(this.email)
-           console.log(this.oldPassword)
-           this.changePassword();
- 
-         },
-         (error) => {
-           console.error('Error verifying old password:', error);
-           console.log(this.email)
-           console.log(this.oldPassword)
-           this.error = 'Old password is incorrect.';
-           this.showAlertMessage('error', 'Old password is incorrect.');
-         }
-       ).add(() => {
-        this.showSpinner = false; // Set submittingForm flag to false when request completes
-      });;
-   }
+    
+      // Get the value of the old password field from the form
+      const oldPasswordValue = this.passwordForm.get('old_password')?.value;
+    
+      // Show the spinner for at least 5 seconds
+      const hideSpinnerAfterTimeout = () => {
+        setTimeout(() => {
+          this.showSpinner = false;
+        }, 5000);
+      };
+    
+      this.authService.verifyOldPassword(this.email, oldPasswordValue).subscribe(
+        (response) => {
+          console.log(this.email);
+          console.log(this.oldPassword);
+          this.changePassword();
+          hideSpinnerAfterTimeout();
+        },
+        (error) => {
+          console.error('Error verifying old password:', error);
+          console.log(this.email);
+          console.log(this.oldPassword);
+          // Display error message and ensure spinner spins for at least 5 seconds
+          setTimeout(() => {
+            this.error = 'Old password is incorrect.';
+            this.showAlertMessage('error', 'Old password is incorrect.');
+            hideSpinnerAfterTimeout();
+          }, 5000);
+        }
+      );
+    }
+    
+    
  
    changePassword() {
     this.showSpinner = true; // Show the spinner when the form is submitted
   
     const PasswordValue = this.passwordForm.get('new_password')?.value;
-    this.authService.changePassword(this.email, PasswordValue)
-      .subscribe(
-        (response: any) => {
-          console.log('Password changed successfully:', response);
-          this.showAlertMessage('success', 'Password changed successfully');
-          this.profileForm.reset();
-        },
-        (error: any) => {
-          console.error('Error changing password:', error);
-          this.error = 'Error changing password. Please try again later.';
-          this.showAlertMessage('error', 'Error changing password. Please try again later.');
-        }
-      ).add(() => {
+    
+    this.authService.changePassword(this.email, PasswordValue).subscribe(
+      (response: any) => {
+        console.log('Password changed successfully:', response);
         setTimeout(() => {
           this.showSpinner = false; // Hide the spinner after 5 seconds
-        }, 5000);
-      });
+          this.showAlertMessage('success', 'Password changed successfully');
+          this.profileForm.reset();
+        }, 5000); // Display success message after 5 seconds
+      },
+      (error: any) => {
+        console.error('Error changing password:', error);
+        this.error = 'Error changing password. Please try again later.';
+        this.showAlertMessage('error', 'Error changing password. Please try again later.');
+        this.showSpinner = false; // Hide the spinner in case of error
+      }
+    );
   }
+  
   
    fetchProfilePictureByEmail(email: string) {
     this.http.get('http://localhost:8080/api/company/displayProfileImage', {
