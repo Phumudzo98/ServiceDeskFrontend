@@ -144,7 +144,7 @@ export class EmployeeTicketsComponent implements OnInit
   get new_ticket (){return this.ticketForm.controls;}
 
   
-
+  successMessage: String = '';
   createTicket():void
   {
     
@@ -178,6 +178,7 @@ export class EmployeeTicketsComponent implements OnInit
         location.reload();
       }, 3000); // 5 seconds delay
     },
+    //What happened
     error => {
       console.log("No", error);
       this.showSpinner = false;
@@ -231,5 +232,7 @@ export class EmployeeTicketsComponent implements OnInit
    closeWindow() {
     this.showDropdown=false;
   }
+
+  newInfo: boolean = true;
 
 }
