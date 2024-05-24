@@ -81,9 +81,10 @@ const routes: Routes = [
   {path:"forget-password",component: CompanyFgtPasswordComponent},
   {path: "", component: HomeComponent},
   {path:"company-subscription", component: CompanySubscriptionsComponent,canActivate: [AuthGuard]},
-  {path: "ticket-details-com", component: CompanyTicketDetailsComponent,canActivate: [AuthGuard]}
+  {path: "ticket-details-com/:ticketId", component: CompanyTicketDetailsComponent,canActivate: [AuthGuard]}
 
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

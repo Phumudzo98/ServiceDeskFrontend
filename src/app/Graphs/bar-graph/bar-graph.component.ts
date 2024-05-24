@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import Chart from 'chart.js/auto';
 import jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
@@ -15,15 +15,15 @@ export class BarGraphComponent implements AfterViewInit {
   companyId: string = '';
   authToken: string | null | undefined;
   token: any;
-
+  @Input() startDate: string = '';
+  @Input() endDate: string = '';
   months: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   years: number[] = Array.from({ length: 11 }, (_, i) => 2020 + i); // Range from 2020 to 2030
   selectedYear: number = new Date().getFullYear();
   createdAtDates: string[] = [];
   ticketData: number[] = [];
   chart: Chart | undefined;
-  startDate: string = '';
-  endDate: string = '';
+
 
   // New properties to store filtered data
   filteredDates: string[] = [];
@@ -167,7 +167,7 @@ export class BarGraphComponent implements AfterViewInit {
     console.log('End date changed to:', this.endDate);
   }
 
-  applyFilters(): void {
+  applyFilters(startDate: string, endDate: string): void {
     console.log('Applying filters with start date:', this.startDate, 'and end date:', this.endDate);
     if (!this.startDate || !this.endDate) {
       console.log('Start date and end date must be specified.');
