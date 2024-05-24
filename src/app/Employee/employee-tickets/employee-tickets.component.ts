@@ -177,7 +177,7 @@ export class EmployeeTicketsComponent implements OnInit
         this.successMessage = 'Ticket created successfully!';
         this.router.navigate(['/employee-tickets']);
         location.reload();
-      }, 5000); // 5 seconds delay
+      }, 3000); // 5 seconds delay
     },
     error => {
       console.log("No", error);
@@ -203,7 +203,7 @@ export class EmployeeTicketsComponent implements OnInit
           this.priority = "";
           this.status = "";
           this.showSpinner2 = false;
-      }, 5000);
+      }, 3000);
   }
 
 

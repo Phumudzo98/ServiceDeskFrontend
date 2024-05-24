@@ -603,9 +603,19 @@ input.mat-input {
   width: 75px;
   height: 35px;
 }
-
 .card {
   transition: transform 0.5s ease-in-out;
+}
+
+.next-button{
+  width :100px;
+  height: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.previous-button{
+  margin-right: 10px;
+  
 }
 
 

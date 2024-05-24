@@ -91,7 +91,7 @@
         <!-- Dynamic Content Section -->
        
 
-        <!--Unresolved Tickets-->
+      <!--Unresolved Tickets-->
 <div class="row" *ngIf="currentForm === 'opened'">
   <div *ngFor="let item of paginatedData" style="margin-bottom: 20px;">
     <div *ngIf="item.status == 'Open'" class="card" style="width: 100%;">
@@ -100,7 +100,7 @@
         <span class="ticket-header">{{ item.category }}</span>
         <span class="form-header">
           <!--Ticket Date & View details-->
-          {{ (item.createdAt).substring(16, -11) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
+          {{ (item.createdAt).substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
         </span>
       </div>
       <!--Ticket Message-->
@@ -114,15 +114,13 @@
       </div>
     </div>
   </div>
-
-  <!-- Move to the right end -->
-  <div class="col-12">
-    <div class="previous-next d-flex justify-content-end">
-      <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
-      <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= dataArray.length">Next</button>
-    </div>
+  <div class="d-flex justify-content-end" *ngIf="paginatedData.length > 0">
+    <button class="next-button previous-button" type="button" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <button class="next-button" type="button" (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= dataArray.length">Next</button>
   </div>
+  
 </div>
+
 
 
       
