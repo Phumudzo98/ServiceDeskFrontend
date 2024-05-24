@@ -22,18 +22,35 @@
             <span class="form-header badge badge-success" id="statusID">Opened</span>
             <span class="vertical-line"></span>
             <span class="filter">Filters:</span>
-            <select id="yearSelect" (change)="onYearChange($event)">
-              <option *ngFor="let year of years" [value]="year">{{year}}</option>
-            </select>
+            <div class="date-picker-container">
+              <div>
+                <label for="startDate">Start Date:</label>
+                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
+              </div>
+              <div>
+                <label for="endDate">End Date:</label>
+                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
+              </div>
+            </div>
+            
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $('#startDate').attr('placeholder', 'Start Date');
+                $('#endDate').attr('placeholder', 'End Date');
+              });
+            </script>
+            
+            
   
             <!--Apply filter Button -->
-            <button class="applyFilter" (click)=" ApplyFilters()">Apply Filter</button>
-  
+            <button class="applyFilter" (click)="updateDates(startDate, endDate)">Apply Filter</button>
+           
             <button class="export" (click)="DownloadCSVOpen()">Export CSV</button>
             <p class="ticket-category"></p>
           </div>
           
-          <app-bar-graph></app-bar-graph>
+          <app-bar-graph [startDate]="startDate" [endDate]="endDate"></app-bar-graph>
          </div>
   
            <!--End Of New Tickets Bar graph-->
@@ -91,7 +108,7 @@
               <option value="Full Month">1 Year</option>
             </select>
               <!--Apply filter Button -->
-              <button class="applyFilter" (click)="applyFilters()">Apply Filter</button>
+              <button class="applyFilter" >Apply Filter</button>
             <button class="export">Export CSV</button>
             <p class="ticket-category"></p>
           </div>
