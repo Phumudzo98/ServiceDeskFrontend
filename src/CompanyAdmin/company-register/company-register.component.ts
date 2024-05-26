@@ -22,7 +22,6 @@ export class CompanyRegisterComponent {
       firstName: new FormControl('',[Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
-
       email: new FormControl('',Validators.compose([Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])),
     
     });
@@ -83,6 +82,35 @@ switchToForm(form: string) {
       }
 
     }
+   }
+
+   submitForm():void
+   {
+
+    if(this.loginForm && this.companyRegisterForm)
+      {
+        const formData={
+          "comapnyName":this.companyRegisterForm.get('companyName')?.value,
+          "comapnyEmail":this.companyRegisterForm.get('companyEmail')?.value,
+          "contactNumber":this.loginForm.get('contactNumber')?.value,
+          "password":this.companyRegisterForm.get('password')?.value,
+
+
+          "fullName":this.loginForm.get('firstName')?.value,
+          "email":this.loginForm.get('email')?.value,
+          "adminContactNumber":this.loginForm.get('contactNumber')?.value,
+          "lastName":this.loginForm.get('lastName')?.value,
+          "position":"Admin",
+          "adminPassword":this.companyRegisterForm.get('password')?.value
+
+
+
+        }
+        console.log('Form Data:', formData);
+      }
+
+      
+
    }
    
    
