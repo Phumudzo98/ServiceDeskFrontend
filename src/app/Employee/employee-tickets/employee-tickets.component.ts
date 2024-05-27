@@ -203,7 +203,7 @@ export class EmployeeTicketsComponent implements OnInit
           this.priority = "";
           this.status = "";
           this.showSpinner2 = false;
-      }, 3000);
+      }, 2000);
   }
 
 

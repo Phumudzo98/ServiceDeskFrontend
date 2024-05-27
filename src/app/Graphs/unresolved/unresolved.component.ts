@@ -119,7 +119,7 @@ export class UnresolvedComponent implements AfterViewInit {
           datasets: [{
             label: 'Tickets',
             data: this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData,
-            backgroundColor: '#00e400',
+            backgroundColor: '#B20000',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 0,
             barThickness: 15
@@ -190,21 +190,45 @@ export class UnresolvedComponent implements AfterViewInit {
     });
   }
 
-  downloadCSV(): void {
+downloadCSV(): void {
+    let datesToUse: string[];
+    let dataToUse: number[];
+
+    // Check if filtered data is available, otherwise use initial data
+    if (this.filteredDates.length > 0 && this.filteredTicketData.length > 0) {
+      datesToUse = this.filteredDates;
+      dataToUse = this.filteredTicketData;
+    } else {
+      datesToUse = this.updatedAtDates;
+      dataToUse = this.ticketData;
+    }
+
     // Use filtered dates and ticket data for CSV
-    const csvData = this.convertToCSV(this.updatedAtDates, this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData);
+    const csvData = this.convertToCSV(datesToUse, dataToUse);
     this.downloadFile(csvData, 'ticket_data.csv');
   }
 
+
   convertToCSV(dates: string[], data: number[]): string {
     let csvContent = 'Month,Year,Ticket Count\n';
-    dates.forEach((date, index) => {
+  
+    // Filter dates to include only months up to current month of the current year
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+    const filteredDates = dates.filter(date => {
+      const [year, month] = date.split('-');
+      return parseInt(year) === currentYear && parseInt(month) <= currentMonth;
+    });
+  
+    filteredDates.forEach((date, index) => {
       const [year, month] = date.split('-');
       const ticketCount = data[index];
       csvContent += `${this.months[parseInt(month, 10) - 1]},${year},${ticketCount}\n`;
     });
     return csvContent;
   }
+  
 
   downloadFile(data: string, filename: string): void {
     const blob = new Blob([data], { type: 'text/csv' });

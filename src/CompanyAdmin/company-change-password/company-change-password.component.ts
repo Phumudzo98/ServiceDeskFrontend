@@ -5,7 +5,7 @@ from '@angular/forms';
 
 
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Email } from 'src/app/utility/models/models';
 @Component({
   selector: 'app-company-change-password',
@@ -18,11 +18,13 @@ export class CompanyChangePasswordComponent {
   alertMessage!: string;
   showAlert!: boolean;
   showSpinner: boolean = false;
+  email!: string;
+  token: string ='';
+
   constructor(private fb: FormBuilder, private http: HttpClient,
-    private router: Router) {}
+    private router: Router,private actiavatedRoute:ActivatedRoute) {}
 
   passwordForm: FormGroup = this.fb.group({
-    email:['',[Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
     confirm_password: ['', [Validators.required]],
   }, 
@@ -59,11 +61,25 @@ export class CompanyChangePasswordComponent {
         'Content-Type': 'application/json',
         'skip': 'true'
       });
+
+      this.actiavatedRoute.queryParams.subscribe(params=>{
+        const emailParam= Object.keys(params)[0];
+        this.email=emailParam;
+      });
+
+      
+    
+    if (!this.email) {
+      // Handle invalid or missing token
+      this.showAlertMessage('danger', 'Invalid password reset link.');
+      return; // Exit function if token is invalid
+    };
       const email = this.passwordForm.get('email')?.value;
       const password = this.passwordForm.get('password')?.value;
       const data = {
-        email: email,
-        password: password
+        email: this.email,
+        password: password,
+        token: this.token // Include token in the data sent to the backend
       };
   
       this.http.post<any>('http://localhost:8080/api/auth/resetPassword', data,{ headers }).subscribe(
@@ -72,7 +88,7 @@ export class CompanyChangePasswordComponent {
           this.showAlertMessage('success', 'Reset password request sent successfully!');
           setTimeout(() => {
             // Redirect to login page after 1 seconds
-            this.router.navigate(['/login']);
+            this.router.navigate(['/company-login']);
           }, 2000); // 2000 milliseconds =2  seconds
         },
         (error) => {

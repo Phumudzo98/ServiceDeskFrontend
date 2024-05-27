@@ -119,7 +119,7 @@ export class InProgressComponent implements AfterViewInit {
           datasets: [{
             label: 'Tickets',
             data: this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData,
-            backgroundColor: '#00e400',
+            backgroundColor: '#ffff00',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 0,
             barThickness: 15
@@ -191,9 +191,14 @@ export class InProgressComponent implements AfterViewInit {
   }
 
   downloadCSV(): void {
+ 
+
     // Use filtered dates and ticket data for CSV
     const csvData = this.convertToCSV(this.updatedAtDates, this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData);
+
+
     this.downloadFile(csvData, 'ticket_data.csv');
+   
   }
 
   convertToCSV(dates: string[], data: number[]): string {

@@ -193,9 +193,12 @@ export class BarGraphComponent implements AfterViewInit {
   }
 
   downloadCSV(): void {
+    
     // Use filtered dates and ticket data for CSV
     const csvData = this.convertToCSV(this.createdAtDates, this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData);
+ 
     this.downloadFile(csvData, 'ticket_data.csv');
+
   }
 
   convertToCSV(dates: string[], data: number[]): string {
