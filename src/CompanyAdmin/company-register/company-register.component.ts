@@ -53,7 +53,7 @@ export class CompanyRegisterComponent {
         if (this.currentForm !== 'form2') {
             this.switchToForm('form2');
         }
-    }, 5000);
+    }, 3000);
 }
 
 switchToForm(form: string) {
@@ -113,6 +113,13 @@ switchToForm(form: string) {
 
    }
    
+   signUp()
+   {
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+   }
    
 }
 

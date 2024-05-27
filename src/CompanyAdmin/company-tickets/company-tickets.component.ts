@@ -95,7 +95,7 @@ export class CompanyTicketsComponent implements OnInit{
           this.priority = "";
           this.status = "";
           this.showSpinner2 = false;
-      }, 5000);
+      }, 2000);
   }
   //Adding a ticket
   addTicket() {
@@ -144,10 +144,32 @@ export class CompanyTicketsComponent implements OnInit{
     console.log(error);
     
   })
-
-  
 }
 
 
+  //Only displaying two tickets the next/previous will display other two tickets
+  currentPage: number = 0;
+  pageSize: number = 2;
+  
+  get paginatedData() {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    return this.dataArray.slice(start, end);
+  }
+
+  nextPage() {
+    if ((this.currentPage + 1) * this.pageSize < this.dataArray.length) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+    }
+  }
+
+  
+ 
 
 }

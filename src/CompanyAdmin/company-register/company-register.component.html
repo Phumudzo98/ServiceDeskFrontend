@@ -130,10 +130,13 @@
                             <div *ngIf="company['confirm_password'].getError('MustMatch')" class="alert alert-danger" style="color:#f98f8f">Password does not match</div>
                             </div>
             </div>
-          <button [disabled]="companyRegisterForm" type="submit"
-                      class="btn btn-primary btn-user btn-block mb-3" style="height: 45px;">
-                      Create Account
+                  <button [disabled]="companyRegisterForm.invalid" type="submit"
+                      class="btn btn-primary btn-user btn-block mb-3" style="height: 45px;" (click)="signUp()">
+                      <span *ngIf="isLoading" class="loader"></span>
+                      <span *ngIf="!isLoading">Create Account
+                      </span>
                   </button>
+                 
                  
                   <div class="text-left">
                       <span style="color: grey">Already have an account? <a routerLink="/company-login"  style="color:#54BEB8;text-decoration: none;">Login</a></span>

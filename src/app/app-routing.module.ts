@@ -34,6 +34,7 @@ import { CompanySubscriptionsComponent } from 'src/CompanyAdmin/company-subscrip
 import { CompanyTicketDetailsComponent } from 'src/CompanyAdmin/company-ticket-details/company-ticket-details.component';
 import { AdminChangePasswordComponent } from './Super-Admin/admin-change-password/admin-change-password.component';
 import { EmployeeChangePasswordComponent } from './Employee/employee-change-password/employee-change-password.component';
+import { AgentTicketDetailsComponent } from './Agent/agent-ticket-details/agent-ticket-details.component';
 import { AuthGuard } from './utility/services/authgaurd.service'; 
 
 
@@ -51,11 +52,10 @@ const routes: Routes = [
   {path:"employee-change-password",component:EmployeeChangePasswordComponent},
 
 
-
-
+  //Agent
+  {path:"agent-ticket-details", component: AgentTicketDetailsComponent},
 
   //Super Admin's routes
-
   {path:"admin-login",component:AdminLoginComponent},
   {path:"admin-password",component:AdminFgtPasswordComponent},
   {path:"admin-dashboard",component:AdminDashboardComponent},
@@ -64,8 +64,6 @@ const routes: Routes = [
   {path:"admin-settings",component:AdminSettingsComponent},
   {path:"edit-subscription",component:EditSubscriptionComponent},
   {path:"admin-change-password",component:AdminChangePasswordComponent},
-
-
 
   //Company Admins' routes
   {path:"company-dashboard",component:CompanyAdminDashboardComponent,canActivate: [AuthGuard]},
@@ -84,8 +82,6 @@ const routes: Routes = [
   {path: "ticket-details-com/:ticketId", component: CompanyTicketDetailsComponent,canActivate: [AuthGuard]}
 
 ];
-
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
