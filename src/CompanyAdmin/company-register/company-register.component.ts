@@ -83,6 +83,35 @@ switchToForm(form: string) {
 
     }
    }
+
+   submitForm():void
+   {
+
+    if(this.loginForm && this.companyRegisterForm)
+      {
+        const formData={
+          "comapnyName":this.companyRegisterForm.get('companyName')?.value,
+          "comapnyEmail":this.companyRegisterForm.get('companyEmail')?.value,
+          "contactNumber":this.loginForm.get('contactNumber')?.value,
+          "password":this.companyRegisterForm.get('password')?.value,
+
+
+          "fullName":this.loginForm.get('firstName')?.value,
+          "email":this.loginForm.get('email')?.value,
+          "adminContactNumber":this.loginForm.get('contactNumber')?.value,
+          "lastName":this.loginForm.get('lastName')?.value,
+          "position":"Admin",
+          "adminPassword":this.companyRegisterForm.get('password')?.value
+
+
+
+        }
+        console.log('Form Data:', formData);
+      }
+
+      
+
+   }
    
    signUp()
    {

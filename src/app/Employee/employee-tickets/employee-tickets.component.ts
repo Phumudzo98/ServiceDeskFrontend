@@ -37,6 +37,7 @@ export class EmployeeTicketsComponent implements OnInit
   profileForm!: FormGroup;
   profileImage: string | ArrayBuffer | null | undefined;
   showSpinner: boolean | undefined;
+  successMessage: string ='';
   constructor(private formBuilder: FormBuilder, private storage:StorageService,private router: Router, private http:HttpClient,private AuthService:AuthService) {
     this.filterForm = this.formBuilder.group({
       status: new FormControl(''),
@@ -52,7 +53,7 @@ export class EmployeeTicketsComponent implements OnInit
 
   ngOnInit(): void {
 
-    console.log("Print")
+    
 
     const token = this.storage.getUser();
     const decodedToken:any = jwtDecode(token);
@@ -143,7 +144,7 @@ export class EmployeeTicketsComponent implements OnInit
   get new_ticket (){return this.ticketForm.controls;}
 
   
-  successMessage: String = '';
+ 
   createTicket():void
   {
     

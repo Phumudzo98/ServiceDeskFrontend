@@ -100,7 +100,7 @@
         <span class="ticket-header">{{ item.category }}</span>
         <span class="form-header">
           <!--Ticket Date & View details-->
-          {{ (item.createdAt).substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
+          {{ (item.createdAt).substring(0, 10) }} | <a [routerLink]="['/ticket-details', item.ticketId]">View</a>
         </span>
       </div>
       <!--Ticket Message-->
@@ -135,7 +135,7 @@
                 <span class="form-header">
   
                   <!--Ticket Date & View details-->
-                  {{(item.createdAt).substring(16,-11)}} |<a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
+                  {{(item.createdAt).substring(16,-11)}} |<a [routerLink]="['/ticket-details',item.ticketId]">View</a>
                 </span>
               </div>
               <!--Ticket Message-->
@@ -165,7 +165,7 @@
                 <span class="form-header">
   
                   <!--Ticket Date & View details-->
-                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details',item.ticketId]">View</a>
                 </span>
               </div>
               <!--Ticket Message-->
@@ -187,14 +187,14 @@
         <div class="row" *ngIf="currentForm === 'escalate'" >
 
           <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
-            <div *ngIf="item.status=='Closed'" class="card" style="width: 100%;">
+            <div *ngIf="item.status=='Escalate'" class="card" style="width: 100%;">
               <div class="card-header">
                 <!--Ticket Header-->
                 <span class="ticket-header">{{item.category}}</span>
                 <span class="form-header">
   
                   <!--Ticket Date & View details-->
-                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details',item.ticketId]">View</a>
                 </span>
               </div>
               <!--Ticket Message-->

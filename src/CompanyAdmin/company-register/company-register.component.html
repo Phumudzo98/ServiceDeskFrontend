@@ -85,7 +85,7 @@
         <!--Company Register Form-->
 
         <div class="row" *ngIf="currentForm === 'form2'">
-          <form [formGroup]="companyRegisterForm" class="col-md-6 mx-auto" >
+          <form [formGroup]="companyRegisterForm" class="col-md-6 mx-auto" (ngSubmit)="submitForm()">
             
             <div class="form-group">
               <input type="text" class="" id="companyName" formControlName="companyName" placeholder="Company Name">
