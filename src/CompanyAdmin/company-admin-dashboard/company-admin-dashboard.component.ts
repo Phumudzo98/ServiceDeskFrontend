@@ -76,17 +76,36 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
       console.error('No graph component is available');
     }
   }
-
-
-  onStartDateChange(event: any): void {
-    this.startDate = event.target.value;
-    console.log('Start date changed to:', this.startDate);
+  dropdownOpen = false;
+  dropdownStates: { [key: string]: boolean } = {
+    opened: false,
+    inProgress: false,
+    closed: false,
+    escalated: false,
+  };
+  
+  toggleDropdown(dropdown: string) {
+    this.dropdownStates[dropdown] = !this.dropdownStates[dropdown];
   }
 
-  onEndDateChange(event: any): void {
-    this.endDate = event.target.value;
-    console.log('End date changed to:', this.endDate);
+  closeFilter(dropdown: string) {
+    this.dropdownStates[dropdown] = false;
   }
+
+  onStartDateChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.startDate = target.value;
+    console.log('Start Date changed to: ', this.startDate);
+  }
+
+  onEndDateChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.endDate = target.value;
+    console.log('End Date changed to: ', this.endDate);
+  }
+
+  
+ 
 
 
   DownloadCSVOpen(): void {

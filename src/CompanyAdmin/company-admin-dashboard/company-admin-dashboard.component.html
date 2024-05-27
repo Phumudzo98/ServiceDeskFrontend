@@ -17,63 +17,92 @@
   
            <!--New Tickets Bar graph-->
   
-         <div class="col" id="details">
-          <div style="display: inline;">
-            <span class="form-header badge badge-success" id="statusID">Opened</span>
-            <span class="vertical-line"></span>
-            <span class="filter">Filters:</span>
-            <div class="date-picker-container">
-              <div>
-                <label for="startDate">Start Date:</label>
-                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
+           <div class="col" id="details">
+            <div style="display: inline;">
+              <span class="form-header badge badge-success" id="statusID">Opened</span>
+              <span class="vertical-line"></span>
+              <span class="filter">Filters:</span>
+              <div class="dropdown">
+                <button class="dropbtn" (click)="toggleDropdown('opened')">Select Date Range</button>
+                <div class="dropdown-content" *ngIf="dropdownStates['opened']">
+                  <div class="date-picker-container">
+                    <div>
+                      <a class="close-button" (click)="closeFilter('opened')">X</a>
+                      <hr style="margin-top: 3px;">
+                      <label for="startDate">Start Date:</label>
+                      <input
+                        type="month"
+                        id="startDate"
+                        (change)="onStartDateChange($event)"
+                        [value]="startDate"
+                        placeholder="Start Date"
+                      />
+                    </div>
+                    <div>
+                      <label for="endDate">End Date:</label>
+                      <input
+                        type="month"
+                        id="endDate"
+                        (change)="onEndDateChange($event)"
+                        [value]="endDate"
+                        placeholder="End Date"
+                      />
+                    </div>
+                    <button class="applyFilter" (click)="updateDatesOpen(startDate, endDate)">Apply Filter</button>
+                    <button class="nextButton">Reset</button>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label for="endDate">End Date:</label>
-                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
-              </div>
-              
+              <button class="export" (click)="DownloadCSVOpen()">Export CSV</button>
+              <p class="ticket-category"></p>
             </div>
-
-            
-            <!--Apply filter Button -->
-            <button class="applyFilter" (click)="updateDatesOpen(startDate, endDate)">Apply Filter</button>
-           
-            <button class="export" (click)="DownloadCSVOpen()">Export CSV</button>
-            <p class="ticket-category"></p>
+            <app-bar-graph [startDate]="startDate" [endDate]="endDate"></app-bar-graph>
           </div>
-          
-          <app-bar-graph [startDate]="startDate" [endDate]="endDate"></app-bar-graph>
-         </div>
+        
   
            <!--End Of New Tickets Bar graph-->
 
-         <div class="col" id="details">
-          <div style="display: inline;">
-            <span class="form-header badge badge-warning" id="inprogress">In Progress</span>
-            <span class="vertical-line"></span>
-            <span class="filter">Filters:</span>
-            <div class="date-picker-container">
-              <div>
-                <label for="startDate">Start Date:</label>
-                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
+           <div class="col" id="details">
+            <div style="display: inline;">
+              <span class="form-header badge badge-warning" id="inprogress">In Progress</span>
+              <span class="vertical-line"></span>
+              <span class="filter">Filters:</span>
+              <div class="dropdown">
+                <button class="dropbtn" (click)="toggleDropdown('inProgress')">Select Date Range</button>
+                <div class="dropdown-content" *ngIf="dropdownStates['inProgress']">
+                  <div class="date-picker-container">
+                    <div>
+                      <a class="close-button" (click)="closeFilter('inProgress')">X</a>
+                      <hr style="margin-top: 3px;">
+                      <label for="startDate">Start Date:</label>
+                      <input
+                        type="month"
+                        id="startDate"
+                        (change)="onStartDateChange($event)"
+                        [value]="startDate"
+                        placeholder="Start Date"
+                      />
+                    </div>
+                    <div>
+                      <label for="endDate">End Date:</label>
+                      <input
+                        type="month"
+                        id="endDate"
+                        (change)="onEndDateChange($event)"
+                        [value]="endDate"
+                        placeholder="End Date"
+                      />
+                    </div>
+                    <button class="applyFilter" (click)="updateDatesInProgress(startDate, endDate)">Apply Filter</button>
+                    <button class="nextButton">Reset</button>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label for="endDate">End Date:</label>
-                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
-              </div>
+              <button class="export" (click)="DownloadCSVInProgress()">Export CSV</button>
+              <p class="ticket-category"></p>
             </div>
-
-            
-            <!--Apply filter Button -->
-            <button class="applyFilter" (click)="updateDatesInProgress(startDate, endDate)">Apply Filter</button>
-           
-            <button class="export" (click)="DownloadCSVInProgress()">Export CSV</button>
-            <p class="ticket-category"></p>
+            <app-in-progress [startDate]="startDate" [endDate]="endDate"></app-in-progress>
           </div>
-          
-
-<app-in-progress  [startDate]="startDate" [endDate]="endDate"></app-in-progress>
-</div>
 <!--End Of In Progress Bar graph-->
   
          <!--End Of Resolved Ticket Bar graph-->
@@ -88,64 +117,94 @@
             <div class="container text-left" style="margin-top: 15px;" >
                 <div class="row">
   
-         <!--Un resolved Bar graph-->
-         <div class="col" id="details">
-          <div style="display: inline;">
-            <span class="form-header badge badge-danger" id="priorityID">Closed</span>
-            <span class="vertical-line"></span>
-            <span class="filter">Filters:</span>
-            <div class="date-picker-container">
-              <div>
-                <label for="startDate">Start Date:</label>
-                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
-              </div>
-              <div>
-                <label for="endDate">End Date:</label>
-                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
-              </div>
+         <!-- Closed Tickets Section -->
+  <div class="col" id="details">
+    <div style="display: inline;">
+      <span class="form-header badge badge-danger" id="priorityID">Closed</span>
+      <span class="vertical-line"></span>
+      <span class="filter">Filters:</span>
+      <div class="dropdown">
+        <button class="dropbtn" (click)="toggleDropdown('closed')">Select Date Range</button>
+        <div class="dropdown-content" *ngIf="dropdownStates['closed']">
+          <div class="date-picker-container">
+            <div>
+              <a class="close-button" (click)="closeFilter('closed')">X</a>
+              <hr style="margin-top: 3px;">
+              <label for="startDate">Start Date:</label>
+              <input
+                type="month"
+                id="startDate"
+                (change)="onStartDateChange($event)"
+                [value]="startDate"
+                placeholder="Start Date"
+              />
             </div>
-
-            
-            <!--Apply filter Button -->
+            <div>
+              <label for="endDate">End Date:</label>
+              <input
+                type="month"
+                id="endDate"
+                (change)="onEndDateChange($event)"
+                [value]="endDate"
+                placeholder="End Date"
+              />
+            </div>
             <button class="applyFilter" (click)="updateDatesClosed(startDate, endDate)">Apply Filter</button>
-           
-            <button class="export" (click)="DownloadCSVClosed()">Export CSV</button>
-            <p class="ticket-category"></p>
+            <button class="nextButton">Reset</button>
           </div>
-          
-  
-          <app-unresolved  [startDate]="startDate" [endDate]="endDate"></app-unresolved>
         </div>
-        <!--End Of Un resolved Bar graph-->
+      </div>
+      <button class="export" (click)="DownloadCSVClosed()">Export CSV</button>
+      <p class="ticket-category"></p>
+    </div>
+    <app-unresolved [startDate]="startDate" [endDate]="endDate"></app-unresolved>
+  </div>
+<!--End Of Un resolved Bar graph-->
   
         <!--Resolved Tickets Bar graph-->
-        <div class="col" id="details">
-          <div style="display: inline;">
-            <span class="form-header badge badge-success" id="escalated">Escalated</span>
-            <span class="vertical-line"></span>
-            <span class="filter">Filters:</span>
-            <div class="date-picker-container">
-              <div>
-                <label for="startDate">Start Date:</label>
-                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
-              </div>
-              <div>
-                <label for="endDate">End Date:</label>
-                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
-              </div>
+        <!-- Escalated Tickets Section -->
+  <div class="col" id="details">
+    <div style="display: inline;">
+      <span class="form-header badge badge-success" id="escalated">Escalated</span>
+      <span class="vertical-line"></span>
+      <span class="filter">Filters:</span>
+      <div class="dropdown">
+        <button class="dropbtn" (click)="toggleDropdown('escalated')">Select Date Range</button>
+        <div class="dropdown-content" *ngIf="dropdownStates['escalated']">
+          <div class="date-picker-container">
+            <div>
+              <a class="close-button" (click)="closeFilter('escalated')">X</a>
+              <hr style="margin-top: 3px;">
+              <label for="startDate">Start Date:</label>
+              <input
+                type="month"
+                id="startDate"
+                (change)="onStartDateChange($event)"
+                [value]="startDate"
+                placeholder="Start Date"
+              />
             </div>
-
-            
-            <!--Apply filter Button -->
+            <div>
+              <label for="endDate">End Date:</label>
+              <input
+                type="month"
+                id="endDate"
+                (change)="onEndDateChange($event)"
+                [value]="endDate"
+                placeholder="End Date"
+              />
+            </div>
             <button class="applyFilter" (click)="updateDatesEscalated(startDate, endDate)">Apply Filter</button>
-           
-            <button class="export" (click)="DownloadCSVEscalated()">Export CSV</button>
-            <p class="ticket-category"></p>
+            <button class="nextButton">Reset</button>
           </div>
-          
-          
-          <app-escalated-graph  [startDate]="startDate" [endDate]="endDate"></app-escalated-graph>
-         </div>
+        </div>
+      </div>
+      <button class="export" (click)="DownloadCSVEscalated()">Export CSV</button>
+      <p class="ticket-category"></p>
+    </div>
+    <app-escalated-graph [startDate]="startDate" [endDate]="endDate"></app-escalated-graph>
+  </div>
+
 
                 </div>
             </div>
