@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-company-fgt-password',
   templateUrl: './company-fgt-password.component.html',
@@ -16,8 +16,8 @@ export class CompanyFgtPasswordComponent {
   alertType!: string;
   alertMessage!: string;
   showAlert!: boolean;
-
-  constructor(private router: Router, private http: HttpClient) {
+ email:String='';
+  constructor(private router: Router, private http: HttpClient,private actiavatedRoute:ActivatedRoute) {
     this.forget_Password_Form = new FormGroup({
       email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
     });
@@ -36,6 +36,8 @@ export class CompanyFgtPasswordComponent {
 
   sendEmail() {
     this.showSpinner = true;
+
+  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'skip': 'true'

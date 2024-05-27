@@ -119,7 +119,7 @@ export class UnresolvedComponent implements AfterViewInit {
           datasets: [{
             label: 'Tickets',
             data: this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData,
-            backgroundColor: '#00e400',
+            backgroundColor: '#B20000',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 0,
             barThickness: 15

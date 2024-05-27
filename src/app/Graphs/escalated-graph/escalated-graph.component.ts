@@ -119,7 +119,7 @@ export class EscalatedGraphComponent {
           datasets: [{
             label: 'Tickets',
             data: this.filteredTicketData.length > 0 ? this.filteredTicketData : this.ticketData,
-            backgroundColor: '#00e400',
+            backgroundColor: '#FF5A00',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 0,
             barThickness: 15
