@@ -90,11 +90,7 @@ export class TicketDetailsComponent implements OnInit {
     });
   }
 
-  colt():void
-  {
-    console.log("Ahh");
-    
-  }
+  
 
   public sendMessage(): void {
     let getUserToken = this.token.getUser();

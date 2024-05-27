@@ -19,17 +19,17 @@
           <div class="card-body">
             <!-- Top section inside main card -->
             <div style="display: flex; margin-bottom: 20px;">
-              <h3><strong>Cannot access the system</strong></h3>
+              <h3><strong>{{dataArray.category}}</strong></h3>
               <div style="display: flex; margin-left: auto;">
-                <p class="form-header badge badge-secondary" id="ticketID">#1E233</p>
-                <p class="form-header badge badge-danger" id="priorityID">Urgent</p>
-                <p class="form-header badge badge-success" id="statusID">Open</p>
+                <p class="form-header badge badge-secondary" id="ticketID">{{ticketId}}</p>
+                <p class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</p>
+                <p class="form-header badge badge-success" id="statusID">{{dataArray.status}}</p>
               </div>
             </div>
             <!-- <hr/> -->
             <!-- Message body -->
             <div class="message-body">
-              <span style="color: white;">Life seasons open have. Air have of. Lights fill after let third darkness replenish fruitful let. Wherein set image. Creepeth said above gathered bring.</span>
+              <span style="color: white;">{{dataArray.description}}</span>
             </div>
             <!-- Reply section -->
             <p>Katherine <span class="form-header">Today, 11:30 PM</span></p>
@@ -39,7 +39,8 @@
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
             <div class="message-input">
-              <input placeholder="Write your response for the issue" class="text-class"/>
+              <input type="text"
+              [(ngModel)]="newMessage" placeholder="Write your response for the issue" class="text-class"/>
               <div style="display: flex; margin-top: 20px;">
                 <div>
                   <!-- Hidden file input -->
@@ -49,7 +50,7 @@
                   <img src="../../../assets/images/Vector (Stroke).svg" width="17px" height="17px" style="margin-right: 15px;"/>
                   Attach
                 </button>
-                <button class="nextButton">Send</button>
+                <button (click)="sendMessage()" class="nextButton">Send</button>
               </div>
             </div>
           </div>

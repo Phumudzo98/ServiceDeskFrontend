@@ -67,10 +67,10 @@
               <h6>Ticket Info</h6>
 
               <div class="col">
-              <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">#1E233</span></p>
-              <p class="form-header">Created : <span>dd - mm - yyyy</span></p>
-              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">Open</span></p>
-              <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">Urgent</span></p>
+              <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
+              <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
+              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
+              <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
             </div>
             
               <hr/>
