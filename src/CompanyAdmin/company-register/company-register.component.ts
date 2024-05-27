@@ -22,7 +22,6 @@ export class CompanyRegisterComponent {
       firstName: new FormControl('',[Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
-
       email: new FormControl('',Validators.compose([Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])),
     
     });
@@ -54,7 +53,7 @@ export class CompanyRegisterComponent {
         if (this.currentForm !== 'form2') {
             this.switchToForm('form2');
         }
-    }, 5000);
+    }, 3000);
 }
 
 switchToForm(form: string) {
@@ -85,6 +84,13 @@ switchToForm(form: string) {
     }
    }
    
+   signUp()
+   {
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 3000);
+   }
    
 }
 

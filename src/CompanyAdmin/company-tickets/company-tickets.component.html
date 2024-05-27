@@ -94,35 +94,36 @@
         <!-- Dynamic Content Section -->
        
 
-        <!--Unresolved Tickets-->
-        <div class="row" *ngIf="currentForm === 'opened'" >
-
-        <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
-          <div *ngIf="item.status=='Open'" class="card" style="width: 100%;">
-            <div class="card-header">
-              <!--Ticket Header-->
-              <span class="ticket-header">{{item.category}}</span>
-              <span class="form-header">
-
-                <!--Ticket Date & View details-->
-                {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details-com',item.ticketId]">View</a>
-              </span>
-            </div>
-            <!--Ticket Message-->
-            <div class="ticket-message">
-              <span class="">{{item.description}}</span>
-            </div>
-            
-            <!--Ticket ID and Priority-->
-            <div class="urgent-section">
-              <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
-              <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
-            </div>
-          </div>
-        </div>
-
-
+        
+      <!--Unresolved Tickets-->
+<div class="row" *ngIf="currentForm === 'opened'">
+  <div *ngFor="let item of paginatedData" style="margin-bottom: 20px;">
+    <div *ngIf="item.status == 'Open'" class="card" style="width: 100%;">
+      <div class="card-header">
+        <!--Ticket Header-->
+        <span class="ticket-header">{{ item.category }}</span>
+        <span class="form-header">
+          <!--Ticket Date & View details-->
+          {{ (item.createdAt).substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
+        </span>
       </div>
+      <!--Ticket Message-->
+      <div class="ticket-message">
+        <span>{{ item.description }}</span>
+      </div>
+      <!--Ticket ID and Priority-->
+      <div class="urgent-section">
+        <span class="form-header badge badge-danger" id="priorityID">{{ item.priority }}</span>
+        <span id="ticketID" class="form-header badge badge-secondary">{{ item.ticketId }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end" *ngIf="paginatedData.length > 0">
+    <button class="next-button previous-button" type="button" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <button class="next-button" type="button" (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= dataArray.length">Next</button>
+  </div>
+  
+</div>
 
       
         <!--InProgress Tickets-->

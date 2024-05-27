@@ -71,6 +71,7 @@ import { EmployeeChangePasswordComponent } from './Employee/employee-change-pass
 import { UserEmployeeComponent } from './user-employee/user-employee.component';
 import { PackageFormComponent } from './package-form/package-form.component';
 import { EscalatedGraphComponent } from './Graphs/escalated-graph/escalated-graph.component';
+import { AgentTicketDetailsComponent } from './Agent/agent-ticket-details/agent-ticket-details.component';
 
 
 
@@ -131,6 +132,7 @@ import { EscalatedGraphComponent } from './Graphs/escalated-graph/escalated-grap
     UserEmployeeComponent,
     PackageFormComponent,
     EscalatedGraphComponent,
+    AgentTicketDetailsComponent,
 
   ],
   imports: [
