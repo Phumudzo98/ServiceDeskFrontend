@@ -32,19 +32,10 @@
                 <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
               </div>
             </div>
+
             
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-              $(document).ready(function() {
-                $('#startDate').attr('placeholder', 'Start Date');
-                $('#endDate').attr('placeholder', 'End Date');
-              });
-            </script>
-            
-            
-  
             <!--Apply filter Button -->
-            <button class="applyFilter" (click)="updateDates(startDate, endDate)">Apply Filter</button>
+            <button class="applyFilter" (click)="updateDatesOpen(startDate, endDate)">Apply Filter</button>
            
             <button class="export" (click)="DownloadCSVOpen()">Export CSV</button>
             <p class="ticket-category"></p>
@@ -60,25 +51,27 @@
             <span class="form-header badge badge-warning" id="inprogress">In Progress</span>
             <span class="vertical-line"></span>
             <span class="filter">Filters:</span>
-            <!--Dropdown for filtering-->
-            <select id="filter" name="">
-              <option value="Type 1">Select</option>
-              <option value="7days"> 30 days</option>
-              <option value="14days">60 days</option>
-              <option value="21days">90 days</option>
-              <option value="Full Month">1 Year</option>
-            </select>
-             <!--End Of Dropdown for filtering 7 days-->
+            <div class="date-picker-container">
+              <div>
+                <label for="startDate">Start Date:</label>
+                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
+              </div>
+              <div>
+                <label for="endDate">End Date:</label>
+                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
+              </div>
+            </div>
 
-               <!--Apply filter Button -->
-          <button class="applyFilter">Apply Filter</button>
-
-             
-            <button class="export">Export CSV</button>
+            
+            <!--Apply filter Button -->
+            <button class="applyFilter" (click)="updateDatesInProgress(startDate, endDate)">Apply Filter</button>
+           
+            <button class="export" (click)="DownloadCSVInProgress()">Export CSV</button>
             <p class="ticket-category"></p>
           </div>
+          
 
-<app-in-progress></app-in-progress>
+<app-in-progress  [startDate]="startDate" [endDate]="endDate"></app-in-progress>
 </div>
 <!--End Of In Progress Bar graph-->
   
@@ -100,21 +93,27 @@
             <span class="form-header badge badge-danger" id="priorityID">Closed</span>
             <span class="vertical-line"></span>
             <span class="filter">Filters:</span>
-            <select id="filter" name="">
-              <option value="Type 1">Select</option>
-              <option value="7days"> 30 days</option>
-              <option value="14days">60 days</option>
-              <option value="21days">90 days</option>
-              <option value="Full Month">1 Year</option>
-            </select>
-              <!--Apply filter Button -->
-              <button class="applyFilter" >Apply Filter</button>
-            <button class="export">Export CSV</button>
+            <div class="date-picker-container">
+              <div>
+                <label for="startDate">Start Date:</label>
+                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
+              </div>
+              <div>
+                <label for="endDate">End Date:</label>
+                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
+              </div>
+            </div>
+
+            
+            <!--Apply filter Button -->
+            <button class="applyFilter" (click)="updateDatesClosed(startDate, endDate)">Apply Filter</button>
+           
+            <button class="export" (click)="DownloadCSVClosed()">Export CSV</button>
             <p class="ticket-category"></p>
           </div>
+          
   
-  
-          <app-unresolved></app-unresolved>
+          <app-unresolved  [startDate]="startDate" [endDate]="endDate"></app-unresolved>
         </div>
         <!--End Of Un resolved Bar graph-->
   
@@ -124,20 +123,27 @@
             <span class="form-header badge badge-success" id="escalated">Escalated</span>
             <span class="vertical-line"></span>
             <span class="filter">Filters:</span>
-            <select id="filter" name="">
-              <option value="Type 1">Select</option>
-              <option value="7days"> 30 days</option>
-              <option value="14days">60 days</option>
-              <option value="21days">90 days</option>
-              <option value="Full Month">1 Year</option>
-            </select>
-              <!--Apply filter Button -->
-              <button class="applyFilter">Apply Filter</button>
-            <button class="export">Export CSV</button>
+            <div class="date-picker-container">
+              <div>
+                <label for="startDate">Start Date:</label>
+                <input type="month" id="startDate" (change)="onStartDateChange($event)" [value]="startDate">
+              </div>
+              <div>
+                <label for="endDate">End Date:</label>
+                <input type="month" id="endDate" (change)="onEndDateChange($event)" [value]="endDate">
+              </div>
+            </div>
+
             
+            <!--Apply filter Button -->
+            <button class="applyFilter" (click)="updateDatesEscalated(startDate, endDate)">Apply Filter</button>
+           
+            <button class="export" (click)="DownloadCSVEscalated()">Export CSV</button>
+            <p class="ticket-category"></p>
           </div>
           
-          <app-escalated-graph></app-escalated-graph>
+          
+          <app-escalated-graph  [startDate]="startDate" [endDate]="endDate"></app-escalated-graph>
          </div>
 
                 </div>

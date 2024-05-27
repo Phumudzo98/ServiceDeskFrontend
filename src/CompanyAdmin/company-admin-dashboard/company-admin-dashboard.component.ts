@@ -20,27 +20,63 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
   endDate: string = '';
 
   constructor() {}
-
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    // Call fetchDataAndCreateChart() from BarGraphComponent
-    if (this.barGraphComponent) {
-      this.barGraphComponent.fetchDataAndCreateChart();
-    } else {
-      console.error('BarGraphComponent is not available');
+    const componentsMap = new Map<any, () => void>([
+      [this.barGraphComponent, () => this.barGraphComponent.fetchDataAndCreateChart()],
+      [this.inProgressComponent, () => this.inProgressComponent.fetchDataAndCreateChart()],
+      [this.escalatedGraphComponent, () => this.escalatedGraphComponent.fetchDataAndCreateChart()],
+      [this.unresolvedComponent, () => this.unresolvedComponent.fetchDataAndCreateChart()]
+    ]);
+  
+    for (const [component, method] of componentsMap) {
+      if (component) {
+        method();
+        return; // Stop after the first component is found and its method is called
+      }
     }
+  
+    console.error('No graph component is available');
   }
-  updateDates(startDate: string, endDate: string): void {
+  updateDatesOpen(startDate: string, endDate: string): void {
     this.startDate = startDate;
     this.endDate = endDate;
 
     if (this.barGraphComponent) {
       this.barGraphComponent.applyFilters(this.startDate, this.endDate);
     } else {
-      console.error('BarGraphComponent is not available');
+      console.error('No graph component is available');
     }
   }
+  updateDatesInProgress(startDate: string, endDate: string): void {
+    this.startDate = startDate;
+    this.endDate = endDate;
+  if (this.inProgressComponent) {
+    this.inProgressComponent.applyFilters(this.startDate, this.endDate);
+  }  else {
+      console.error('No graph component is available');
+    }
+  }
+  updateDatesEscalated(startDate: string, endDate: string): void {
+    this.startDate = startDate;
+    this.endDate = endDate;
+    if (this.escalatedGraphComponent) {
+      this.escalatedGraphComponent.applyFilters(this.startDate, this.endDate);
+    }  else {
+      console.error('No graph component is available');
+    }
+  }
+  updateDatesClosed(startDate: string, endDate: string): void {
+    this.startDate = startDate;
+    this.endDate = endDate;
+    if (this.unresolvedComponent) {
+      this.unresolvedComponent.applyFilters(this.startDate, this.endDate);
+    }  else {
+      console.error('No graph component is available');
+    }
+  }
+
 
   onStartDateChange(event: any): void {
     this.startDate = event.target.value;
@@ -56,9 +92,31 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
   DownloadCSVOpen(): void {
     if (this.barGraphComponent) {
       this.barGraphComponent.downloadCSV();
-    } else {
-      console.error('BarGraphComponent is not available');
+    }else {
+      console.error('No graph component is available');
     }
   }
+  DownloadCSVInProgress(): void {
+    if (this.inProgressComponent) {
+      this.inProgressComponent.downloadCSV();
+    }else {
+      console.error('No graph component is available');
+    }
+  }
+  DownloadCSVClosed(): void {
+    if (this.unresolvedComponent) {
+      this.unresolvedComponent.downloadCSV();
+    } else {
+      console.error('No graph component is available');
+    }
+  }
+  DownloadCSVEscalated(): void {
+    if (this.escalatedGraphComponent) {
+      this.escalatedGraphComponent.downloadCSV();
+    } else {
+      console.error('No graph component is available');
+    }
+  }
+
 
 }
