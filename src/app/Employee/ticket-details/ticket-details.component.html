@@ -38,8 +38,9 @@
             </div>
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
-            <div class="message-input">
-              <input placeholder="Write your response for the issue" class="text-class"/>
+            <div class="message-input" >
+              <input type="text"
+              [(ngModel)]="newMessage" placeholder="Write your response for the issue" class="text-class"/>
               <div style="display: flex; margin-top: 20px;">
                 <div>
                   <!-- Hidden file input -->
@@ -49,7 +50,7 @@
                   <img src="../../../assets/images/Vector (Stroke).svg" width="17px" height="17px" style="margin-right: 15px;"/>
                   Attach
                 </button>
-                <button class="nextButton">Send</button>
+                <button (click)="sendMessage()" class="nextButton" >Send</button>
               </div>
             </div>
           </div>
