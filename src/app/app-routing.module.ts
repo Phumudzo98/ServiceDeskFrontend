@@ -44,7 +44,7 @@ const routes: Routes = [
   {path:"employee-register",component:EmployeeRegisterComponent},
   {path:"employee-fgt-password",component:EmployeeForgortPasswordComponent},
   {path:"employee-tickets",component:EmployeeTicketsComponent},
-  {path:"ticket-details",component:TicketDetailsComponent},
+  {path:"ticket-details/:ticketId",component:TicketDetailsComponent, canActivate: [AuthGuard]},
   {path:"knowledgebase",component:KnowledgebaseComponent},
   {path:"employee-settings",component:SettingsComponent},
   {path:"no-tickets",component:NoTicketsComponent},

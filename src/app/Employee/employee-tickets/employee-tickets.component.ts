@@ -53,7 +53,7 @@ export class EmployeeTicketsComponent implements OnInit
 
   ngOnInit(): void {
 
-    console.log("Print")
+    
 
     const token = this.storage.getUser();
     const decodedToken:any = jwtDecode(token);
