@@ -53,8 +53,6 @@ export class EmployeeTicketsComponent implements OnInit
 
   ngOnInit(): void {
 
-    
-
     const token = this.storage.getUser();
     const decodedToken:any = jwtDecode(token);
     const customerId=decodedToken.accountId;
@@ -166,8 +164,6 @@ export class EmployeeTicketsComponent implements OnInit
     };
 
     let url2="http://localhost:8080/api/ticket/request-service/"+companyNo;
-
-    
 
     this.http.post<any>(url2, ticketCreate).subscribe(response => {
       console.log("Yes", response);

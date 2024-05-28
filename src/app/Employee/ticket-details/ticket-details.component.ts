@@ -26,6 +26,7 @@ export class TicketDetailsComponent implements OnInit {
   messageList?: Observable<Array<RespondMessage>>;
   messages: RespondMessage[] = [];
   newMessage: string = '';
+  accountId!:any;
 
   navigateToDestination() {
       this.router.navigate(['/employee-tickets']);
@@ -89,13 +90,15 @@ export class TicketDetailsComponent implements OnInit {
     });
   }
 
+  
+
   public sendMessage(): void {
     let getUserToken = this.token.getUser();
     let getUserId: any = jwtDecode(getUserToken);
-    let accountId = getUserId.accountId;
+    this.accountId = getUserId.accountId;
 
     let message = {
-      'sender': accountId,
+      'sender': this.accountId,
       'content': this.newMessage
     };
 

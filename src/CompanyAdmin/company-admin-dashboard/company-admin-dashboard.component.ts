@@ -45,6 +45,7 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
 
     if (this.barGraphComponent) {
       this.barGraphComponent.applyFilters(this.startDate, this.endDate);
+      this.closeFilter('opened');
     } else {
       console.error('No graph component is available');
     }
@@ -54,6 +55,7 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     this.endDate = endDate;
   if (this.inProgressComponent) {
     this.inProgressComponent.applyFilters(this.startDate, this.endDate);
+    this.closeFilter('inProgress');
   }  else {
       console.error('No graph component is available');
     }
@@ -63,6 +65,7 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     this.endDate = endDate;
     if (this.escalatedGraphComponent) {
       this.escalatedGraphComponent.applyFilters(this.startDate, this.endDate);
+      this.closeFilter('escalated');
     }  else {
       console.error('No graph component is available');
     }
@@ -72,6 +75,7 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     this.endDate = endDate;
     if (this.unresolvedComponent) {
       this.unresolvedComponent.applyFilters(this.startDate, this.endDate);
+      this.closeFilter('closed');
     }  else {
       console.error('No graph component is available');
     }
@@ -132,6 +136,8 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
       console.error('No graph component is available');
     }
   }
-
+  resetPage():void{
+    window.location.reload();
+  }
 
 }

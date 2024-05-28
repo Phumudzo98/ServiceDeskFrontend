@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators,FormBuilder, AbstractControl, ValidationErrors} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ export class CompanyRegisterComponent {
   loginForm: FormGroup;
   companyRegisterForm: FormGroup;
     
-  constructor(private router:Router, formBuilder: FormBuilder) {
+  constructor(private router:Router, formBuilder: FormBuilder, private http: HttpClient) {
   
     this.loginForm = formBuilder.group({
       firstName: new FormControl('',[Validators.required]),
@@ -84,14 +85,18 @@ switchToForm(form: string) {
     }
    }
 
+   
+
    submitForm():void
    {
+
+    let url="http://localhost:8080/api/auth/signup"
 
     if(this.loginForm && this.companyRegisterForm)
       {
         const formData={
-          "comapnyName":this.companyRegisterForm.get('companyName')?.value,
-          "comapnyEmail":this.companyRegisterForm.get('companyEmail')?.value,
+          "companyName":this.companyRegisterForm.get('companyName')?.value,
+          "companyEmail":this.companyRegisterForm.get('companyEmail')?.value,
           "contactNumber":this.loginForm.get('contactNumber')?.value,
           "password":this.companyRegisterForm.get('password')?.value,
 
@@ -103,10 +108,23 @@ switchToForm(form: string) {
           "position":"Admin",
           "adminPassword":this.companyRegisterForm.get('password')?.value
 
-
-
         }
-        console.log('Form Data:', formData);
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'POST,GET,PUT,DELETE',
+          'skip': 'true'
+        });
+
+        this.http.post<any>(url, formData, {headers}).subscribe(response=>{
+          console.log("successful");
+          this.router.navigate(['/company-login'])
+        }
+      ,error=>{
+        console.log("Somthing went wrong");
+        
+      })
+        
       }
 
       
@@ -120,6 +138,8 @@ switchToForm(form: string) {
       this.isLoading = false;
     }, 3000);
    }
+
+   
    
 }
 

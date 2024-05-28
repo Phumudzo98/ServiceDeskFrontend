@@ -49,7 +49,7 @@
                       />
                     </div>
                     <button class="applyFilter" (click)="updateDatesOpen(startDate, endDate)">Apply Filter</button>
-                    <button class="nextButton">Reset</button>
+                    <button class="nextButton" (click)="resetPage()">Reset</button>
                   </div>
                 </div>
               </div>
@@ -94,7 +94,7 @@
                       />
                     </div>
                     <button class="applyFilter" (click)="updateDatesInProgress(startDate, endDate)">Apply Filter</button>
-                    <button class="nextButton">Reset</button>
+                    <button class="nextButton"(click)="resetPage()">Reset</button>
                   </div>
                 </div>
               </div>
@@ -150,7 +150,7 @@
               />
             </div>
             <button class="applyFilter" (click)="updateDatesClosed(startDate, endDate)">Apply Filter</button>
-            <button class="nextButton">Reset</button>
+            <button class="nextButton" (click)="resetPage()">Reset</button>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@
               />
             </div>
             <button class="applyFilter" (click)="updateDatesEscalated(startDate, endDate)">Apply Filter</button>
-            <button class="nextButton">Reset</button>
+            <button class="nextButton" (click)="resetPage()">Reset</button>
           </div>
         </div>
       </div>
