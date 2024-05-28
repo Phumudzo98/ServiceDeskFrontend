@@ -18,6 +18,16 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
 
   startDate: string = '';
   endDate: string = '';
+  // Separate date variables for each section
+  openedStartDate: string = '';
+  openedEndDate: string = '';
+  inProgressStartDate: string = '';
+  inProgressEndDate: string = '';
+  closedStartDate: string = '';
+  closedEndDate: string = '';
+  escalatedStartDate: string = '';
+  escalatedEndDate: string = '';
+
 
   constructor() {}
   ngOnInit(): void {}
@@ -96,18 +106,46 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     this.dropdownStates[dropdown] = false;
   }
 
-  onStartDateChange(event: Event) {
+  
+  onStartDateChange(event: Event, section: string) {
     const target = event.target as HTMLInputElement;
-    this.startDate = target.value;
-    console.log('Start Date changed to: ', this.startDate);
+    const value = target.value;
+    switch (section) {
+      case 'opened':
+        this.openedStartDate = value;
+        break;
+      case 'inProgress':
+        this.inProgressStartDate = value;
+        break;
+      case 'closed':
+        this.closedStartDate = value;
+        break;
+      case 'escalated':
+        this.escalatedStartDate = value;
+        break;
+    }
+    console.log(`${section} Start Date changed to: `, value);
   }
 
-  onEndDateChange(event: Event) {
+  onEndDateChange(event: Event, section: string) {
     const target = event.target as HTMLInputElement;
-    this.endDate = target.value;
-    console.log('End Date changed to: ', this.endDate);
+    const value = target.value;
+    switch (section) {
+      case 'opened':
+        this.openedEndDate = value;
+        break;
+      case 'inProgress':
+        this.inProgressEndDate = value;
+        break;
+      case 'closed':
+        this.closedEndDate = value;
+        break;
+      case 'escalated':
+        this.escalatedEndDate = value;
+        break;
+    }
+    console.log(`${section} End Date changed to: `, value);
   }
-
   DownloadCSVOpen(): void {
     if (this.barGraphComponent) {
       this.barGraphComponent.downloadCSV();
@@ -138,7 +176,7 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
   }
   resetPage(): void {
     if (this.barGraphComponent) {
-      this.barGraphComponent.fetchDataAndCreateChart(); // Ensure this method initializes the chart to its default state
+      this.barGraphComponent.resetFilters(); // Ensure this method initializes the chart to its default state
     }
   }
 
