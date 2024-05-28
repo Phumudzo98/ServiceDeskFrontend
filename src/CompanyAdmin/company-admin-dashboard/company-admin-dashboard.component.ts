@@ -27,6 +27,11 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
   closedEndDate: string = '';
   escalatedStartDate: string = '';
   escalatedEndDate: string = '';
+  showSpinner: boolean=false;
+  showSpinnerClosed: boolean=false;
+  showSpinnerEscalated: boolean=false;
+  showSpinnerInProgress: boolean=false;
+  showSpinnerOpen: boolean=false;
 
 
   constructor() {}
@@ -50,46 +55,74 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     console.error('No graph component is available');
   }
   updateDatesOpen(startDate: string, endDate: string): void {
+    this.showSpinnerOpen = true; // Show the spinner for opened component
     this.startDate = startDate;
     this.endDate = endDate;
-
+  
     if (this.barGraphComponent) {
-      this.barGraphComponent.applyFilters(this.startDate, this.endDate);
-      this.closeFilter('opened');
+      setTimeout(() => {
+        this.barGraphComponent.applyFilters(this.startDate, this.endDate);
+        this.closeFilter('opened');
+        this.showSpinnerOpen = false; // Hide the spinner after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
     } else {
       console.error('No graph component is available');
+      this.showSpinnerOpen = false; // Hide the spinner if no graph component is available
     }
   }
+  
   updateDatesInProgress(startDate: string, endDate: string): void {
+    this.showSpinnerInProgress = true; // Show the spinner for inProgress component
     this.startDate = startDate;
     this.endDate = endDate;
-  if (this.inProgressComponent) {
-    this.inProgressComponent.applyFilters(this.startDate, this.endDate);
-    this.closeFilter('inProgress');
-  }  else {
+  
+    if (this.inProgressComponent) {
+      setTimeout(() => {
+        this.inProgressComponent.applyFilters(this.startDate, this.endDate);
+        this.closeFilter('inProgress');
+        this.showSpinnerInProgress = false; // Hide the spinner after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+    } else {
       console.error('No graph component is available');
+      this.showSpinnerInProgress = false; // Hide the spinner if no graph component is available
     }
   }
+  
   updateDatesEscalated(startDate: string, endDate: string): void {
+    this.showSpinnerEscalated = true; // Show the spinner for escalated component
     this.startDate = startDate;
     this.endDate = endDate;
+  
     if (this.escalatedGraphComponent) {
-      this.escalatedGraphComponent.applyFilters(this.startDate, this.endDate);
-      this.closeFilter('escalated');
-    }  else {
+      setTimeout(() => {
+        this.escalatedGraphComponent.applyFilters(this.startDate, this.endDate);
+        this.closeFilter('escalated');
+        this.showSpinnerEscalated = false; // Hide the spinner after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+    } else {
       console.error('No graph component is available');
+      this.showSpinnerEscalated = false; // Hide the spinner if no graph component is available
     }
   }
+  
   updateDatesClosed(startDate: string, endDate: string): void {
+    this.showSpinnerClosed = true; // Show the spinner for closed component
     this.startDate = startDate;
     this.endDate = endDate;
+  
     if (this.unresolvedComponent) {
-      this.unresolvedComponent.applyFilters(this.startDate, this.endDate);
-      this.closeFilter('closed');
-    }  else {
+      setTimeout(() => {
+        this.unresolvedComponent.applyFilters(this.startDate, this.endDate);
+        this.closeFilter('closed');
+        this.showSpinnerClosed = false; // Hide the spinner after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+    } else {
       console.error('No graph component is available');
+      this.showSpinnerClosed = false; // Hide the spinner if no graph component is available
     }
   }
+  
+  
   dropdownOpen = false;
   dropdownStates: { [key: string]: boolean } = {
     opened: false,
@@ -174,10 +207,62 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
       console.error('No graph component is available');
     }
   }
-  resetPage(): void {
-    if (this.barGraphComponent) {
-      this.barGraphComponent.resetFilters(); // Ensure this method initializes the chart to its default state
-    }
+ // Define currentComponent as a string variable in your component class
+currentComponent: string | null = null;
+
+// Update the resetPage method to set the currentComponent variable
+resetPage(componentName: string): void {
+  this.currentComponent = componentName; // Set currentComponent to the componentName parameter
+
+  switch (componentName) {
+    case 'opened':
+      this.showSpinner = true; // Show the spinner for opened component
+      setTimeout(() => {
+        this.barGraphComponent.resetFilters(); // Perform reset operations for opened component
+        this.openedEndDate = '';
+        this.openedStartDate = '';
+        this.showSpinner = false; // Hide the spinner after operations complete
+        this.currentComponent = null; // Reset currentComponent after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+      break;
+    case 'inProgress':
+      this.showSpinner = true; // Show the spinner for inProgress component
+      setTimeout(() => {
+        this.inProgressComponent.resetFilters(); // Perform reset operations for inProgress component
+        this.inProgressEndDate = '';
+        this.inProgressStartDate = '';
+        this.showSpinner = false; // Hide the spinner after operations complete
+        this.currentComponent = null; // Reset currentComponent after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+      break;
+    case 'escalated':
+      this.showSpinner = true; // Show the spinner for escalated component
+      setTimeout(() => {
+        this.escalatedGraphComponent.resetFilters(); // Perform reset operations for escalated component
+        this.escalatedEndDate = '';
+        this.escalatedStartDate = '';
+        this.showSpinner = false; // Hide the spinner after operations complete
+        this.currentComponent = null; // Reset currentComponent after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+      break;
+    case 'closed':
+      this.showSpinner = true; // Show the spinner for closed component
+      setTimeout(() => {
+        this.unresolvedComponent.resetFilters(); // Perform reset operations for closed component
+        this.closedEndDate = '';
+        this.closedStartDate = '';
+        this.showSpinner = false; // Hide the spinner after operations complete
+        this.currentComponent = null; // Reset currentComponent after operations complete
+      }, 1000); // Adjust the delay time as needed (1000ms = 1 second)
+      break;
+    default:
+      this.showSpinner = false; // Hide the spinner if component name is not recognized
+      this.currentComponent = null; // Reset currentComponent if component name is not recognized
   }
+}
+
+  
+  
+  
 
 }

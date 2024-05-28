@@ -48,8 +48,16 @@
                         placeholder="End Date"
                       />
                     </div>
-                    <button class="applyFilter"  (click)="updateDatesOpen(openedStartDate, openedEndDate)">Apply Filter</button>
-                    <button class="nextButton" (click)="resetPage()">Reset</button>
+                    <button class="applyFilter" [disabled]="!openedStartDate || !openedEndDate" (click)="updateDatesOpen(openedStartDate, openedEndDate)">
+                      
+                      <span *ngIf="showSpinnerOpen" class="spinner" role="status" aria-hidden="true"></span>
+                      <span *ngIf="!showSpinnerOpen"> Apply Filter</span>
+                    </button>
+                    <button class="nextButton" (click)="resetPage('opened')">
+                      <span *ngIf="showSpinner && currentComponent === 'opened'" class="spinner" role="status" aria-hidden="true"></span>
+                      <span *ngIf="!showSpinner || currentComponent !== 'opened'">Reset</span>
+                    </button>
+                    
                   </div>
                 </div>
               </div>
@@ -93,8 +101,16 @@
                         placeholder="End Date"
                       />
                     </div>
-                    <button class="applyFilter"  (click)="updateDatesInProgress(inProgressStartDate, inProgressEndDate)">Apply Filter</button>
-                    <button class="nextButton"(click)="resetPage()">Reset</button>
+                    <button class="applyFilter" [disabled]="!inProgressStartDate || !inProgressEndDate" (click)="updateDatesInProgress(inProgressStartDate, inProgressEndDate)">
+                      <span *ngIf="showSpinnerInProgress" class="spinner" role="status" aria-hidden="true"></span>
+                      <span *ngIf="!showSpinnerInProgress"> Apply Filter</span>
+                    </button>
+                    <button class="nextButton"(click)="resetPage('inProgress')">
+                    
+                        <span *ngIf="showSpinner && currentComponent === 'inProgress'" class="spinner" role="status" aria-hidden="true"></span>
+                        <span *ngIf="!showSpinner || currentComponent !== 'inProgress'">Reset</span>
+                
+                    </button>
                   </div>
                 </div>
               </div>
@@ -134,8 +150,8 @@
               <input
                 type="month"
                 id="startDate"
-                (change)="onStartDateChange($event, 'escalated')"
-                [value]="escalatedStartDate"
+                (change)="onStartDateChange($event, 'closed')"
+                [value]="closedStartDate"
                 placeholder="Start Date"
               />
             </div>
@@ -144,20 +160,26 @@
               <input
                 type="month"
                 id="endDate"
-                (change)="onEndDateChange($event, 'escalated')"
-                [value]="escalatedEndDate"
+                (change)="onEndDateChange($event, 'closed')"
+                [value]="closedEndDate"
                 placeholder="End Date"
               />
             </div>
-            <button class="applyFilter"  (click)="updateDatesEscalated(escalatedStartDate, escalatedEndDate)">Apply Filter</button>
-            <button class="nextButton" (click)="resetPage()">Reset</button>
+            <button class="applyFilter" [disabled]="!closedStartDate || !closedEndDate" (click)="updateDatesClosed(closedStartDate, closedEndDate)">
+              <span *ngIf="showSpinnerClosed" class="spinner" role="status" aria-hidden="true"></span>
+              <span *ngIf="!showSpinnerClosed"> Apply Filter</span>
+            </button>
+            <button class="nextButton" (click)="resetPage('closed')">
+              <span *ngIf="showSpinner && currentComponent === 'closed'" class="spinner" role="status" aria-hidden="true"></span>
+  <span *ngIf="!showSpinner || currentComponent !== 'closed'">Reset</span>
+            </button>
           </div>
         </div>
       </div>
       <button class="export" (click)="DownloadCSVClosed()">Export CSV</button>
       <p class="ticket-category"></p>
     </div>
-    <app-unresolved [startDate]="startDate" [endDate]="endDate"></app-unresolved>
+    <app-unresolved [startDate]="closedStartDate" [endDate]="closedEndDate"></app-unresolved>
   </div>
 <!--End Of Un resolved Bar graph-->
   
@@ -194,8 +216,15 @@
                 placeholder="End Date"
               />
             </div>
-            <button class="applyFilter"  (click)="updateDatesEscalated(startDate, endDate)">Apply Filter</button>
-            <button class="nextButton" (click)="resetPage()">Reset</button>
+            <button class="applyFilter" [disabled]="!escalatedStartDate || !escalatedEndDate"  (click)="updateDatesEscalated(escalatedStartDate, escalatedEndDate)">
+             
+              <span *ngIf="showSpinnerEscalated" class="spinner" role="status" aria-hidden="true"></span>
+              <span *ngIf="!showSpinnerEscalated"> Apply Filter</span>
+            </button>
+            <button class="nextButton" (click)="resetPage('escalated')">
+              <span *ngIf="showSpinner && currentComponent === 'escalated'" class="spinner" role="status" aria-hidden="true"></span>
+              <span *ngIf="!showSpinner || currentComponent !== 'escalated'">Reset</span>
+            </button>
           </div>
         </div>
       </div>

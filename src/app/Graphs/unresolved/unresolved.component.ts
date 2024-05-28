@@ -241,4 +241,13 @@ downloadCSV(): void {
     a.click();
     document.body.removeChild(a);
   }
+  resetFilters(): void {
+    console.log('Resetting filters to original state');
+    this.startDate = ''; // Resetting start date
+    this.endDate = ''; // Resetting end date
+    this.filteredDates = []; // Clear filtered dates
+    this.filteredTicketData = []; // Clear filtered ticket data
+    this.generateInitialUpdatedAtDates(); // Generate initial created at dates
+    this.fetchDataAndCreateChart(); // Fetch new data and create chart
+  }
 }
