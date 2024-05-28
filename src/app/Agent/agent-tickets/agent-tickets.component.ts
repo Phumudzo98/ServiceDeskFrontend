@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/utility/services/auth.service';
   templateUrl: './agent-tickets.component.html',
   styleUrls: ['./agent-tickets.component.css']
 })
-export class AgentTicketsComponent {
+export class AgentTicketsComponent implements OnInit{
 
   currentMenuItem: string = 'opened'; // Initialize with the default active menu item
   previousMenuItem: string = ''; // Initialize with empty value
@@ -53,8 +53,11 @@ export class AgentTicketsComponent {
 
     const token = this.storage.getUser();
     const decodedToken:any = jwtDecode(token);
-    const customerId=decodedToken.accountId;
+    const agentId=decodedToken.accountId;
     this.companyName=decodedToken.companyId;
+
+    console.log("hello");
+    
 
     this.ticketForm= new FormGroup({
 
@@ -68,12 +71,11 @@ export class AgentTicketsComponent {
 
 
 
-    let baseUrl:any="http://localhost:8080/api/ticket/get-user-tickets/";
+    let baseUrl:any="http://localhost:8080/api/ticket/get-agent-tickets/";
 
-    this.http.get<any[]>(baseUrl+customerId).subscribe(data=>
+    this.http.get<any[]>(baseUrl+agentId).subscribe(data=>
       {
         this.dataArray=data;
-        
       },
       error=>
       {
@@ -168,7 +170,7 @@ export class AgentTicketsComponent {
       setTimeout(() => {
         this.showSpinner = false;
         this.successMessage = 'Ticket created successfully!';
-        this.router.navigate(['/employee-tickets']);
+        this.router.navigate(['/agent-tickets']);
         location.reload();
       }, 3000); // 5 seconds delay
     },

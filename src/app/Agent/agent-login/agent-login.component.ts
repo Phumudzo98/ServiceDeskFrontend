@@ -45,10 +45,9 @@ export class AgentLoginComponent {
       });
   
       if (this.loginForm.valid) {
-        this.http.post<any>(this.loginUrl, this.loginForm.value, { headers })
-          .subscribe((response: any) => {
+        this.http.post<any>(this.loginUrl, this.loginForm.value, { headers }).subscribe((response: any) => {
             console.log('Login response:', response);
-           // this.showAlertMessage('success', 'Logged in successfully');
+          
             setTimeout(() => {
               this.authToken = response;
               this.storageService.saveUser(this.authToken.message);
@@ -56,7 +55,7 @@ export class AgentLoginComponent {
               const check =this.storageService.getUser()
               
              ///this.isLoggedIn = true;
-             this.router.navigate(['/employee-tickets']);
+             this.router.navigate(['/agent-tickets']);
             }, 2000);
           }, (error: HttpErrorResponse) => {
             console.error('Error logging in:', error);
