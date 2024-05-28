@@ -28,14 +28,22 @@
             </div>
             <!-- <hr/> -->
             <!-- Message body -->
-            <div class="message-body">
-              <span style="color: white;">{{dataArray.description}}</span>
-            </div>
-            <!-- Reply section -->
-            <p>Katherine <span class="form-header">Today, 11:30 PM</span></p>
-            <div class="replied">
-              <span style="color: #202020;">Life seasons open have. Air have of.</span>
-            </div>
+           
+              <div class="message-body">
+                <span style="color: white;">{{dataArray.description}}</span>
+              </div>
+              <div *ngFor="let msg of messageList | async">
+                <div *ngIf="msg.sender === accountId; else elseBlock">
+                  <!-- Reply section -->
+                  <p>{{msg.content}} <span class="form-header"></span></p>
+                  <div class="replied">
+                    
+                  </div>
+                </div>
+                <ng-template #elseBlock>
+                  <span style="color: #202020;">{{msg.content}}</span>
+                </ng-template>
+              </div>
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
             <div class="message-input" >

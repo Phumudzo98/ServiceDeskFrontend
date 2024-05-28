@@ -56,6 +56,7 @@ export class TicketDetailsComponent implements OnInit {
       });
   
       this.connect();
+      this.loadChat();
   }
 
   private connect(): void {
@@ -63,7 +64,7 @@ export class TicketDetailsComponent implements OnInit {
       return new SockJS('http://localhost:8081/chat') as IStompSocket;
     };
 
-    this.loadChat();
+   
 
     this.stompClient.onConnect = (frame) => {
       this.stompClient.subscribe("/topic/messages/" + this.ticketId, (message: Message) => {
@@ -84,7 +85,7 @@ export class TicketDetailsComponent implements OnInit {
 
       mesg.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
       this.messageList = of(mesg);
-      this.messages = mesg; // Add sorted messages to the messages array
+      this.messages = mesg; 
 
       console.log("Here", mesg);
     });
