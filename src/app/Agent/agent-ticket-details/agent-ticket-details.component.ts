@@ -104,6 +104,12 @@ export class AgentTicketDetailsComponent implements OnInit {
     this.newMessage = "";
   }
 
+  isCloseTicketFormVisible = false;
+
+  toggleCloseTicketForm() {
+    this.isCloseTicketFormVisible = !this.isCloseTicketFormVisible;
+  }
+
  
 
 }

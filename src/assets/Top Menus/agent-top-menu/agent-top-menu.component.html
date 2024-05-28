@@ -1,0 +1,32 @@
+
+<!--Company Admin Top Menu-->
+
+
+<header class="top-menu">
+    <nav>
+      <ul>
+        <div style="display: inline; font-family: Poppins">
+            
+        <li><a><img src="../../../assets/images/align-left.svg" style="margin-left: 25px;"> Welcome! <strong>{{ lastName }}</strong></a></li>
+        <div style="float: inline-end;">
+          <li class="iconImages"><a><img src="../../../assets/images/Notif.svg" width="40px" height="40px" (click)="toggleNotification()"></a></li>
+          <app-notifications *ngIf="notificationVisible" [message]="message" (close)="notificationVisible = false"></app-notifications>
+  
+        <div class="dropdown">
+        <li class="iconImages" (click)="toggleDropdown()">
+          <img  *ngIf="profileImage" [src]="profileImage" class="profile-image">
+          <strong style="margin-left: 10px;">{{ lastName }}</strong>
+          <!-- Dropdown menu -->
+          <div class="dropdown-content" *ngIf="showDropdown">
+            <!-- Dropdown content goes here -->
+            <a routerLink="/agent-settings">Settings</a>
+            <a (click)="logout()" routerLink="/agent-login" >Logout</a>
+          </div>
+          
+      </li>      
+    </div>
+        </div>
+      </div>
+      </ul>
+    </nav>
+  </header>

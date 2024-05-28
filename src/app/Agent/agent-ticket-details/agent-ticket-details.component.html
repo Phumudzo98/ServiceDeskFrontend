@@ -1,5 +1,5 @@
-<app-employee-sidebar></app-employee-sidebar>
-<app-top-menu></app-top-menu>
+<app-agent-sidebar></app-agent-sidebar>
+<app-agent-top-menu></app-agent-top-menu>
 
 <div class="content">
 
@@ -55,6 +55,8 @@
             </div>
           </div>
         </div>
+        <button class="closeButton" routerLink="agent-tickets">Back</button>
+
         <!-- Bottom section card -->
         
       </div>
@@ -79,8 +81,18 @@
         </div>
         <div class="card" style="width: 100%;margin-top:10px;">
           <div class="card-body">
+            <p>Close Ticket</p>
+            <textarea placeholder="Type reason here"></textarea>
+            <button class="closeButton">Close</button>
+          
+          </div>
+        </div>
+
+        <div class="card" style="width: 100%;margin-top:10px;">
+          <div class="card-body">
             <p>Escalate Ticket</p>
             <input placeholder="Name" class="escalate-input">
+            <textarea placeholder="Type reason here"></textarea>
             <button class="escalate-button">Escalate</button>
           
           </div>
@@ -88,7 +100,6 @@
       </div>
 
     </div>
-    <button class="closeButton" routerLink="">Back</button>
 
   </div>
 

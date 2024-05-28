@@ -1,18 +1,18 @@
-
-
-
 .logout{
-  margin-left: 25px;
-   text-decoration: none;
-   position: fixed;
-   bottom: 25px;
-   left: 0; 
+    margin-left: 25px;
+     text-decoration: none;
+     position: fixed;
+     bottom: 25px;
+     left: 0; 
 }
 
-  a{
+.menuItems
+{
+    margin-left: 25px; 
     text-decoration: none;
-  }
-  .active {
+}
+
+.active {
     background-color: rgba(127, 86, 216, 0.1); 
     color: #7F56D8 !important;
   }

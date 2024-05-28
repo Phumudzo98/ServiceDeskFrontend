@@ -1,0 +1,283 @@
+
+
+<app-agent-sidebar></app-agent-sidebar>
+<app-agent-top-menu></app-agent-top-menu>
+
+<div class="content">
+  
+
+  <div class="content-wrapper">
+    <div class="row">
+      <h2><strong>Tickets</strong></h2>
+      <hr>
+      
+      <!-- Column for Dynamic Content -->
+
+      <div class="col-md-9">
+        <div class="top-menu2">
+          <nav>
+            <ul style="display: flex; align-items: center;">
+              <li style="margin-right: 10px;" [class.active]="currentForm === 'opened'">
+                <a (click)="toggleForms('opened')" routerLink="#">Opened</a>
+              </li>
+              <li style="margin-right: 10px;" [class.active]="currentForm === 'inprogress'">
+                <a (click)="toggleForms('inprogress')" routerLink="#">In Progress</a>
+              </li>
+              <li style="margin-right: 10px;" [class.active]="currentForm === 'closed'">
+                <a (click)="toggleForms('closed')" routerLink="#">Closed</a>
+              </li>
+              <li style="margin-right: 15px;" [class.active]="currentForm === 'escalate'">
+                <a (click)="toggleForms('escalate')" routerLink="#">Escalated</a>
+              </li>
+        <div class="search-input">
+          <li style="margin-right: 20px;">
+            <input type="text" placeholder="Search tickets" style="padding-left: 50px;">
+                <label for="search" class="search-icon">
+                  <img src="../../assets/images/search.svg" alt="Search Icon">
+              </label>
+              </li>
+         </div>
+                <div class="dropdown">
+                  <li><button class="filterButton" (click)="toggleDropdown()">
+                    <img src="../../../assets/images/filter.svg"  > 
+                    Filter</button>
+                    <div class="dropdown-content" [class.show]="showDropdown">
+                      <div class="filters-header">
+                        <p><strong>FILTER</strong></p>
+                      </div>
+                      
+                      <hr>
+       
+                     <select id="priority" name="" [(ngModel)]="priority" >
+                        <option value="" disabled selected>Choose Priority</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+    
+                      </select>
+    
+                      <select id="status" name="" [(ngModel)]="status">
+                        <option value="" disabled selected>Choose status</option>
+                        <option value="open">Opened</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="closed">Closed</option>
+                        <option value="escalated">Escalated</option>
+                      </select>
+                      
+                     <!-- Start Date Input -->
+                    <div class="dateInput">
+                      <input matInput [(ngModel)]="startDate" [matDatepicker]="startDatePicker" placeholder="Choose start date">
+                      <mat-datepicker-toggle matSuffix [for]="startDatePicker" class="date-picker"></mat-datepicker-toggle>
+                      <mat-datepicker #startDatePicker panelClass="datepickerTwo"></mat-datepicker>
+                    </div>
+    
+                    <!-- End Date Input -->
+                    <div class="dateInput">
+                      <input matInput [(ngModel)]="endDate" [matDatepicker]="endDatePicker" placeholder="Choose end date">
+                      <mat-datepicker-toggle matSuffix [for]="endDatePicker" class="date-picker"></mat-datepicker-toggle>
+                      <mat-datepicker #endDatePicker panelClass="datepickerTwo"></mat-datepicker>
+                    </div>
+                        <button class="nextButton" (click)="resetFilters()">
+                          <span *ngIf="!showSpinner2">Reset</span>
+                          <div *ngIf="showSpinner2" class="filter-spinner"></div>
+                          </button>
+                        <button class="closeButton" (click)="closeWindow()">Close</button>
+                    </div>
+                  </li> </div>
+              
+            </ul>
+          </nav>
+        </div>
+        <!-- Dynamic Content Section -->
+       
+
+      <!--Unresolved Tickets-->
+<div class="row" *ngIf="currentForm === 'opened'">
+  <div *ngFor="let item of paginatedData" style="margin-bottom: 20px;">
+    <div *ngIf="item.status == 'Open'" class="card" style="width: 100%;">
+      <div class="card-header">
+        <!--Ticket Header-->
+        <span class="ticket-header">{{ item.category }}</span>
+        <span class="form-header">
+          <!--Ticket Date & View details-->
+          {{ (item.createdAt).substring(0, 10) }} | <a [routerLink]="['/agent-ticket-details', item.ticketId]">View</a>
+        </span>
+      </div>
+      <!--Ticket Message-->
+      <div class="ticket-message">
+        <span>{{ item.description }}</span>
+      </div>
+      <!--Ticket ID and Priority-->
+      <div class="urgent-section">
+        <span class="form-header badge badge-danger" id="priorityID">{{ item.priority }}</span>
+        <span id="ticketID" class="form-header badge badge-secondary">{{ item.ticketId }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end" *ngIf="paginatedData.length > 0">
+    <button class="next-button previous-button" type="button" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <button class="next-button" type="button" (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= dataArray.length">Next</button>
+  </div>
+  
+</div>
+
+
+
+      
+        <!--InProgress Tickets-->
+        <div class="row" *ngIf="currentForm === 'inprogress'" >
+
+          <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+            <div *ngIf="item.status=='In progress'" class="card" style="width: 100%;">
+              <div class="card-header">
+                <!--Ticket Header-->
+                <span class="ticket-header">{{item.category}}</span>
+                <span class="form-header">
+  
+                  <!--Ticket Date & View details-->
+                  {{(item.createdAt).substring(16,-11)}} |<a [routerLink]="['/ticket-details',item.ticketId]">View</a>
+                </span>
+              </div>
+              <!--Ticket Message-->
+              <div class="ticket-message">
+                <span class="">{{item.description}}</span>
+              </div>
+              
+              <!--Ticket ID and Priority-->
+              <div class="urgent-section">
+                <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+
+        
+        <!--Resolved Tickets-->
+        <div class="row" *ngIf="currentForm === 'closed'" >
+
+          <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+            <div *ngIf="item.status=='Closed'" class="card" style="width: 100%;">
+              <div class="card-header">
+                <!--Ticket Header-->
+                <span class="ticket-header">{{item.category}}</span>
+                <span class="form-header">
+  
+                  <!--Ticket Date & View details-->
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details',item.ticketId]">View</a>
+                </span>
+              </div>
+              <!--Ticket Message-->
+              <div class="ticket-message">
+                <span class="">{{item.description}}</span>
+              </div>
+              
+              <!--Ticket ID and Priority-->
+              <div class="urgent-section">
+                <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+
+        <!--Escalated Tickets-->
+        <div class="row" *ngIf="currentForm === 'escalate'" >
+
+          <div *ngFor="let item of dataArray" style="margin-bottom: 20px;">
+            <div *ngIf="item.status=='Escalate'" class="card" style="width: 100%;">
+              <div class="card-header">
+                <!--Ticket Header-->
+                <span class="ticket-header">{{item.category}}</span>
+                <span class="form-header">
+  
+                  <!--Ticket Date & View details-->
+                  {{(item.createdAt).substring(16,-11)}} | <a [routerLink]="['/ticket-details',item.ticketId]">View</a>
+                </span>
+              </div>
+              <!--Ticket Message-->
+              <div class="ticket-message">
+                <span class="">{{item.description}}</span>
+              </div>
+              
+              <!--Ticket ID and Priority-->
+              <div class="urgent-section">
+                <span class="form-header badge badge-danger" id="priorityID">{{item.priority}}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+
+
+      </div>
+      <div class="col-2">
+        
+        <form [formGroup]="ticketForm" (ngSubmit)="createTicket()">
+          <span class="header"><strong>CREATE QUICK TICKET</strong></span><br>
+          <span class="form-header">Write and address new queries and issues</span>
+          <hr/>
+          
+            
+          <fieldset>
+            <label for="category">Category</label>
+            <select id="category" formControlName="category" (change)="onCategoryChange()">
+              <option value="" disabled selected>Choose Category</option>
+              <option value="software">Software</option>
+              <option value="hardware">Hardware</option>
+              <option value="network">Network</option>
+              <option value="email">Email</option>
+              <option value="other">Other</option>
+            </select>
+
+             <!--Validations-->
+             <div
+             *ngIf="new_ticket['category'].invalid && (new_ticket['category'].dirty || new_ticket['category'].touched)"
+             class="alert alert-danger" >  
+             <span *ngIf="new_ticket['category'].errors?.['required']" style="color:#f98f8f">Please select ticket type</span>
+             </div>
+          
+            <div *ngIf="showOtherCategoryInput">
+              <label for="otherCategory">Other Category</label>
+              <input type="text" id="otherCategory" formControlName="otherCategory" placeholder="Type Category">
+            </div>
+
+             <!--Other Category Validations-->
+             <div
+             *ngIf="new_ticket['otherCategory'].invalid && (new_ticket['otherCategory'].dirty || new_ticket['otherCategory'].touched)"
+             class="alert alert-danger" >  
+             <span *ngIf="new_ticket['otherCategory'].errors?.['required']" style="color:#f98f8f">Please type category</span>
+             </div>
+          </fieldset>
+          <fieldset>
+            <label>Ticket Body</label>
+            <textarea formControlName="ticketBody" id="ticketbody" placeholder="Type ticket issue here.."></textarea>
+
+            <!--Validations-->
+            <div
+            *ngIf="new_ticket['ticketBody'].invalid && (new_ticket['ticketBody'].dirty || new_ticket['ticketBody'].touched)"
+            class="alert alert-danger" >  
+            <span *ngIf="new_ticket['ticketBody'].errors?.['required']" style="color:#f98f8f">Ticket issue is required</span>
+            </div>
+             <!--End Of Validations-->
+
+          </fieldset>
+          <button type="submit" [disabled]="ticketForm.invalid || showSpinner">
+            <span *ngIf="!showSpinner">Submit</span>
+            <div *ngIf="showSpinner" class="spinner"></div>
+          </button>
+
+          <div *ngIf="successMessage">
+            <div class="alert alert-success" role="alert">
+                {{ successMessage }}
+          </div>
+        </div>
+        </form>
+</div>
+
+     </div>
+  </div>
+</div>
