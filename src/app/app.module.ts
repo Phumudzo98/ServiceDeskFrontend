@@ -72,6 +72,14 @@ import { UserEmployeeComponent } from './user-employee/user-employee.component';
 import { PackageFormComponent } from './package-form/package-form.component';
 import { EscalatedGraphComponent } from './Graphs/escalated-graph/escalated-graph.component';
 import { AgentTicketDetailsComponent } from './Agent/agent-ticket-details/agent-ticket-details.component';
+import { AgentTicketsComponent } from './Agent/agent-tickets/agent-tickets.component';
+import { AgentSettingsComponent } from './Agent/agent-settings/agent-settings.component';
+import { AgentLoginComponent } from './Agent/agent-login/agent-login.component';
+import { AgentRegisterComponent } from './Agent/agent-register/agent-register.component';
+import { AgentForgotPasswordComponent } from './Agent/agent-forgot-password/agent-forgot-password.component';
+import { AgentChangePasswordComponent } from './Agent/agent-change-password/agent-change-password.component';
+import { AgentSidebarComponent } from './Agent/agent-sidebar/agent-sidebar.component';
+import { AgentTopMenuComponent } from '../assets/Top Menus/agent-top-menu/agent-top-menu.component';
 
 
 
@@ -133,6 +141,14 @@ import { AgentTicketDetailsComponent } from './Agent/agent-ticket-details/agent-
     PackageFormComponent,
     EscalatedGraphComponent,
     AgentTicketDetailsComponent,
+    AgentTicketsComponent,
+    AgentSettingsComponent,
+    AgentLoginComponent,
+    AgentRegisterComponent,
+    AgentForgotPasswordComponent,
+    AgentChangePasswordComponent,
+    AgentSidebarComponent,
+    AgentTopMenuComponent,
 
   ],
   imports: [

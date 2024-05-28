@@ -36,6 +36,11 @@ import { AdminChangePasswordComponent } from './Super-Admin/admin-change-passwor
 import { EmployeeChangePasswordComponent } from './Employee/employee-change-password/employee-change-password.component';
 import { AgentTicketDetailsComponent } from './Agent/agent-ticket-details/agent-ticket-details.component';
 import { AuthGuard } from './utility/services/authgaurd.service'; 
+import { AgentSettingsComponent } from './Agent/agent-settings/agent-settings.component';
+import { AgentTicketsComponent } from './Agent/agent-tickets/agent-tickets.component';
+import { AgentLoginComponent } from './Agent/agent-login/agent-login.component';
+import { AgentForgotPasswordComponent } from './Agent/agent-forgot-password/agent-forgot-password.component';
+import { AgentChangePasswordComponent } from './Agent/agent-change-password/agent-change-password.component';
 
 
 const routes: Routes = [
@@ -53,6 +58,11 @@ const routes: Routes = [
 
   //Agent
   {path:"agent-ticket-details", component: AgentTicketDetailsComponent},
+  {path:"agent-settings", component:AgentSettingsComponent},
+  {path:"agent-tickets", component:AgentTicketsComponent},
+  {path:"agent-login", component:AgentLoginComponent},
+  {path:"agent-password", component:AgentForgotPasswordComponent},
+  {path:"agent-change-password",component:AgentChangePasswordComponent},
 
   //Super Admin's routes
   {path:"admin-login",component:AdminLoginComponent},

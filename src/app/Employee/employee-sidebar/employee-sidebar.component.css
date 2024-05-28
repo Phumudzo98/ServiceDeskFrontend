@@ -1,7 +1,9 @@
 .logout{
-    margin-left: 25px;
-     text-decoration: none; 
-     margin-top: 600px;
+  margin-left: 25px;
+   text-decoration: none;
+   position: fixed;
+   bottom: 25px;
+   left: 0; 
 }
 
 .menuItems
