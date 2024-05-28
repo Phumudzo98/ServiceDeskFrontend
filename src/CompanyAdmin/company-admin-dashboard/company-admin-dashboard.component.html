@@ -33,8 +33,8 @@
                       <input
                         type="month"
                         id="startDate"
-                        (change)="onStartDateChange($event)"
-                        [value]="startDate"
+                        (change)="onStartDateChange($event, 'opened')"
+                        [value]="openedStartDate"
                         placeholder="Start Date"
                       />
                     </div>
@@ -43,12 +43,12 @@
                       <input
                         type="month"
                         id="endDate"
-                        (change)="onEndDateChange($event)"
-                        [value]="endDate"
+                        (change)="onEndDateChange($event, 'opened')"
+                        [value]="openedEndDate"
                         placeholder="End Date"
                       />
                     </div>
-                    <button class="applyFilter" (click)="updateDatesOpen(startDate, endDate)">Apply Filter</button>
+                    <button class="applyFilter"  (click)="updateDatesOpen(openedStartDate, openedEndDate)">Apply Filter</button>
                     <button class="nextButton" (click)="resetPage()">Reset</button>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
               <button class="export" (click)="DownloadCSVOpen()">Export CSV</button>
               <p class="ticket-category"></p>
             </div>
-            <app-bar-graph [startDate]="startDate" [endDate]="endDate"></app-bar-graph>
+            <app-bar-graph [startDate]="openedStartDate" [endDate]="openedEndDate"></app-bar-graph>
           </div>
         
   
@@ -78,8 +78,8 @@
                       <input
                         type="month"
                         id="startDate"
-                        (change)="onStartDateChange($event)"
-                        [value]="startDate"
+                        (change)="onStartDateChange($event, 'inProgress')"
+                        [value]="inProgressStartDate"
                         placeholder="Start Date"
                       />
                     </div>
@@ -88,12 +88,12 @@
                       <input
                         type="month"
                         id="endDate"
-                        (change)="onEndDateChange($event)"
-                        [value]="endDate"
+                        (change)="onEndDateChange($event, 'inProgress')"
+                        [value]="inProgressEndDate"
                         placeholder="End Date"
                       />
                     </div>
-                    <button class="applyFilter" (click)="updateDatesInProgress(startDate, endDate)">Apply Filter</button>
+                    <button class="applyFilter"  (click)="updateDatesInProgress(inProgressStartDate, inProgressEndDate)">Apply Filter</button>
                     <button class="nextButton"(click)="resetPage()">Reset</button>
                   </div>
                 </div>
@@ -101,7 +101,7 @@
               <button class="export" (click)="DownloadCSVInProgress()">Export CSV</button>
               <p class="ticket-category"></p>
             </div>
-            <app-in-progress [startDate]="startDate" [endDate]="endDate"></app-in-progress>
+            <app-in-progress [startDate]="inProgressStartDate" [endDate]="inProgressEndDate"></app-in-progress>
           </div>
 <!--End Of In Progress Bar graph-->
   
@@ -134,8 +134,8 @@
               <input
                 type="month"
                 id="startDate"
-                (change)="onStartDateChange($event)"
-                [value]="startDate"
+                (change)="onStartDateChange($event, 'escalated')"
+                [value]="escalatedStartDate"
                 placeholder="Start Date"
               />
             </div>
@@ -144,12 +144,12 @@
               <input
                 type="month"
                 id="endDate"
-                (change)="onEndDateChange($event)"
-                [value]="endDate"
+                (change)="onEndDateChange($event, 'escalated')"
+                [value]="escalatedEndDate"
                 placeholder="End Date"
               />
             </div>
-            <button class="applyFilter" (click)="updateDatesClosed(startDate, endDate)">Apply Filter</button>
+            <button class="applyFilter"  (click)="updateDatesEscalated(escalatedStartDate, escalatedEndDate)">Apply Filter</button>
             <button class="nextButton" (click)="resetPage()">Reset</button>
           </div>
         </div>
@@ -179,8 +179,8 @@
               <input
                 type="month"
                 id="startDate"
-                (change)="onStartDateChange($event)"
-                [value]="startDate"
+                (change)="onStartDateChange($event, 'escalated')"
+                [value]="escalatedStartDate"
                 placeholder="Start Date"
               />
             </div>
@@ -189,12 +189,12 @@
               <input
                 type="month"
                 id="endDate"
-                (change)="onEndDateChange($event)"
-                [value]="endDate"
+                (change)="onEndDateChange($event, 'escalated')"
+                [value]="escalatedEndDate"
                 placeholder="End Date"
               />
             </div>
-            <button class="applyFilter" (click)="updateDatesEscalated(startDate, endDate)">Apply Filter</button>
+            <button class="applyFilter"  (click)="updateDatesEscalated(startDate, endDate)">Apply Filter</button>
             <button class="nextButton" (click)="resetPage()">Reset</button>
           </div>
         </div>
@@ -202,7 +202,7 @@
       <button class="export" (click)="DownloadCSVEscalated()">Export CSV</button>
       <p class="ticket-category"></p>
     </div>
-    <app-escalated-graph [startDate]="startDate" [endDate]="endDate"></app-escalated-graph>
+         <app-escalated-graph [startDate]="escalatedStartDate" [endDate]="escalatedEndDate"></app-escalated-graph>
   </div>
 
 

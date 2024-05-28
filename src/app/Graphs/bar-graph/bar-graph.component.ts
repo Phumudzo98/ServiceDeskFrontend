@@ -97,8 +97,11 @@ export class BarGraphComponent implements AfterViewInit {
       this.ticketData = Array(this.createdAtDates.length).fill(0);
       this.createBarGraph([]);
     });
-  }
 
+      // Fetch initial data and create the chart
+     
+  }
+ 
   filterDates(startDate: string, endDate: string, dates: string[]): string[] {
     return dates.filter(date => (!startDate || date >= startDate) && (!endDate || date <= endDate));
   }
@@ -221,4 +224,17 @@ export class BarGraphComponent implements AfterViewInit {
     a.click();
     document.body.removeChild(a);
   }
+
+  resetFilters(): void {
+    console.log('Resetting filters to original state');
+    this.startDate = ''; // Resetting start date
+    this.endDate = ''; // Resetting end date
+    this.filteredDates = []; // Clear filtered dates
+    this.filteredTicketData = []; // Clear filtered ticket data
+    this.generateInitialCreatedAtDates(); // Generate initial created at dates
+    this.fetchDataAndCreateChart(); // Fetch new data and create chart
+  }
+  
+  
+  
 }

@@ -14,10 +14,20 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
   @ViewChild(InProgressComponent, { static: false }) private inProgressComponent!: InProgressComponent;
   @ViewChild(UnresolvedComponent, { static: false }) private unresolvedComponent!: UnresolvedComponent;
   @ViewChild(EscalatedGraphComponent, { static: false }) private escalatedGraphComponent!: EscalatedGraphComponent;
-
   years: number[] = [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+
   startDate: string = '';
   endDate: string = '';
+  // Separate date variables for each section
+  openedStartDate: string = '';
+  openedEndDate: string = '';
+  inProgressStartDate: string = '';
+  inProgressEndDate: string = '';
+  closedStartDate: string = '';
+  closedEndDate: string = '';
+  escalatedStartDate: string = '';
+  escalatedEndDate: string = '';
+
 
   constructor() {}
   ngOnInit(): void {}
@@ -96,18 +106,46 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     this.dropdownStates[dropdown] = false;
   }
 
-  onStartDateChange(event: Event) {
+  
+  onStartDateChange(event: Event, section: string) {
     const target = event.target as HTMLInputElement;
-    this.startDate = target.value;
-    console.log('Start Date changed to: ', this.startDate);
+    const value = target.value;
+    switch (section) {
+      case 'opened':
+        this.openedStartDate = value;
+        break;
+      case 'inProgress':
+        this.inProgressStartDate = value;
+        break;
+      case 'closed':
+        this.closedStartDate = value;
+        break;
+      case 'escalated':
+        this.escalatedStartDate = value;
+        break;
+    }
+    console.log(`${section} Start Date changed to: `, value);
   }
 
-  onEndDateChange(event: Event) {
+  onEndDateChange(event: Event, section: string) {
     const target = event.target as HTMLInputElement;
-    this.endDate = target.value;
-    console.log('End Date changed to: ', this.endDate);
+    const value = target.value;
+    switch (section) {
+      case 'opened':
+        this.openedEndDate = value;
+        break;
+      case 'inProgress':
+        this.inProgressEndDate = value;
+        break;
+      case 'closed':
+        this.closedEndDate = value;
+        break;
+      case 'escalated':
+        this.escalatedEndDate = value;
+        break;
+    }
+    console.log(`${section} End Date changed to: `, value);
   }
-
   DownloadCSVOpen(): void {
     if (this.barGraphComponent) {
       this.barGraphComponent.downloadCSV();
@@ -136,8 +174,10 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
       console.error('No graph component is available');
     }
   }
-  resetPage():void{
-    window.location.reload();
+  resetPage(): void {
+    if (this.barGraphComponent) {
+      this.barGraphComponent.resetFilters(); // Ensure this method initializes the chart to its default state
+    }
   }
 
 }
