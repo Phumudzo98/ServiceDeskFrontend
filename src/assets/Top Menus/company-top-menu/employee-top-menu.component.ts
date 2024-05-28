@@ -12,6 +12,7 @@ export class EmployeeTopMenuComponent {
   lastName: string='';
   expiredToken: any;
   profileImage: any ;
+  firstName: string='';
 
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
@@ -32,13 +33,21 @@ email:string='';
     this.authToken = sessionStorage.getItem('auth-user');
     if (this.authToken) {
       this.token = jwt_decode(this.authToken);
-      this.extractName();
+      this.extractLastName();
+      this.extractFirstName()
       this.extractEmail();
       this.extractExpTokenTime();
     }
   }
-
-  private extractName() {
+  private extractFirstName() {
+    if (this.token && this.token.hasOwnProperty('firstName')) {
+      this.firstName = this.token.firstName;
+    } else {
+      // Handle error or default value if company name is not present in the token
+      this.sub = 'Default Company Name';
+    }
+  }
+  private extractLastName() {
     if (this.token && this.token.hasOwnProperty('lastName')) {
       this.lastName = this.token.lastName;
     } else {
