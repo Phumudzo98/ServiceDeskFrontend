@@ -36,13 +36,14 @@
                 <div *ngIf="msg.sender === accountId; else elseBlock">
                   <!-- Reply section -->
                   <p>{{msg.content}} <span class="form-header"></span></p>
-                  <div class="replied">
-                    
-                  </div>
+                 
                 </div>
-                <ng-template #elseBlock>
-                  <span style="color: #202020;">{{msg.content}}</span>
-                </ng-template>
+                <div class="replied">
+                  <ng-template #elseBlock>
+                    <span style="color: #202020;">{{msg.content}}</span>
+                  </ng-template>
+                </div>
+                
               </div>
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
