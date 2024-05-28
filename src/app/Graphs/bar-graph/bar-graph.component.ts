@@ -175,7 +175,6 @@ export class BarGraphComponent implements AfterViewInit {
       console.log('Start date and end date must be specified.');
       return;
     }
-
     this.generateCreatedAtDates(this.startDate, this.endDate);
 
     const requests = this.createdAtDates.map(date =>
