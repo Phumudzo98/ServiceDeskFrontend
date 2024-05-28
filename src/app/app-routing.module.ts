@@ -51,7 +51,6 @@ const routes: Routes = [
   {path:"no-tickets",component:NoTicketsComponent},
   {path:"employee-change-password",component:EmployeeChangePasswordComponent},
 
-
   //Agent
   {path:"agent-ticket-details", component: AgentTicketDetailsComponent},
 

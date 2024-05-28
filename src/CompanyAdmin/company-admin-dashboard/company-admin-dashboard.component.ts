@@ -104,10 +104,6 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
     console.log('End Date changed to: ', this.endDate);
   }
 
-  
- 
-
-
   DownloadCSVOpen(): void {
     if (this.barGraphComponent) {
       this.barGraphComponent.downloadCSV();
