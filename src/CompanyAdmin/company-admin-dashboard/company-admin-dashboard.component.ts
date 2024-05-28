@@ -14,8 +14,8 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
   @ViewChild(InProgressComponent, { static: false }) private inProgressComponent!: InProgressComponent;
   @ViewChild(UnresolvedComponent, { static: false }) private unresolvedComponent!: UnresolvedComponent;
   @ViewChild(EscalatedGraphComponent, { static: false }) private escalatedGraphComponent!: EscalatedGraphComponent;
-
   years: number[] = [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+
   startDate: string = '';
   endDate: string = '';
 
@@ -136,8 +136,10 @@ export class CompanyAdminDashboardComponent implements OnInit, AfterViewInit {
       console.error('No graph component is available');
     }
   }
-  resetPage():void{
-    window.location.reload();
+  resetPage(): void {
+    if (this.barGraphComponent) {
+      this.barGraphComponent.fetchDataAndCreateChart(); // Ensure this method initializes the chart to its default state
+    }
   }
 
 }
