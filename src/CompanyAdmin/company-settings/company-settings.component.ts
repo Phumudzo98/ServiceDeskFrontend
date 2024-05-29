@@ -1,7 +1,7 @@
 
 import { Component, OnInit, HostListener, ElementRef  } from '@angular/core';
 import { FormControl, FormGroup, Validators,FormBuilder, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/utility/services/auth.service';
 import jwt_decode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
@@ -49,7 +49,7 @@ export class CompanySettingsComponent {
   position: string ='';
   
   constructor(private fb: FormBuilder,private http: HttpClient, private formBuilder: FormBuilder,
-    private authService: AuthService) {}
+    private authService: AuthService,private route: ActivatedRoute) {}
 
     ngOnInit(): void {
       this.authToken = sessionStorage.getItem('auth-user');
@@ -61,7 +61,12 @@ export class CompanySettingsComponent {
         this.extractLastName();
         this.extractPosition();
       }
-
+      this.route.queryParams.subscribe(params => {
+        const form = params['form'];
+        if (form) {
+          this.toggleForms(form);
+        }
+      });
       this.getAllAgents();
       this.getAllUsers();
     // Initialize buttonText for each agent
@@ -132,6 +137,7 @@ export class CompanySettingsComponent {
           const target = event.target as HTMLElement;
       if (!target.closest('.addButton') && !target.closest('app-user-employee')) {
         this.addVisible = false;
+       
       }
     }
 

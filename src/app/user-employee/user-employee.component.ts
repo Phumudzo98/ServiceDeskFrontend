@@ -29,7 +29,7 @@ export class UserEmployeeComponent {
   showAlert: boolean | undefined;
   email: string="";
   
-  constructor(private fb: FormBuilder,private http: HttpClient, private formBuilder: FormBuilder) {}
+  constructor(private fb: FormBuilder,private http: HttpClient, private formBuilder: FormBuilder,private router: Router) {}
 
   ngOnInit(): void {
     this.authToken = sessionStorage.getItem('auth-user');
@@ -138,8 +138,16 @@ validateNumber(control: AbstractControl): ValidationErrors | null {
          
           if (userData.role === 'Agent') {
             this.alertMessage= `Agent "${userData.fullName} ${userData.lastName}" successfully added.`;
+            const url = this.router.createUrlTree(['/company-settings'], { queryParams: { form: 'form5' } }).toString();
+    
+            // Force a page reload with the new URL
+            window.location.href = url;
           } else {
             this.alertMessage= `Employee "${userData.fullName} ${userData.fullName}" successfully added.`;
+            const url = this.router.createUrlTree(['/company-settings'], { queryParams: { form: 'form6' } }).toString();
+    
+            // Force a page reload with the new URL
+            window.location.href = url;
           }
           
         } else if (response.failed === 1) {
@@ -152,7 +160,8 @@ validateNumber(control: AbstractControl): ValidationErrors | null {
   
    
         this.add_user_form[0].reset();
-          window.location.reload(); // Refresh the page
+       
+
 
   
       },
