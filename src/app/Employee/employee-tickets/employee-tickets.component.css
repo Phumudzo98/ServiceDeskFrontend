@@ -99,20 +99,34 @@ a{cursor: pointer;}
   border: none; /* remove border */
 }
 
+
 .nextButton
 {
-  color: #fff;
-  background-color: #3818D9;
-  font-style: normal;
-  border-radius: 5px;
+color: #fff;
+background-color: #3818D9;
+font-style: normal;
+border-radius: 0px !important;
+width: 300px;
+height: 40px;
+margin-bottom: 10px;
+border: 2px solid #3818D9;
+padding-left: 5px;
+margin-top: 15px;
+margin-left: 25px;
+}
+.applyFilter{
   width: 300px;
   height: 40px;
-  margin-bottom: 10px;
-  border: 2px solid #3818D9;
-  padding-left: 5px;
+  background-color: #59699e;
+  color: #fff;
+  border: 2px solid #59699e;
+  border-radius: 0.5px;
   margin-top: 15px;
   margin-left: 25px;
-}
+  margin-bottom: 10px;
+  font-style: normal;
+
+  }
 
 .closeButton
 {
@@ -615,7 +629,37 @@ input.mat-input {
 }
 .previous-button{
   margin-right: 10px;
-  
+}
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Optional: Adjust spacing between the elements */
+}
+
+.filters-header a{
+  margin-right: 25px;
+  color: black !important;
+
+}
+.filters-header a:hover{
+  color: black;
+}
+
+.filters-header a {
+  cursor: pointer; /* Adds a pointer cursor to the link */
+}
+.close-button {
+  display: inline-block; 
+  width: 30px; 
+  height: 30px; 
+  line-height: 30px; 
+  background-color: #E94435;
+  color: #fff; 
+  text-align: center; 
+  border-radius: 50%; 
+  text-decoration: none; 
+  font-size: 14px; 
+  cursor: pointer; 
 }
 
 

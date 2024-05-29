@@ -43,8 +43,9 @@
                     Filter</button>
                     <div class="dropdown-content" [class.show]="showDropdown">
                       <div class="filters-header">
-                        <p><strong>FILTER</strong></p>
-                      </div>
+                    <p><strong>FILTER</strong></p>
+                    <a class="close-button" (click)="closeFilter('closed')">X</a>
+                  </div>
                       
                       <hr>
        
@@ -77,13 +78,19 @@
                       <mat-datepicker-toggle matSuffix [for]="endDatePicker" class="date-picker"></mat-datepicker-toggle>
                       <mat-datepicker #endDatePicker panelClass="datepickerTwo"></mat-datepicker>
                     </div>
+                    
+                    <button class="applyFilter" (click)="applyFilter()">
+                      <span *ngIf="!applyFilterSpinner">Apply Filters</span>
+                      <div *ngIf="applyFilterSpinner" class="filter-spinner"></div>
+                      </button>
+                      
                         <button class="nextButton" (click)="resetFilters()">
                           <span *ngIf="!showSpinner2">Reset</span>
                           <div *ngIf="showSpinner2" class="filter-spinner"></div>
                           </button>
-                        <button class="closeButton" (click)="closeWindow()">Close</button>
                     </div>
-                  </li> </div>
+                  </li> 
+                </div>
               
             </ul>
           </nav>

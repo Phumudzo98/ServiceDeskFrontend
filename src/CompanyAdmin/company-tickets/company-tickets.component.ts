@@ -64,6 +64,9 @@ export class CompanyTicketsComponent implements OnInit{
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
+  closeFilter(dropdown: string) {
+    this.showDropdown = false;
+  }
 
   /*
   @HostListener('document:click', ['$event'])
@@ -85,8 +88,9 @@ export class CompanyTicketsComponent implements OnInit{
   successMessage: string = '';
 
   showSpinner2: boolean = false;
+  applyFilterSpinner: boolean = false;
 
-  //Filtering
+  //reset Filters
   resetFilters() {
       this.showSpinner2 = true;
         setTimeout(() => {
@@ -97,6 +101,20 @@ export class CompanyTicketsComponent implements OnInit{
           this.showSpinner2 = false;
       }, 2000);
   }
+
+  //apply filter
+  applyFilter()
+  {
+    this.applyFilterSpinner = true;
+    setTimeout(() =>
+      {
+        //Add other filter logic
+        this.applyFilterSpinner = false;
+      }, 2000);
+
+
+  }
+
   //Adding a ticket
   addTicket() {
     if (this.ticketForm.valid) {
@@ -110,7 +128,7 @@ export class CompanyTicketsComponent implements OnInit{
         setTimeout(() => {
           this.successMessage = ''; 
         }, 3000);
-      }, 5000); 
+      }, 3000); 
     }
   }
 

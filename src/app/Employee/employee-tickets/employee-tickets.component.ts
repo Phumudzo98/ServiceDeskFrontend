@@ -189,6 +189,7 @@ export class EmployeeTicketsComponent implements OnInit
   status: string = "";
 
   showSpinner2: boolean = false;
+  applyFilterSpinner: boolean = false;
 
   //Filtering
   resetFilters() {
@@ -201,7 +202,16 @@ export class EmployeeTicketsComponent implements OnInit
           this.showSpinner2 = false;
       }, 2000);
   }
-
+  //apply filter
+  applyFilter()
+  {
+    this.applyFilterSpinner = true;
+    setTimeout(() =>
+      {
+        //Add other filter logic
+        this.applyFilterSpinner = false;
+      }, 2000);
+  }
 
   //Only displaying two tickets the next/previous will display other two tickets
   
@@ -224,9 +234,9 @@ export class EmployeeTicketsComponent implements OnInit
   }
 
   
-   //Closing the window
-   closeWindow() {
-    this.showDropdown=false;
+   //Closing the dropdwon
+   closeFilter(dropdown: string) {
+    this.showDropdown = false;
   }
 
   newInfo: boolean = true;
