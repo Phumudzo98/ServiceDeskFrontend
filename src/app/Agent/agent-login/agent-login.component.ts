@@ -56,7 +56,7 @@ export class AgentLoginComponent {
               const check =this.storageService.getUser()
               
              ///this.isLoggedIn = true;
-             this.router.navigate(['/employee-tickets']);
+             this.router.navigate(['/agent-tickets']);
             }, 2000);
           }, (error: HttpErrorResponse) => {
             console.error('Error logging in:', error);
