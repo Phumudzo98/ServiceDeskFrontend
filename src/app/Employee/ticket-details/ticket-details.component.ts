@@ -54,9 +54,9 @@ export class TicketDetailsComponent implements OnInit {
           console.log("Something went wrong");
         });
       });
-  
+      
       this.connect();
-      this.loadChat();
+      
   }
 
   private connect(): void {
@@ -64,6 +64,7 @@ export class TicketDetailsComponent implements OnInit {
       return new SockJS('http://localhost:8081/chat') as IStompSocket;
     };
 
+    this.loadChat();
    
 
     this.stompClient.onConnect = (frame) => {
