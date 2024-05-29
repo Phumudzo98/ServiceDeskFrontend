@@ -54,14 +54,14 @@ const routes: Routes = [
   {path:"knowledgebase",component:KnowledgebaseComponent},
   {path:"employee-settings",component:SettingsComponent},
   {path:"no-tickets",component:NoTicketsComponent},
-  {path:"employee-change-password",component:EmployeeChangePasswordComponent},
+  {path:"employee-change-password",component:EmployeeChangePasswordComponent, canActivate: [AuthGuard]},
 
   //Agent
-  {path:"agent-ticket-details", component: AgentTicketDetailsComponent},
+  {path:"agent-ticket-details/:ticketId", component: AgentTicketDetailsComponent},
   {path:"agent-settings", component:AgentSettingsComponent},
   {path:"agent-tickets", component:AgentTicketsComponent},
   {path:"agent-login", component:AgentLoginComponent},
-  {path:"agent-password", component:AgentForgotPasswordComponent},
+  {path:"agent-forgotpassword", component:AgentForgotPasswordComponent},
   {path:"agent-change-password",component:AgentChangePasswordComponent},
 
   //Super Admin's routes

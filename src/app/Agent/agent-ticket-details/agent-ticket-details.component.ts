@@ -44,6 +44,30 @@ export class AgentTicketDetailsComponent implements OnInit {
   
         this.http.get<any>(url).subscribe(response => {
           this.dataArray = response;
+          console.log(this.dataArray);
+          
+          let url2="http://localhost:8080/api/ticket/update-ticket";
+          if(response.status=="Open")
+            {
+              const ticketUpdate={
+                "ticketId":this.ticketId,
+                "status":"In progress",
+                "updateMessage":"",
+                "escalatedToAgentId":""
+              }
+
+              this.http.put<any>(url2, ticketUpdate).subscribe(response=>{
+
+                console.log(response);
+                
+              },error=>{
+                console.log(response);
+                
+              }
+            )
+
+            }
+
         }, error => {
           console.log("Something went wrong");
         });

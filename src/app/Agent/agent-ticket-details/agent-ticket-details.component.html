@@ -27,14 +27,23 @@
               </div>
             </div>
             <!-- <hr/> -->
-            <!-- Message body -->
-            <div class="message-body">
-              <span style="color: white;">{{dataArray.description}}</span>
-            </div>
-            <!-- Reply section -->
-            <p>Katherine <span class="form-header">Today, 11:30 PM</span></p>
-            <div class="replied">
-              <span style="color: #202020;">Life seasons open have. Air have of.</span>
+            <div *ngFor="let msg of messageList | async">
+              <!-- Displaying the message sender and timestamp -->
+              <p>{{ msg.sender }} <span class="form-header">Today, 11:30 PM</span></p>
+              
+              <!-- Displaying the message content conditionally -->
+              <div *ngIf="msg.sender === accountId; else elseBlock">
+                <div class="replied">
+                  <span style="color: #202020;">{{ msg.content }}</span>
+                </div>
+              </div>
+              
+              <!-- Template for messages not sent by the current user -->
+              <ng-template #elseBlock>
+                <div class="replied">
+                  <span style="color: #202020;">{{ msg.content }}</span>
+                </div>
+              </ng-template>
             </div>
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
@@ -69,10 +78,10 @@
               <h6>Ticket Info</h6>
 
               <div class="col">
-              <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">#1E233</span></p>
-              <p class="form-header">Created : <span>dd - mm - yyyy</span></p>
-              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">Open</span></p>
-              <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">Urgent</span></p>
+              <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
+              <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
+              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
+              <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
             </div>
             
               <hr/>
