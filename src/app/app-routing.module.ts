@@ -61,7 +61,7 @@ const routes: Routes = [
   {path:"agent-settings", component:AgentSettingsComponent},
   {path:"agent-tickets", component:AgentTicketsComponent},
   {path:"agent-login", component:AgentLoginComponent},
-  {path:"agent-password", component:AgentForgotPasswordComponent},
+  {path:"agent-forgotpassword", component:AgentForgotPasswordComponent},
   {path:"agent-change-password",component:AgentChangePasswordComponent},
 
   //Super Admin's routes

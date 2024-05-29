@@ -15,11 +15,10 @@ export class AgentChangePasswordComponent {
   email!: string;
   token: any;
 
-  router: any;
   alertType!: string;
   alertMessage!: string;
   showAlert: boolean = false;
-  constructor(private fb: FormBuilder, private http: HttpClient,private actiavatedRoute:ActivatedRoute) {}
+  constructor(private fb: FormBuilder, private http: HttpClient,private actiavatedRoute:ActivatedRoute, private router: Router) {}
 
   passwordForm: FormGroup = this.fb.group({
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
@@ -84,7 +83,7 @@ export class AgentChangePasswordComponent {
           this.showAlertMessage('success', 'Reset password request sent successfully!');
           setTimeout(() => {
             // Redirect to login page after 1 seconds
-            this.router.navigate(['/company-login']);
+            this.router.navigate(['/agent-login']);
           }, 2000); // 2000 milliseconds =2  seconds
         },
         (error) => {
