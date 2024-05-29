@@ -27,24 +27,16 @@
               </div>
             </div>
             <!-- <hr/> -->
-            <div *ngFor="let msg of messageList | async">
-              <!-- Displaying the message sender and timestamp -->
-              <p>{{ msg.sender }} <span class="form-header">Today, 11:30 PM</span></p>
-              
-              <!-- Displaying the message content conditionally -->
-              <div *ngIf="msg.sender === accountId; else elseBlock">
-                <div class="replied">
-                  <span style="color: #202020;">{{ msg.content }}</span>
-                </div>
-              </div>
-              
-              <!-- Template for messages not sent by the current user -->
-              <ng-template #elseBlock>
-                <div class="replied">
-                  <span style="color: #202020;">{{ msg.content }}</span>
-                </div>
-              </ng-template>
+            <div class="message-body">
+              <span style="color: white;">{{dataArray.description}}</span>
             </div>
+            <!-- Reply section -->
+            <p>Katherine <span class="form-header">Today, 11:30 PM</span></p>
+            <div class="replied">
+              <span style="color: #202020;">Life seasons open have. Air have of.</span>
+            </div>
+            <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
+            <!-- Message input section -->
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
             <div class="message-input">
