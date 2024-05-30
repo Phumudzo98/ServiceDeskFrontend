@@ -256,7 +256,7 @@
           </fieldset>
           <fieldset>
             <label for="assignee" class="input-fields">Assign ticket to</label>
-            <input type="text" id="assignee" name="assignee" formControlName="assignee" placeholder="Search" (input)="onAssigneeInput()">
+            <input type="text" id="assignee" name="assignee" formControlName="assignee" placeholder="Search"  (input)="onAssigneeInput()">
             
             <!-- Dropdown for email suggestions -->
             <ul *ngIf="assigneeSuggestions.length > 0" class="list-group">
