@@ -232,8 +232,16 @@
           <hr/>
           <fieldset>
             <label for="email" class="input-fields">Employee Email</label>
-            <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Search">
-
+            <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Search" (input)="onEmailInput()" >
+           
+           
+            <!-- Dropdown for email suggestions -->
+            <ul *ngIf="emailSuggestions.length > 0" class="list-group">
+              <li *ngFor="let email of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(email)">
+                {{ i + 1 }}. {{ email }}
+              </li>
+            </ul>
+            
             <!--Validations-->
             <div
             *ngIf="new_ticket['email'].invalid && (new_ticket['email'].dirty || new_ticket['email'].touched)"
@@ -246,22 +254,24 @@
              <!--End Of Validations-->
 
           </fieldset>
-
           <fieldset>
             <label for="assignee" class="input-fields">Assign ticket to</label>
-            <input type="text" id="assignee" name="assignee" formControlName="assignee" placeholder="Search">
-
-            <!--Validations-->
-            <div
-            *ngIf="new_ticket['assignee'].invalid && (new_ticket['assignee'].dirty || new_ticket['assignee'].touched)"
-            class="alert alert-danger" >  
-            <span *ngIf="new_ticket['assignee'].errors?.['required']" style="color:#f98f8f">Please select agent name</span>
+            <input type="text" id="assignee" name="assignee" formControlName="assignee" placeholder="Search" (input)="onAssigneeInput()">
+            
+            <!-- Dropdown for email suggestions -->
+            <ul *ngIf="assigneeSuggestions.length > 0" class="list-group">
+              <li *ngFor="let assignee of assigneeSuggestions; let i = index" class="list-group-item" (click)="onAssigneeSuggestion(assignee)">
+                {{ i + 1 }}. {{ assignee }}
+              </li>
+            </ul>
+          
+            <!-- Validations -->
+            <div *ngIf="new_ticket['assignee'].invalid && (new_ticket['assignee'].dirty || new_ticket['assignee'].touched)" class="alert alert-danger">
+              <span *ngIf="new_ticket['assignee'].errors?.['required']" style="color:#f98f8f">Please select agent name</span>
             </div>
-            <!--Search through the database using 3 letters-->
-
-             <!--End Of Validations-->
-
+            <!-- End Of Validations -->
           </fieldset>
+          
          
           <fieldset>
             <label for="category">Category</label>

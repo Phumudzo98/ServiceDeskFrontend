@@ -633,8 +633,28 @@ float: inline-end;
 }
 .previous-button{
   margin-right: 10px;
-  
 }
+.list-group {
+  background-color: #f8f9fa; /* Light background for the entire dropdown */
+  border-radius: 0.25rem; /* Slightly rounded corners */
+  max-height: 80px; /* Max height for the dropdown */
+  overflow-y: auto; /* Scroll if content overflows */
+  margin-top: 5px; /* Space between input and dropdown */
+  list-style: none; /* Remove default list styles */
+}
+
+.list-group .list-group-item {
+  padding: 10px; /* Padding for list items */
+  cursor: pointer; /* Pointer cursor for better UX */
+  font-size: 14px;
+  background-color: transparent; /* Make list item background transparent */
+  border: none; /* Remove borders */
+}
+
+.list-group .list-group-item:hover {
+  font-weight: 600;
+}
+
 
 
 

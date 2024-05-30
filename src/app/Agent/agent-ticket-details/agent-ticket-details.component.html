@@ -67,16 +67,18 @@
           <div class="card-body">
             <!-- Ticket info -->
             <div class="row">
-              <h6>Ticket Info</h6>
-
+              <div class="d-flex justify-content-between align-items-center three-dots">
+                <h6>Ticket Info</h6>
+                <img src="../../../assets/images/Three Dots.svg" alt="Three dots" width="15" height="15">
+              </div>
               <div class="col">
               <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
               <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
               <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
               <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
-            </div>
               <hr/>
-              <a>Close Ticket</a>
+            </div>
+              
             </div>
           </div>
         </div>
