@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
 })
 export class CompanyTicketsComponent implements OnInit {
   emailSuggestions: string[] = [];
+  
   allEmails: string[] = [
     'alicia@gmail.com', 'mkay@gmail.com', 'phumu@gmail.com', 'evanga@gmail.com', 'elelwani@gmail.com', 'ewe@yahoo.com'
   ];
@@ -183,11 +184,13 @@ export class CompanyTicketsComponent implements OnInit {
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
 
+    this.getEmployee();
+
     let url: string = "http://localhost:8080/api/ticket/get-tickets/" + companyId;
 
     this.http.get<any[]>(url).subscribe(data => {
       this.dataArray = data;
-      console.log(data);
+      
     },
     error => {
       console.log(error);
@@ -220,5 +223,35 @@ export class CompanyTicketsComponent implements OnInit {
       this.currentPage--;
     }
   }
-  
+
+  empEmails:any="";
+
+  getEmployee(){
+
+    const token = this.storage.getUser();
+    const decodedToken: any = jwtDecode(token);
+    const companyId = decodedToken.companyId;
+
+    let url = "http://localhost:8080/api/company/get-user-email";
+
+    let searchEmployee=
+    {
+      "search":this.ticketForm.get("email")?.value,
+      "companyID":companyId
+    }
+
+    this.http.post<[]>(url,searchEmployee).subscribe(response=>{
+
+      this.empEmails=response;
+
+      //this.allEmails=this.empEmails.map(account =>account.email)
+
+      
+    },error=>{
+      console.log(error);
+      
+    })
+
+
+  }
 }
