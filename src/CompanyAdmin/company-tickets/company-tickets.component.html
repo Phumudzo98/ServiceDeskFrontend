@@ -239,8 +239,6 @@
           <fieldset>
             <label for="email" class="input-fields">Employee Email</label>
             <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Search" (input)="onEmailInput()" >
-           
-           
             <!-- Dropdown for email suggestions -->
             <ul *ngIf="emailSuggestions.length > 0" class="list-group">
               <li *ngFor="let email of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(email)">

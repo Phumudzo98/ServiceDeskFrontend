@@ -635,24 +635,37 @@ float: inline-end;
   margin-right: 10px;
 }
 .list-group {
-  background-color: #f8f9fa; /* Light background for the entire dropdown */
-  border-radius: 0.25rem; /* Slightly rounded corners */
-  max-height: 80px; /* Max height for the dropdown */
-  overflow-y: auto; /* Scroll if content overflows */
-  margin-top: 5px; /* Space between input and dropdown */
-  list-style: none; /* Remove default list styles */
+  background-color: #f8f9fa; 
+  border-radius: 0.25rem; 
+  max-height: 80px; 
+  overflow-y: auto;
+  margin-top: 5px; 
+  list-style: none; 
 }
 
 .list-group .list-group-item {
-  padding: 10px; /* Padding for list items */
-  cursor: pointer; /* Pointer cursor for better UX */
+  padding: 10px;
+  cursor: pointer; 
   font-size: 14px;
-  background-color: transparent; /* Make list item background transparent */
-  border: none; /* Remove borders */
+  background-color: transparent; 
+  border: none; 
 }
 
 .list-group .list-group-item:hover {
   font-weight: 600;
+}
+.alert {
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.success {
+  background-color: #d4edda; 
+  border: 1px solid #c3e6cb; 
+  color: #155724; 
 }
 
 
