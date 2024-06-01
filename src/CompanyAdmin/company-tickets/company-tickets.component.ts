@@ -13,17 +13,17 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
 export class CompanyTicketsComponent implements OnInit {
 
   emailSuggestions: string[] = [];
-  
-  allEmails: string[] = [
-    'alicia@gmail.com','mkay@gmail.com','phumu@gmail.com','evanga@gmail.com','elelwani@gmail.com','ewe@yahoo.com'
-  ];
+  allEmails: string[] = [];
 
   assigneeSuggestions: string[] = [];
   allAssignees: string[] = [
     'Mufamadi Mk','Khoza Nh','Tshivhase P','Tshivhase G','Unnamed','Unnamed'
   ];
 
-  constructor(private http: HttpClient, private storage: StorageService) {}
+  constructor(private http: HttpClient, private storage: StorageService) {
+
+   
+  }
 
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
@@ -222,7 +222,9 @@ export class CompanyTicketsComponent implements OnInit {
     }
   }
 
-  empEmails:any="";
+  
+  empEmails:any=""
+  
 
   getEmployee(){
 
@@ -234,16 +236,17 @@ export class CompanyTicketsComponent implements OnInit {
 
     let searchEmployee=
     {
-      "search":this.ticketForm.get("email")?.value,
+      "search":"",
       "companyID":companyId
     }
 
     this.http.post<[]>(url,searchEmployee).subscribe(response=>{
 
-      this.empEmails=response;
+      //console.log(response);
+      this.allEmails=response;
 
-      //this.allEmails=this.empEmails.map(account =>account.email)
-
+      console.log(this.allEmails);
+      
       
     },error=>{
       console.log(error);
