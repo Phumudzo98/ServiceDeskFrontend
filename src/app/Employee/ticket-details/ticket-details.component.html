@@ -32,17 +32,20 @@
             <div class="message-body">
               <span style="color: white;">{{dataArray.description}}</span>
             </div>
-            <div *ngFor="let msg of messageList | async">
-              <div *ngIf="msg.sender === accountId; else elseBlock">
-                <!-- Reply section -->
-                <p>{{msg.content}} <span class="form-header"></span></p>
-              </div>
-              <ng-template #elseBlock>
-                <div class="replied">
-                  <span style="color: #202020;">{{msg.content}}</span>
+            <div class="message-container">
+              <div *ngFor="let msg of messageList | async">
+                <div *ngIf="msg.sender === accountId; else elseBlock">
+                  <!-- Reply section -->
+                  <p>{{msg.content}} <span class="form-header"></span></p>
                 </div>
-              </ng-template>
+                <ng-template #elseBlock>
+                  <div class="replied">
+                    <span style="color: #202020;">{{msg.content}}</span>
+                  </div>
+                </ng-template>
+              </div>
             </div>
+            
             <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
             <!-- Message input section -->
             <div class="message-input" >
@@ -84,12 +87,7 @@
             </div>
           </div>
         </div>
-        <div class="card" style="width: 100%;margin-top:10px;">
-          <div class="card-body">
-            <h6>Recent activities</h6>
-            <p>John closed "How do I reset my password" <br/> <span class="form-header">14 Nov 2022, 5:26 PM</span> </p>
-          </div>
-        </div>
+        
       </div>
 
     </div>

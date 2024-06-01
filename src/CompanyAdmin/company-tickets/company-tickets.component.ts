@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
@@ -11,13 +11,19 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
   styleUrls: ['./company-tickets.component.css']
 })
 export class CompanyTicketsComponent implements OnInit {
-
   emailSuggestions: string[] = [];
+<<<<<<< HEAD
   allEmails: string[] = [];
+=======
+  
+  allEmails: string[] = [
+    'alicia@gmail.com', 'mkay@gmail.com', 'phumu@gmail.com', 'evanga@gmail.com', 'elelwani@gmail.com', 'ewe@yahoo.com'
+  ];
+>>>>>>> 4c22dc249546b75fea6d81864a4a015330b666f2
 
   assigneeSuggestions: string[] = [];
   allAssignees: string[] = [
-    'Mufamadi Mk','Khoza Nh','Tshivhase P','Tshivhase G','Unnamed','Unnamed'
+    'Mufamadi Mk', 'Khoza Nh', 'Tshivhase P', 'Tshivhase G', 'Unnamed', 'Unnamed'
   ];
 
   constructor(private http: HttpClient, private storage: StorageService) {
@@ -33,7 +39,7 @@ export class CompanyTicketsComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     category: new FormControl('', [Validators.required]),
     ticketBody: new FormControl('', [Validators.required]),
-    /*In a case "Other" was the option chosen*/
+    /* In a case "Other" was the option chosen */
     otherCategory: new FormControl('', [Validators.required])
   });
 
@@ -101,7 +107,7 @@ export class CompanyTicketsComponent implements OnInit {
     this.emailSuggestions = [];
   }
 
-  // Email suggestion handling
+  // Assignee suggestion handling
   onAssigneeInput(): void {
     const assigneeControl = this.ticketForm.get('assignee');
     if (assigneeControl) {
@@ -120,7 +126,6 @@ export class CompanyTicketsComponent implements OnInit {
     this.ticketForm.get('assignee')?.setValue(assignee);
     this.assigneeSuggestions = [];
   }
-
 
   startDate: Date = new Date("");
   endDate: Date = new Date("");
@@ -182,7 +187,6 @@ export class CompanyTicketsComponent implements OnInit {
   dataArray: any[] = []
 
   ngOnInit(): void {
-
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
@@ -200,18 +204,23 @@ export class CompanyTicketsComponent implements OnInit {
     });
   }
 
-  // Only displaying two tickets the next/previous will display other two tickets
+  // Only displaying two tickets; the next/previous will display other two tickets
   currentPage: number = 0;
   pageSize: number = 2;
-
+ 
   get paginatedData() {
     const start = this.currentPage * this.pageSize;
     const end = start + this.pageSize;
     return this.dataArray.slice(start, end);
   }
 
+  hasNextPage(): boolean {
+    const start = (this.currentPage + 1) * this.pageSize;
+    return start < this.dataArray.length;
+  }
+
   nextPage() {
-    if ((this.currentPage + 1) * this.pageSize < this.dataArray.length) {
+    if (this.hasNextPage()) {
       this.currentPage++;
     }
   }

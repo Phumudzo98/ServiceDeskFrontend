@@ -15,7 +15,7 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
 })
 export class TicketDetailsComponent implements OnInit {
 
-  constructor(private router: Router,private http: HttpClient,
+  constructor(private router: Router, private http: HttpClient,
     private route: ActivatedRoute,
     private token: StorageService) { }
 
@@ -26,37 +26,33 @@ export class TicketDetailsComponent implements OnInit {
   messageList?: Observable<Array<RespondMessage>>;
   messages: RespondMessage[] = [];
   newMessage: string = '';
-  accountId!:any;
+  accountId!: any;
 
   navigateToDestination() {
-      this.router.navigate(['/employee-tickets']);
+    this.router.navigate(['/employee-tickets']);
   }
 
-  //Button to select
+  // Button to select
 
   onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
     //console.log(selectedFile); Do something with the selected file
   }
 
-  ngOnInit():void
-  {
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(param => {
+      this.ticketId = param.get('ticketId');
 
-    
-      this.route.paramMap.subscribe(param => {
-        this.ticketId = param.get('ticketId');
-  
-        let url = "http://localhost:8080/api/ticket/get-ticket/" + this.ticketId;
-  
-        this.http.get<any>(url).subscribe(response => {
-          this.dataArray = response;
-        }, error => {
-          console.log("Something went wrong");
-        });
+      let url = "http://localhost:8080/api/ticket/get-ticket/" + this.ticketId;
+
+      this.http.get<any>(url).subscribe(response => {
+        this.dataArray = response;
+      }, error => {
+        console.log("Something went wrong");
       });
-      
-      this.connect();
-      
+    });
+
+    this.connect();
   }
 
   private connect(): void {
@@ -65,13 +61,12 @@ export class TicketDetailsComponent implements OnInit {
     };
 
     this.loadChat();
-   
 
     this.stompClient.onConnect = (frame) => {
       this.stompClient.subscribe("/topic/messages/" + this.ticketId, (message: Message) => {
         const receivedMsg = JSON.parse(message.body) as RespondMessage;
-        this.messageList = this.messageList?.pipe(map((d: RespondMessage[]) => [...d, receivedMsg]));
         this.messages.push(receivedMsg);
+        this.messageList = of([...this.messages]);  // update the observable
       });
     }
 
@@ -82,17 +77,12 @@ export class TicketDetailsComponent implements OnInit {
     this.messageList = this.http.get<Array<RespondMessage>>("http://localhost:8081/get-messages/" + this.ticketId);
 
     this.messageList.subscribe(d => {
-      let mesg: Array<RespondMessage> = d;
-
-      mesg.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
-      this.messageList = of(mesg);
-      this.messages = mesg; 
-
-      console.log("Here", mesg);
+      d.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
+      this.messages = d;
+      this.messageList = of(d);
+      console.log("Here", d);
     });
   }
-
-  
 
   public sendMessage(): void {
     let getUserToken = this.token.getUser();
@@ -111,5 +101,4 @@ export class TicketDetailsComponent implements OnInit {
 
     this.newMessage = "";
   }
-
 }
