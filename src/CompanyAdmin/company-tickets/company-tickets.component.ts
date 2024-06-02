@@ -12,24 +12,12 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
 })
 export class CompanyTicketsComponent implements OnInit {
   emailSuggestions: string[] = [];
-<<<<<<< HEAD
   allEmails: string[] = [];
-=======
-  
-  allEmails: string[] = [
-    'alicia@gmail.com', 'mkay@gmail.com', 'phumu@gmail.com', 'evanga@gmail.com', 'elelwani@gmail.com', 'ewe@yahoo.com'
-  ];
->>>>>>> 4c22dc249546b75fea6d81864a4a015330b666f2
 
   assigneeSuggestions: string[] = [];
-  allAssignees: string[] = [
-    'Mufamadi Mk', 'Khoza Nh', 'Tshivhase P', 'Tshivhase G', 'Unnamed', 'Unnamed'
-  ];
+  allAssignees: string[] = [];
 
-  constructor(private http: HttpClient, private storage: StorageService) {
-
-   
-  }
+  constructor(private http: HttpClient, private storage: StorageService) {}
 
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
@@ -174,6 +162,51 @@ export class CompanyTicketsComponent implements OnInit {
           this.successMessage = '';
         }, 3000);
       }, 3000);
+
+    const token = this.storage.getUser();
+    const decodedToken: any = jwtDecode(token);
+    const companyId = decodedToken.companyId;
+
+      let urlId:string ="http://localhost:8080/api/company/get-user-id";
+      let userEmail=this.ticketForm.get('email')?.value;
+
+      this.http.post<any>(urlId,userEmail).subscribe(response=>
+        {
+          console.log(response);
+
+          let ticketDetail=
+          {
+            "category":this.ticketForm.get('category')?.value,
+            "description":this.ticketForm.get('ticketBody')?.value,
+            "customerUserId":response
+          }
+
+          console.log(typeof response);
+          
+
+          if(response!=null)
+            {
+              let addTicketUrl="http://localhost:8080/api/ticket/request-service/"+companyId;
+
+              this.http.post<any>(addTicketUrl,ticketDetail).subscribe(response=>
+                {
+                  console.log(response);
+                },
+                error=>
+                  {
+                    console.log(error);
+                  }
+                
+              )
+           }
+
+        },error=>
+        {
+          console.log("Check if email is correct");
+        }
+        
+      )
+
     }
   }
 
@@ -191,7 +224,7 @@ export class CompanyTicketsComponent implements OnInit {
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
 
-    this.getEmployee();
+    this.getEmployeeAndAgent();
 
     let url: string = "http://localhost:8080/api/ticket/get-tickets/" + companyId;
 
@@ -230,18 +263,17 @@ export class CompanyTicketsComponent implements OnInit {
       this.currentPage--;
     }
   }
-
   
   empEmails:any=""
-  
 
-  getEmployee(){
+  getEmployeeAndAgent(){
 
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
 
     let url = "http://localhost:8080/api/company/get-user-email";
+    let url2 ="http://localhost:8080/api/company/get-agent-email";
 
     let searchEmployee=
     {
@@ -253,15 +285,27 @@ export class CompanyTicketsComponent implements OnInit {
 
       //console.log(response);
       this.allEmails=response;
-
-      console.log(this.allEmails);
-      
+      //console.log(this.allEmails);
       
     },error=>{
       console.log(error);
       
     })
 
+    let searchAgent=
+    {
+      "search":"",
+      "companyID":companyId
+    }
 
+    this.http.post<[]>(url2,searchAgent).subscribe(response=>{
+
+      //console.log(response);
+      this.allAssignees=response;
+      
+    },error=>{
+      console.log(error);
+      
+    })
   }
 }
