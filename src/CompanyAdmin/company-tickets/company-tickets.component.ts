@@ -10,12 +10,7 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.css']
 })
-<<<<<<< HEAD
-export class CompanyTicketsComponent implements OnInit{
-  searchQuery: string = ''; // Define searchQuery property
-  constructor(private http: HttpClient, private storage : StorageService){}
-  tickets: any[] = []; // Define the agents array to hold the data
-=======
+
 export class CompanyTicketsComponent implements OnInit {
   emailSuggestions: string[] = [];
   allEmails: string[] = [];
@@ -25,7 +20,7 @@ export class CompanyTicketsComponent implements OnInit {
 
   constructor(private http: HttpClient, private storage: StorageService) {}
 
->>>>>>> 4f398b77bb745330a0d54cf1cb6c6736b58e80db
+
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
 
@@ -270,27 +265,10 @@ export class CompanyTicketsComponent implements OnInit {
       this.currentPage--;
     }
   }
-<<<<<<< HEAD
 
-  performSearchOpenTicket(): void {
-    if (this.searchQuery.trim() === '') {
-      this.ngOnInit(); // Reset to show all agents if search query is empty
- console.log(this.ngOnInit);
-      
-    } else {
-      this.tickets = this.tickets.filter(user =>
-        (user.priority && user.priority.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||
-        (user.description && user.description.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
-        (user.category && user.category.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||
-        (user.statusAgent && user.statusAgent.toString().toLowerCase().includes(this.searchQuery.toLowerCase()))
-      );
-    }
-  }
- 
-=======
   
   empEmails:any=""
->>>>>>> 4f398b77bb745330a0d54cf1cb6c6736b58e80db
+
 
   getEmployeeAndAgent(){
 
