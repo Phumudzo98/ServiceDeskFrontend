@@ -180,10 +180,7 @@ export class CompanyTicketsComponent implements OnInit {
             "description":this.ticketForm.get('ticketBody')?.value,
             "customerUserId":response
           }
-
-          console.log(typeof response);
           
-
           if(response!=null)
             {
               let addTicketUrl="http://localhost:8080/api/ticket/request-service/"+companyId;
