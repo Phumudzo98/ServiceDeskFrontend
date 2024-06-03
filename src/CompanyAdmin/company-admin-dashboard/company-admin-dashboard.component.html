@@ -27,8 +27,10 @@
                 <div class="dropdown-content" *ngIf="dropdownStates['opened']">
                   <div class="date-picker-container">
                     <div>
-                      <a class="close-button" (click)="closeFilter('opened')">X</a>
-                      <hr style="margin-top: 3px;">
+                      <div class="filters-header">
+                        <p>FILTER</p>
+                        <a class="close-button" (click)="closeFilter('opened')">X</a>
+                      </div>                          <hr style="margin-top: 3px;">
                       <label for="startDate">Start Date:</label>
                       <input
                         type="month"
@@ -80,8 +82,10 @@
                 <div class="dropdown-content" *ngIf="dropdownStates['inProgress']">
                   <div class="date-picker-container">
                     <div>
-                      <a class="close-button" (click)="closeFilter('inProgress')">X</a>
-                      <hr style="margin-top: 3px;">
+                      <div class="filters-header">
+                        <p>FILTER</p>
+                        <a class="close-button" (click)="closeFilter('inProgress')">X</a>
+                      </div>                          <hr style="margin-top: 3px;">
                       <label for="startDate">Start Date:</label>
                       <input
                         type="month"
@@ -144,8 +148,10 @@
         <div class="dropdown-content" *ngIf="dropdownStates['closed']">
           <div class="date-picker-container">
             <div>
-              <a class="close-button" (click)="closeFilter('closed')">X</a>
-              <hr style="margin-top: 3px;">
+              <div class="filters-header">
+                <p>FILTER</p>
+                <a class="close-button" (click)="closeFilter('closed')">X</a>
+              </div>              <hr style="margin-top: 3px;">
               <label for="startDate">Start Date:</label>
               <input
                 type="month"
@@ -195,8 +201,10 @@
         <div class="dropdown-content" *ngIf="dropdownStates['escalated']">
           <div class="date-picker-container">
             <div>
-              <a class="close-button" (click)="closeFilter('escalated')">X</a>
-              <hr style="margin-top: 3px;">
+              <div class="filters-header">
+                <p>FILTER</p>
+                <a class="close-button" (click)="closeFilter('escalated')">X</a>
+              </div>                  <hr style="margin-top: 3px;">
               <label for="startDate">Start Date:</label>
               <input
                 type="month"

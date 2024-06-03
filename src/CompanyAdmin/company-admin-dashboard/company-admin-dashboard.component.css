@@ -172,7 +172,6 @@ border: 1px solid #59699e;
   border-radius: 0.5px;
   font-size: 12px;
   margin-top: 10px;
-
   }
   .nextButton
 {
@@ -292,5 +291,24 @@ margin-top: 10px;
   to {
       transform: rotate(360deg);
   }
+  
+}
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Optional: Adjust spacing between the elements */
+}
+
+.filters-header a{
+  color: black !important;
+}
+.filters-header p{
+font-weight: 600;}
+.filters-header a:hover{
+  color: black;
+}
+
+.filters-header a {
+  cursor: pointer; /* Adds a pointer cursor to the link */
 }
   

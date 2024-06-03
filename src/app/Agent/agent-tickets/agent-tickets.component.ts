@@ -189,6 +189,7 @@ export class AgentTicketsComponent implements OnInit{
   status: string = "";
 
   showSpinner2: boolean = false;
+  applyFilterSpinner: boolean = false;
 
   //Filtering
   resetFilters() {
@@ -199,6 +200,16 @@ export class AgentTicketsComponent implements OnInit{
           this.priority = "";
           this.status = "";
           this.showSpinner2 = false;
+      }, 2000);
+  }
+  //apply filter
+  applyFilter()
+  {
+    this.applyFilterSpinner = true;
+    setTimeout(() =>
+      {
+        //Add other filter logic
+        this.applyFilterSpinner = false;
       }, 2000);
   }
 
@@ -224,10 +235,10 @@ export class AgentTicketsComponent implements OnInit{
   }
 
   
-   //Closing the window
-   closeWindow() {
-    this.showDropdown=false;
-  }
+    //Closing the dropdwon
+    closeFilter(dropdown: string) {
+      this.showDropdown = false;
+    }
 
   newInfo: boolean = true;
 

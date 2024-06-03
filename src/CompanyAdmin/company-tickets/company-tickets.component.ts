@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, EventEmitter, Input, Output, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
@@ -10,23 +10,34 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.css']
 })
+<<<<<<< HEAD
 export class CompanyTicketsComponent implements OnInit{
   searchQuery: string = ''; // Define searchQuery property
   constructor(private http: HttpClient, private storage : StorageService){}
   tickets: any[] = []; // Define the agents array to hold the data
+=======
+export class CompanyTicketsComponent implements OnInit {
+  emailSuggestions: string[] = [];
+  allEmails: string[] = [];
+
+  assigneeSuggestions: string[] = [];
+  allAssignees: string[] = [];
+
+  constructor(private http: HttpClient, private storage: StorageService) {}
+
+>>>>>>> 4f398b77bb745330a0d54cf1cb6c6736b58e80db
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
 
-  ticketForm:FormGroup = new FormGroup({
+  ticketForm: FormGroup = new FormGroup({
     assignee: new FormControl('', [Validators.required]),
-    email: new FormControl('',[Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-    category: new FormControl('',[Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    category: new FormControl('', [Validators.required]),
     ticketBody: new FormControl('', [Validators.required]),
-    /*In a case "Other" was the option chosen*/
-    otherCategory: new FormControl('',[Validators.required])
-  })
+    /* In a case "Other" was the option chosen */
+    otherCategory: new FormControl('', [Validators.required])
+  });
 
-  
   showOtherCategoryInput: boolean = false;
 
   onCategoryChange() {
@@ -52,28 +63,64 @@ export class CompanyTicketsComponent implements OnInit{
       }
     }
   }
-  //Toggling through the buttons
+
+  // Toggling through the buttons
   currentForm: string = 'opened';
 
   toggleForms(form: string) {
     this.currentForm = form;
   }
-  //Filter toggle
+
+  // Filter toggle
   showDropdown: boolean = false;
 
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
 
-  /*
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent) {
-    const dropdownElement = document.getElementById('dropdown');
-    if (dropdownElement && dropdownElement.contains(event.target as Node)) {
-      return;
-    }
+  closeFilter(dropdown: string) {
     this.showDropdown = false;
-  }*/
+  }
+
+  // Email suggestion handling
+  onEmailInput(): void {
+    const emailControl = this.ticketForm.get('email');
+    if (emailControl) {
+      const query = emailControl.value;
+      if (query.length > 0) {
+        this.emailSuggestions = this.allEmails.filter(email =>
+          email.toLowerCase().startsWith(query.toLowerCase())
+        );
+      } else {
+        this.emailSuggestions = [];
+      }
+    }
+  }
+
+  onSelectSuggestion(email: string): void {
+    this.ticketForm.get('email')?.setValue(email);
+    this.emailSuggestions = [];
+  }
+
+  // Assignee suggestion handling
+  onAssigneeInput(): void {
+    const assigneeControl = this.ticketForm.get('assignee');
+    if (assigneeControl) {
+      const query = assigneeControl.value;
+      if (query.length > 0) {
+        this.assigneeSuggestions = this.allAssignees.filter(assignee =>
+          assignee.toLowerCase().startsWith(query.toLowerCase())
+        );
+      } else {
+        this.assigneeSuggestions = [];
+      }
+    }
+  }
+
+  onAssigneeSuggestion(assignee: string): void {
+    this.ticketForm.get('assignee')?.setValue(assignee);
+    this.assigneeSuggestions = [];
+  }
 
   startDate: Date = new Date("");
   endDate: Date = new Date("");
@@ -85,80 +132,135 @@ export class CompanyTicketsComponent implements OnInit{
   successMessage: string = '';
 
   showSpinner2: boolean = false;
+  applyFilterSpinner: boolean = false;
 
-  //Filtering
+  // Reset Filters
   resetFilters() {
-      this.showSpinner2 = true;
-        setTimeout(() => {
-          this.startDate = new Date(""); 
-          this.endDate = new Date("");
-          this.priority = "";
-          this.status = "";
-          this.showSpinner2 = false;
-      }, 2000);
+    this.showSpinner2 = true;
+    setTimeout(() => {
+      this.startDate = new Date("");
+      this.endDate = new Date("");
+      this.priority = "";
+      this.status = "";
+      this.showSpinner2 = false;
+    }, 2000);
   }
-  //Adding a ticket
+
+  // Apply filter
+  applyFilter() {
+    this.applyFilterSpinner = true;
+    setTimeout(() => {
+      // Add other filter logic
+      this.applyFilterSpinner = false;
+    }, 2000);
+  }
+
+  // Adding a ticket
   addTicket() {
     if (this.ticketForm.valid) {
       this.showSpinner = true;
-  
+
       setTimeout(() => {
         this.showSpinner = false;
         this.successMessage = `Ticket added successfully.`;
         this.ticketForm.reset();
-        
+
         setTimeout(() => {
-          this.successMessage = ''; 
+          this.successMessage = '';
         }, 3000);
-      }, 5000); 
+      }, 3000);
+
+    const token = this.storage.getUser();
+    const decodedToken: any = jwtDecode(token);
+    const companyId = decodedToken.companyId;
+
+      let urlId:string ="http://localhost:8080/api/company/get-user-id";
+      let userEmail=this.ticketForm.get('email')?.value;
+
+      this.http.post<any>(urlId,userEmail).subscribe(response=>
+        {
+          console.log(response);
+
+          let ticketDetail=
+          {
+            "category":this.ticketForm.get('category')?.value,
+            "description":this.ticketForm.get('ticketBody')?.value,
+            "customerUserId":response
+          }
+
+          console.log(typeof response);
+          
+
+          if(response!=null)
+            {
+              let addTicketUrl="http://localhost:8080/api/ticket/request-service/"+companyId;
+
+              this.http.post<any>(addTicketUrl,ticketDetail).subscribe(response=>
+                {
+                  console.log(response);
+                },
+                error=>
+                  {
+                    console.log(error);
+                  }
+                
+              )
+           }
+
+        },error=>
+        {
+          console.log("Check if email is correct");
+        }
+        
+      )
+
     }
   }
 
-    //Closing the window
-    closeWindow() {
-      this.showDropdown=false;
-    }
-  
-  get new_ticket (){return this.ticketForm.controls;}
+  // Closing the window
+  closeWindow() {
+    this.showDropdown = false;
+  }
 
-  dataArray:any[]=[]
+  get new_ticket() { return this.ticketForm.controls; }
 
-  
+  dataArray: any[] = []
 
-  ngOnInit():void {
+  ngOnInit(): void {
+    const token = this.storage.getUser();
+    const decodedToken: any = jwtDecode(token);
+    const companyId = decodedToken.companyId;
 
-    const token = this.storage.getUser()
-    const decodedToken:any=jwtDecode(token);
-    const companyId=decodedToken.companyId;
+    this.getEmployeeAndAgent();
 
+    let url: string = "http://localhost:8080/api/ticket/get-tickets/" + companyId;
 
-    let url:string="http://localhost:8080/api/ticket/get-tickets/"+companyId;
-
-    this.http.get<any[]>(url).subscribe(data=>{
+    this.http.get<any[]>(url).subscribe(data => {
+      this.dataArray = data;
       
-      this.dataArray=data;
-      console.log(data);
     },
-  error=>
-  {
-    console.log(error);
-    
-  })
-}
+    error => {
+      console.log(error);
+    });
+  }
 
-
-  //Only displaying two tickets the next/previous will display other two tickets
+  // Only displaying two tickets; the next/previous will display other two tickets
   currentPage: number = 0;
   pageSize: number = 2;
-  
+ 
   get paginatedData() {
     const start = this.currentPage * this.pageSize;
     const end = start + this.pageSize;
     return this.dataArray.slice(start, end);
   }
 
+  hasNextPage(): boolean {
+    const start = (this.currentPage + 1) * this.pageSize;
+    return start < this.dataArray.length;
+  }
+
   nextPage() {
-    if ((this.currentPage + 1) * this.pageSize < this.dataArray.length) {
+    if (this.hasNextPage()) {
       this.currentPage++;
     }
   }
@@ -168,6 +270,7 @@ export class CompanyTicketsComponent implements OnInit{
       this.currentPage--;
     }
   }
+<<<<<<< HEAD
 
   performSearchOpenTicket(): void {
     if (this.searchQuery.trim() === '') {
@@ -184,5 +287,51 @@ export class CompanyTicketsComponent implements OnInit{
     }
   }
  
+=======
+  
+  empEmails:any=""
+>>>>>>> 4f398b77bb745330a0d54cf1cb6c6736b58e80db
 
+  getEmployeeAndAgent(){
+
+    const token = this.storage.getUser();
+    const decodedToken: any = jwtDecode(token);
+    const companyId = decodedToken.companyId;
+
+    let url = "http://localhost:8080/api/company/get-user-email";
+    let url2 ="http://localhost:8080/api/company/get-agent-email";
+
+    let searchEmployee=
+    {
+      "search":"",
+      "companyID":companyId
+    }
+
+    this.http.post<[]>(url,searchEmployee).subscribe(response=>{
+
+      //console.log(response);
+      this.allEmails=response;
+      //console.log(this.allEmails);
+      
+    },error=>{
+      console.log(error);
+      
+    })
+
+    let searchAgent=
+    {
+      "search":"",
+      "companyID":companyId
+    }
+
+    this.http.post<[]>(url2,searchAgent).subscribe(response=>{
+
+      //console.log(response);
+      this.allAssignees=response;
+      
+    },error=>{
+      console.log(error);
+      
+    })
+  }
 }

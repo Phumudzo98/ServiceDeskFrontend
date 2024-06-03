@@ -46,6 +46,7 @@
                 <div class="dropdown-content" [class.show]="showDropdown">
                   <div class="filters-header">
                     <p><strong>FILTER</strong></p>
+                    <a class="close-button" (click)="closeFilter('closed')">X</a>
                   </div>
                   
                   <hr>
@@ -79,11 +80,14 @@
                   <mat-datepicker-toggle matSuffix [for]="endDatePicker" class="date-picker"></mat-datepicker-toggle>
                   <mat-datepicker #endDatePicker panelClass="datepickerTwo"></mat-datepicker>
                 </div>
+                  <button class="applyFilter" (click)="applyFilter()">
+                    <span *ngIf="!applyFilterSpinner">Apply Filters</span>
+                    <div *ngIf="applyFilterSpinner" class="filter-spinner"></div>
+                    </button>
                     <button class="nextButton" (click)="resetFilters()">
                       <span *ngIf="!showSpinner2">Reset</span>
                       <div *ngIf="showSpinner2" class="filter-spinner"></div>
                       </button>
-                    <button class="closeButton" (click)="closeWindow()">Close</button>
                 </div>
               </li>
               </div>
@@ -94,36 +98,38 @@
         <!-- Dynamic Content Section -->
        
 
+        <div class="row" *ngIf="currentForm === 'opened'">
+          <div *ngFor="let item of paginatedData" style="margin-bottom: 20px;">
+            <div *ngIf="item.status === 'Open'" class="card" style="width: 100%;">
+              <div class="card-header">
+                <!-- Ticket Header -->
+                <span class="ticket-header">{{ item.category }}</span>
+                <span class="form-header">
+                  <!-- Ticket Date & View details -->
+                  {{ item.createdAt.substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
+                </span>
+              </div>
+              <!-- Ticket Message -->
+              <div class="ticket-message">
+                <span>{{ item.description }}</span>
+              </div>
+              <!-- Ticket ID and Priority -->
+              <div class="urgent-section">
+                <span class="form-header badge badge-danger" id="priorityID">{{ item.priority }}</span>
+                <span id="ticketID" class="form-header badge badge-secondary">{{ item.ticketId }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end" *ngIf="paginatedData.length > 0">
+            <button class="next-button previous-button" type="button" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+            <button class="next-button" type="button" (click)="nextPage()" [disabled]="!hasNextPage()">Next</button>
+          </div>
+        </div>
         
-      <!--Unresolved Tickets-->
-<div class="row" *ngIf="currentForm === 'opened'">
-  <div *ngFor="let item of paginatedData" style="margin-bottom: 20px;">
-    <div *ngIf="item.status == 'Open'" class="card" style="width: 100%;">
-      <div class="card-header">
-        <!--Ticket Header-->
-        <span class="ticket-header">{{ item.category }}</span>
-        <span class="form-header">
-          <!--Ticket Date & View details-->
-          {{ (item.createdAt).substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
-        </span>
-      </div>
-      <!--Ticket Message-->
-      <div class="ticket-message">
-        <span>{{ item.description }}</span>
-      </div>
-      <!--Ticket ID and Priority-->
-      <div class="urgent-section">
-        <span class="form-header badge badge-danger" id="priorityID">{{ item.priority }}</span>
-        <span id="ticketID" class="form-header badge badge-secondary">{{ item.ticketId }}</span>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-end" *ngIf="paginatedData.length > 0">
-    <button class="next-button previous-button" type="button" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
-    <button class="next-button" type="button" (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= dataArray.length">Next</button>
-  </div>
-  
-</div>
+        
+        
+
+
 
       
         <!--InProgress Tickets-->
@@ -151,6 +157,10 @@
                 <span id="ticketID" class="form-header badge badge-secondary">{{item.ticketId}}</span>
               </div>
             </div>
+          </div>
+          <div class="d-flex justify-content-end" *ngIf="paginatedData.length > 0">
+            <button class="next-button previous-button" type="button" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+            <button class="next-button" type="button" (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= dataArray.length">Next</button>
           </div>
   
           
@@ -228,8 +238,14 @@
           <hr/>
           <fieldset>
             <label for="email" class="input-fields">Employee Email</label>
-            <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Search">
-
+            <input type="email" id="mail" name="user_email" formControlName="email" placeholder="Search" (input)="onEmailInput()" >
+            <!-- Dropdown for email suggestions -->
+            <ul *ngIf="emailSuggestions.length > 0" class="list-group">
+              <li *ngFor="let email of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(email)">
+                {{ i + 1 }}. {{ email }}
+              </li>
+            </ul>
+            
             <!--Validations-->
             <div
             *ngIf="new_ticket['email'].invalid && (new_ticket['email'].dirty || new_ticket['email'].touched)"
@@ -242,22 +258,24 @@
              <!--End Of Validations-->
 
           </fieldset>
-
           <fieldset>
             <label for="assignee" class="input-fields">Assign ticket to</label>
-            <input type="text" id="assignee" name="assignee" formControlName="assignee" placeholder="Search">
-
-            <!--Validations-->
-            <div
-            *ngIf="new_ticket['assignee'].invalid && (new_ticket['assignee'].dirty || new_ticket['assignee'].touched)"
-            class="alert alert-danger" >  
-            <span *ngIf="new_ticket['assignee'].errors?.['required']" style="color:#f98f8f">Please select agent name</span>
+            <input type="text" id="assignee" name="assignee" formControlName="assignee" placeholder="Search"  (input)="onAssigneeInput()">
+            
+            <!-- Dropdown for email suggestions -->
+            <ul *ngIf="assigneeSuggestions.length > 0" class="list-group">
+              <li *ngFor="let assignee of assigneeSuggestions; let i = index" class="list-group-item" (click)="onAssigneeSuggestion(assignee)">
+                {{ i + 1 }}. {{ assignee }}
+              </li>
+            </ul>
+          
+            <!-- Validations -->
+            <div *ngIf="new_ticket['assignee'].invalid && (new_ticket['assignee'].dirty || new_ticket['assignee'].touched)" class="alert alert-danger">
+              <span *ngIf="new_ticket['assignee'].errors?.['required']" style="color:#f98f8f">Please select agent name</span>
             </div>
-            <!--Search through the database using 3 letters-->
-
-             <!--End Of Validations-->
-
+            <!-- End Of Validations -->
           </fieldset>
+          
          
           <fieldset>
             <label for="category">Category</label>

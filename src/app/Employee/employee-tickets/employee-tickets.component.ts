@@ -143,43 +143,45 @@ export class EmployeeTicketsComponent implements OnInit
 
   
  
-  createTicket():void
-  {
-    
-
+  createTicket(): void {
+    // Show spinner
+    this.showSpinner = true;
+  
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyNo = decodedToken.companyId;
     const empNo = decodedToken.accountId;
-
+  
     let category = this.ticketForm.value.category;
     if (category === 'other') {
       category = this.ticketForm.value.otherCategory;
     }
-
+  
     const ticketCreate = {
       'category': category,
       'description': this.ticketForm.value.ticketBody,
       'customerUserId': `${empNo}`
     };
-
-    let url2="http://localhost:8080/api/ticket/request-service/"+companyNo;
-
-    this.http.post<any>(url2, ticketCreate).subscribe(response => {
-      console.log("Yes", response);
-      setTimeout(() => {
+  
+    let url2 = "http://localhost:8080/api/ticket/request-service/" + companyNo;
+  
+    this.http.post<any>(url2, ticketCreate).subscribe(
+      response => {
+        console.log("Yes", response);
+        // Hide spinner on success
         this.showSpinner = false;
         this.successMessage = 'Ticket created successfully!';
         this.router.navigate(['/employee-tickets']);
         location.reload();
-      }, 3000); // 5 seconds delay
-    },
-    //What happened
-    error => {
-      console.log("No", error);
-      this.showSpinner = false;
-    });
+      },
+      error => {
+        console.log("No", error);
+        // Hide spinner on error
+        this.showSpinner = false;
+      }
+    );
   }
+  
 
   //Reset The filter
 
@@ -189,6 +191,7 @@ export class EmployeeTicketsComponent implements OnInit
   status: string = "";
 
   showSpinner2: boolean = false;
+  applyFilterSpinner: boolean = false;
 
   //Filtering
   resetFilters() {
@@ -201,7 +204,16 @@ export class EmployeeTicketsComponent implements OnInit
           this.showSpinner2 = false;
       }, 2000);
   }
-
+  //apply filter
+  applyFilter()
+  {
+    this.applyFilterSpinner = true;
+    setTimeout(() =>
+      {
+        //Add other filter logic
+        this.applyFilterSpinner = false;
+      }, 2000);
+  }
 
   //Only displaying two tickets the next/previous will display other two tickets
   
@@ -224,9 +236,9 @@ export class EmployeeTicketsComponent implements OnInit
   }
 
   
-   //Closing the window
-   closeWindow() {
-    this.showDropdown=false;
+   //Closing the dropdwon
+   closeFilter(dropdown: string) {
+    this.showDropdown = false;
   }
 
   newInfo: boolean = true;

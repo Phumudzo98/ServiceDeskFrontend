@@ -318,11 +318,9 @@
     margin: 10px auto;
     padding: 10px 20px;
     height: auto;
-    width:auto;
-    margin-left: 350px;
+    width:45%;
     overflow-y: auto;
     margin-right: 5px;
-
   }
  
   .message-input{
@@ -374,6 +372,8 @@
     padding-right: 10px;
     border-radius: 50px;
   }
+ 
+
 
 
   
