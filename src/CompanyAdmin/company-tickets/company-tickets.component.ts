@@ -10,6 +10,7 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.css']
 })
+
 export class CompanyTicketsComponent implements OnInit {
   emailSuggestions: string[] = [];
   allEmails: string[] = [];
@@ -18,6 +19,7 @@ export class CompanyTicketsComponent implements OnInit {
   allAssignees: string[] = [];
 
   constructor(private http: HttpClient, private storage: StorageService) {}
+
 
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
@@ -260,8 +262,10 @@ export class CompanyTicketsComponent implements OnInit {
       this.currentPage--;
     }
   }
+
   
   empEmails:any=""
+
 
   getEmployeeAndAgent(){
 
