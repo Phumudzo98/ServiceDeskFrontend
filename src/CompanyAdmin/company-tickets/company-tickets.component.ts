@@ -11,9 +11,9 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
   styleUrls: ['./company-tickets.component.css']
 })
 export class CompanyTicketsComponent implements OnInit{
-
+  searchQuery: string = ''; // Define searchQuery property
   constructor(private http: HttpClient, private storage : StorageService){}
-
+  tickets: any[] = []; // Define the agents array to hold the data
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
 
@@ -169,7 +169,20 @@ export class CompanyTicketsComponent implements OnInit{
     }
   }
 
-  
+  performSearchOpenTicket(): void {
+    if (this.searchQuery.trim() === '') {
+      this.ngOnInit(); // Reset to show all agents if search query is empty
+ console.log(this.ngOnInit);
+      
+    } else {
+      this.tickets = this.tickets.filter(user =>
+        (user.priority && user.priority.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.description && user.description.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.category && user.category.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.statusAgent && user.statusAgent.toString().toLowerCase().includes(this.searchQuery.toLowerCase()))
+      );
+    }
+  }
  
 
 }
