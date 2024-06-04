@@ -17,6 +17,8 @@ export class CompanyTicketsComponent implements OnInit {
 
   assigneeSuggestions: string[] = [];
   allAssignees: string[] = [];
+  searchQuery: string = ''; // Define searchQuery property
+  tickets: any[]=[];
 
   constructor(private http: HttpClient, private storage: StorageService) {}
 
@@ -222,7 +224,7 @@ export class CompanyTicketsComponent implements OnInit {
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
-
+    this.tickets=this.tickets;
     this.getEmployeeAndAgent();
 
     let url: string = "http://localhost:8080/api/ticket/get-tickets/" + companyId;
@@ -260,6 +262,21 @@ export class CompanyTicketsComponent implements OnInit {
   previousPage() {
     if (this.currentPage > 0) {
       this.currentPage--;
+    }
+  }
+
+
+  performSearchOpenTicket(): void {
+    if (this.searchQuery.trim() === '') {
+      this.ngOnInit(); // Reset to show all agents if search query is empty
+ console.log(this.ngOnInit);
+      
+    } else {
+      this.tickets = this.tickets.filter(user =>
+        (user.priority && user.priority.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.description && user.description.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.category && user.category.toString().toLowerCase().includes(this.searchQuery.toLowerCase()))
+      );
     }
   }
 

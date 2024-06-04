@@ -27,7 +27,7 @@ export class UnresolvedComponent implements AfterViewInit {
   filteredDates: string[] = [];
   filteredTicketData: number[] = [];
 
-  private apiUrl = 'http://localhost:8080/api/ticket/tickets/progress';
+  private apiUrl = 'http://localhost:8080/api/ticket/tickets/resolved';
 
   constructor(private http: HttpClient) {}
 
