@@ -569,7 +569,7 @@ resetButtonText(agentIndex: number) {
   }
   performSearchUser(): void {
     if (this.searchQuery.trim() === '') {
-      this.getAllUsers(); // Reset to show all agents if search query is empty
+      this.getAllUsers(); // Reset to show all Users if search query is empty
     } else {
       this.users = this.users.filter(user =>
         (user.fullName && user.fullName.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||

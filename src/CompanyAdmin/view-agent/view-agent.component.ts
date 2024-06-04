@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Account } from 'src/app/utility/models/models';
 
 @Component({
   selector: 'app-view-agent',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ViewAgentComponent {
   agent: any;
   private apiUrl = 'http://localhost:8080/api/users/get-agent'; // Replace with your actual API endpoint
-
+  TicketUser: any; // Initialize as an array to store ticket objects
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient
@@ -31,6 +32,18 @@ export class ViewAgentComponent {
     this.http.get<any>(`${this.apiUrl}/${accountId}`).subscribe(
       data => {
         this.agent = data;
+      },
+      error => {
+        console.error('Error fetching agent data', error);
+      }
+    );
+  }
+
+  getUserTicket(accountId: string): void {
+    const url = `http://localhost:8080/api/ticket/get-user-tickets/${accountId}`;
+    this.http.get<any>(url).subscribe(
+      data => {
+        this.TicketUser = data;
       },
       error => {
         console.error('Error fetching agent data', error);
