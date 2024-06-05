@@ -106,7 +106,7 @@
                 <span class="ticket-header">{{ item.category }}</span>
                 <span class="form-header">
                   <!-- Ticket Date & View details -->
-                  {{ item.createdAt.substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
+                  {{item.createdAt.substring(0, 10) }} | <a [routerLink]="['/ticket-details-com', item.ticketId]">View</a>
                 </span>
               </div>
               <!-- Ticket Message -->
@@ -127,11 +127,6 @@
         </div>
         
         
-        
-
-
-
-      
         <!--InProgress Tickets-->
         <div class="row" *ngIf="currentForm === 'inprogress'" >
 
@@ -194,8 +189,6 @@
             </div>
             
           </div>
-  
-  
         </div>
 
         <!--Escalated tickets-->

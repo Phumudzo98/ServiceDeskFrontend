@@ -92,8 +92,8 @@
         <div class="card" style="width: 100%;margin-top:10px;">
           <div class="card-body">
             <p>Close Ticket</p>
-            <textarea placeholder="Type reason here"></textarea>
-            <button class="closeButton">Close</button>
+            <textarea [(ngModel)]="reason" placeholder="Type reason here"></textarea>
+            <button (click)="closeTicket()" class="closeButton">Close</button>
           
           </div>
         </div>

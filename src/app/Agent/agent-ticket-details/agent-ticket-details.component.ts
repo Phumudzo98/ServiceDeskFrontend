@@ -32,6 +32,7 @@ export class AgentTicketDetailsComponent implements OnInit {
   messages: RespondMessage[] = [];
   newMessage: string = '';
   accountId!:any;
+  reason = "";
 
   ngOnInit():void
   {
@@ -44,30 +45,6 @@ export class AgentTicketDetailsComponent implements OnInit {
   
         this.http.get<any>(url).subscribe(response => {
           this.dataArray = response;
-          console.log(this.dataArray);
-          
-          let url2="http://localhost:8080/api/ticket/update-ticket";
-          if(response.status=="Open")
-            {
-              const ticketUpdate={
-                "ticketId":this.ticketId,
-                "status":"In progress",
-                "updateMessage":"",
-                "escalatedToAgentId":""
-              }
-
-              this.http.put<any>(url2, ticketUpdate).subscribe(response=>{
-
-                console.log(response);
-                
-              },error=>{
-                console.log(response);
-                
-              }
-            )
-
-            }
-
         }, error => {
           console.log("Something went wrong");
         });
@@ -102,9 +79,9 @@ export class AgentTicketDetailsComponent implements OnInit {
 
       mesg.sort((a, b) => (a.timestamp > b.timestamp) ? 1 : -1);
       this.messageList = of(mesg);
-      this.messages = mesg; // Add sorted messages to the messages array
+      this.messages = mesg; 
 
-      console.log("Here", mesg);
+      
     });
   }
 
@@ -136,6 +113,32 @@ export class AgentTicketDetailsComponent implements OnInit {
 
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
+  }
+
+  closeTicket()
+  {
+
+
+
+
+    let url ="http://localhost:8080/api/ticket/update-ticket"
+
+    const ticketUpdate=
+    {
+      "ticketId":this.ticketId,
+      "status":"Closed",
+      "updateMessage":this.reason,
+      "escalatedToAgentId":""
+    }
+
+    this.http.put(url,ticketUpdate).subscribe(response=>
+      {
+        console.log(response);
+      },error=>{
+        console.log(error);
+      }
+    )
+
   }
 
  
