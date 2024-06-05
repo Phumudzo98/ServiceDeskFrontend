@@ -159,18 +159,30 @@ export class AgentTicketDetailsComponent implements OnInit {
       this.escalateSpinner = false;
       this.formSubmitted = true; 
       this.successMessage = 'Ticket escalated successfully!';
+  
+      // Disappear message after 2 seconds
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 2000);
+  
     }, 3000);
   }
-
+  
   closeTicket() {
     this.closeSpinner = true;
     setTimeout(() => {
       this.closeSpinner = false;
       this.formSubmitted = true;
       this.successMessage = 'Ticket closed successfully!';
+  
+      // Disappear message after 2 seconds
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 2000);
+  
     }, 3000);
   }
-
+  
  
 
   get close (){return this.closeForm.controls;}

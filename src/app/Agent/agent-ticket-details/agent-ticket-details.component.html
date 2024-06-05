@@ -141,10 +141,8 @@
         </div>
         </div>
 
-        <div *ngIf="formSubmitted">
-          <div class="card" style="width: 100%;margin-top:10px;"> 
-          <p class="alert alert-success" style="width: 100%">{{ successMessage }}</p>
-          </div>
+        <div *ngIf="formSubmitted" style="margin-top: 15px;">
+          <p class="success" style="width: 100%">{{ successMessage }}</p>
         </div>
 
       
