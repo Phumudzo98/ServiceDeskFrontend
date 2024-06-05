@@ -444,6 +444,39 @@ border-radius: 50px;}
   .success{
     color:#03781D;
   }
+  #inprogress
+{
+color:#e47200;
+background-color: rgba(241, 238, 142, 0.5);
+border: 2px solid #ffff00;
+border-radius: 50px;
+margin-left: 10px;
+
+}
+
+#statusID{
+  color:#03781D;
+  background-color: #F0F9F2;
+  border: 2px solid #6DC580;
+  padding-right: 10px;
+  border-radius: 50px;
+  margin-bottom: 10px;}
+  
+  #escalated{
+    color:#ff7420;
+    background-color: rgba(255, 116, 32, 0.1);
+    border: 2px solid rgba(255, 116, 32, 0.5);
+      padding-right: 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;}
+  
+  
+  #priorityID{
+  color:#BA1717;
+  background-color: #F9F2F2;
+  border: 2px solid #E2A1A1;
+  border-radius: 50px;
+  }
   
  
 
