@@ -27,7 +27,7 @@ export class CompanyTicketsComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
 
   ticketForm: FormGroup = new FormGroup({
-    assignee: new FormControl('', [Validators.required]),
+     //assignee: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     category: new FormControl('', [Validators.required]),
     ticketBody: new FormControl('', [Validators.required]),
