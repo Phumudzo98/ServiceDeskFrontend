@@ -30,7 +30,6 @@ import { CompanyChangePasswordComponent } from '../CompanyAdmin/company-change-p
 import { CompanyRegisterComponent } from '../CompanyAdmin/company-register/company-register.component';
 import { CompanyFgtPasswordComponent } from '../CompanyAdmin/company-fgt-password/company-fgt-password.component';
 import { HomeComponent } from './Single Page/home/home.component';
-import { CompanySubscriptionsComponent } from 'src/CompanyAdmin/company-subscriptions/company-subscriptions.component';
 import { CompanyTicketDetailsComponent } from 'src/CompanyAdmin/company-ticket-details/company-ticket-details.component';
 import { AdminChangePasswordComponent } from './Super-Admin/admin-change-password/admin-change-password.component';
 import { EmployeeChangePasswordComponent } from './Employee/employee-change-password/employee-change-password.component';
@@ -41,6 +40,7 @@ import { AgentTicketsComponent } from './Agent/agent-tickets/agent-tickets.compo
 import { AgentLoginComponent } from './Agent/agent-login/agent-login.component';
 import { AgentForgotPasswordComponent } from './Agent/agent-forgot-password/agent-forgot-password.component';
 import { AgentChangePasswordComponent } from './Agent/agent-change-password/agent-change-password.component';
+import { CompanySubscriptionComponent } from 'src/CompanyAdmin/company-subscription/company-subscription.component';
 
 
 const routes: Routes = [
@@ -87,7 +87,7 @@ const routes: Routes = [
   {path:"change-password",component: CompanyChangePasswordComponent},
   {path:"forget-password",component: CompanyFgtPasswordComponent},
   {path: "", component: HomeComponent},
-  {path:"company-subscription", component: CompanySubscriptionsComponent,canActivate: [AuthGuard]},
+ {path:"company-subscription", component: CompanySubscriptionComponent,canActivate: [AuthGuard]},
   {path: "ticket-details-com/:ticketId", component: CompanyTicketDetailsComponent,canActivate: [AuthGuard]}
 
 ];

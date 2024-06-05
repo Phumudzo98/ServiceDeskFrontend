@@ -1,3 +1,13 @@
+.content {
+    margin-left: 250px; /* Same as the width of the sidebar */
+    padding: 20px;
+    width: calc(100% - 250px); /* Calculate width to fill remaining space */
+    height: 100vh; /* Calculate height to fill remaining space */
+    background-color: #F9F9FB;
+    }
+
+    
+
 
   
     .closeButton
@@ -18,7 +28,7 @@
       color: #0FB967;
     }
   
-  .borderless-table {
+  .borderless-table1 {
       border-collapse: collapse;
       margin-top: 15px; 
       margin-bottom: 15px;
@@ -30,8 +40,8 @@
       margin-top: 50px;
 
   }
-  .borderless-table th,
-  .borderless-table td {
+  .borderless-table1 th,
+  .borderless-table1 td {
       text-align: center; /* Align content in the center */
       padding: 8px; /* Add padding for better spacing */
       border-bottom:1px solid #E2E3E9;
@@ -75,27 +85,7 @@
           border: 1px solid #FFC145;
           padding: none;
           border-radius: 4px;
-  
-  
   }
-  
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-    
-     
-      
-    
-    
-    
+  .downgrade-button{
+    width: auto;
+  }

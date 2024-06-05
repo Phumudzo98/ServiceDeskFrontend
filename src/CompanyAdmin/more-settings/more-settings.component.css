@@ -7,10 +7,15 @@
     
     form {
       word-wrap: break-word;
-  
+    }
+    .content {
+      margin-left: 250px; 
+      padding: 20px 0; 
+      width: calc(100% - 250px); 
+      min-height: 100vh; /* Ensure the content fills the entire height of the viewport */
+      font-family: 'Poppins';
     }
     input,
-    
     select {
       background: white;
       border: none;
@@ -150,6 +155,13 @@
     margin-bottom: 10px;
     margin-top: 5px;
     width: 800px;
+}
+
+.closeButton1
+{
+ 
+    width: 100px;
+  
 }
 
 
@@ -318,7 +330,56 @@ td {
 {
   margin-bottom: 25px;
 }
+.borderless-table1 {
+  border-collapse: collapse;
+  margin: 15px 0; 
+  width: 100%;
+  padding: 50px;
+}
 
+.borderless-table1 th,
+.borderless-table1 td {
+  text-align: center; /* Align content in the center */
+  padding: 8px; /* Add padding for better spacing */
+  border-bottom: 1px solid #E2E3E9;
+  border-top: 0px;
+  border-left: none;
+  border-right: none;
+}
+
+.borderless-table1 th {
+  height: 60px;
+  background-color: #F1F0FE;
+}
+
+.borderless-table1 td {
+  height: 60px;
+  text-align: center;
+  padding: 8px; /* Add padding for better spacing */
+  word-wrap: break-word;
+}
+.edit{
+  color: #fff;
+      background-color: #3818D9;
+      font-style: normal;
+      height: 40px;
+      width: 100px;
+      border: 1px solid #3818D9;
+      padding: none;
+      border-radius: 4px;
+}
+
+.cancel{
+  color: #fff;
+      background-color: #FFC145;
+      font-style: normal;
+      height: 40px;
+      width: 85px;
+      margin-left: 15px;
+      border: 1px solid #FFC145;
+      padding: none;
+      border-radius: 4px;
+}
 
 
 

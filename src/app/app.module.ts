@@ -64,7 +64,6 @@ import { AdminTopMenuComponent } from '../assets/Top Menus/admin-top-menu/admin-
 import { EmployeeSidebarComponent } from './Employee/employee-sidebar/employee-sidebar.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { HomeComponent } from './Single Page/home/home.component';
-import { CompanySubscriptionsComponent } from 'src/CompanyAdmin/company-subscriptions/company-subscriptions.component';
 import { CompanyTicketDetailsComponent } from '../CompanyAdmin/company-ticket-details/company-ticket-details.component';
 import { AdminChangePasswordComponent } from './Super-Admin/admin-change-password/admin-change-password.component';
 import { EmployeeChangePasswordComponent } from './Employee/employee-change-password/employee-change-password.component';
@@ -80,6 +79,7 @@ import { AgentForgotPasswordComponent } from './Agent/agent-forgot-password/agen
 import { AgentChangePasswordComponent } from './Agent/agent-change-password/agent-change-password.component';
 import { AgentSidebarComponent } from './Agent/agent-sidebar/agent-sidebar.component';
 import { AgentTopMenuComponent } from '../assets/Top Menus/agent-top-menu/agent-top-menu.component';
+import { CompanySubscriptionComponent } from '../CompanyAdmin/company-subscription/company-subscription.component';
 
 
 
@@ -133,7 +133,6 @@ import { AgentTopMenuComponent } from '../assets/Top Menus/agent-top-menu/agent-
     EmployeeSidebarComponent,
     NotificationsComponent,
     HomeComponent,
-    CompanySubscriptionsComponent,
     CompanyTicketDetailsComponent,
     AdminChangePasswordComponent,
     EmployeeChangePasswordComponent,
@@ -149,6 +148,7 @@ import { AgentTopMenuComponent } from '../assets/Top Menus/agent-top-menu/agent-
     AgentChangePasswordComponent,
     AgentSidebarComponent,
     AgentTopMenuComponent,
+    CompanySubscriptionComponent,
 
   ],
   imports: [

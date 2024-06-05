@@ -1,15 +1,17 @@
+
+
 <app-sidebar></app-sidebar>
 <app-employee-top-menu></app-employee-top-menu> 
   
   <div class="content">
 
     <div class="content-wrapper">
-                    <h2><strong>Subscriptions</strong></h2>
+                    <h2><strong>Licence</strong></h2>
             <hr/>
             <!--If the current package is Free-->
             <div *ngIf="currentPackage===packageFree">
                 <p>Your current package: {{packageFree}}</p>
-                <table class="borderless-table">
+                <table class="borderless-table1">
                   
                     <tbody>
                         <tr>
@@ -43,7 +45,7 @@
               <div *ngIf="currentPackage===packageEssentials">
                 <p>Your current package: {{packageEssentials}}</p>
                 <p>You can upgrade: </p>
-                <table class="borderless-table">
+                <table class="borderless-table1">
                   
                     <tbody>
                         <tr>
@@ -51,7 +53,7 @@
                             <td>Free</td>
                             <td>10 - 10- 2023</td>
                             <td class="active-status">Active</td>
-                            <td><button class="closeButton" >Downgrade</button></td>
+                            <td><button class="closeButton downgrade-button" >Downgrade</button></td>
                         </tr>
                         <tr>
                             <td>2</td>
@@ -76,7 +78,7 @@
              <!--If the current package is Team-->
              <div *ngIf="currentPackage===packageTeam">
                 <p>Your current package: {{packageTeam}}</p>
-                <table class="borderless-table">
+                <table class="borderless-table1">
                   
                     <tbody>
                         <tr>
@@ -84,14 +86,14 @@
                             <td>Free</td>
                             <td>10 - 10- 2023</td>
                             <td class="active-status">Active</td>
-                            <td><button class="closeButton" >Downgrade</button></td>
+                            <td><button class="closeButton downgrade-button" >Downgrade</button></td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Essentials</td>
                             <td>10 - 10- 2023</td>
                             <td class="active-status">Active</td>
-                            <td><button class="closeButton" >Downgrade</button></td>
+                            <td><button class="closeButton downgrade-button" >Downgrade</button></td>
                         </tr>
                         <tr>
                             <td>3</td>
@@ -109,7 +111,7 @@
              <!--If the current package is Enterprise-->
              <div *ngIf="currentPackage===packageEnterprise">
                 <p>Your current package: {{packageEnterprise}}</p>
-                <table class="borderless-table">
+                <table class="borderless-table1">
                   
                     <tbody>
                         <tr>
@@ -117,31 +119,31 @@
                             <td>Free</td>
                             <td>10 - 10- 2023</td>
                             <td class="active-status">Active</td>
-                            <td><button class="closeButton" >Downgrade</button></td>
+                            <td><button class="closeButton downgrade-button" >Downgrade</button></td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Essentials</td>
                             <td>10 - 10- 2023</td>
                             <td class="active-status">Active</td>
-                            <td><button class="closeButton" >Downgrade</button></td>
+                            <td><button class="closeButton downgrade-button" >Downgrade</button></td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>Team</td>
                             <td>10 - 10- 2023</td>
                             <td class="active-status">Active</td>
-                            <td><button class="closeButton" >Downgrade</button></td>
+                            <td><button class="closeButton downgrade-button" >Downgrade</button></td>
                         </tr>
                     </tbody>
                 </table>
-
-    
             </div>
-       
+            <button class="closeButton " routerLink="/more-settings">Close</button>
+
         </div>
 
         
        
  </div>
 
+  
