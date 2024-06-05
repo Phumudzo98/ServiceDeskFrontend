@@ -76,6 +76,8 @@ export class AgentTicketsComponent implements OnInit{
     this.http.get<any[]>(baseUrl+agentId).subscribe(data=>
       {
         this.dataArray=data;
+        
+        
       },
       error=>
       {

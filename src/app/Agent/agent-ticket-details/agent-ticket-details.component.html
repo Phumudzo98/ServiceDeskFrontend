@@ -144,7 +144,7 @@
         <div class="card" style="width: 100%;margin-top:10px;">
           <div class="card-body">
             <h6>Close Ticket</h6>
-            <form [formGroup]="closeForm" style="width:100%">
+            <form [formGroup]="closeForm" (submit)="closeTicket()" style="width:100%">
             <textarea  formControlName="closeReason" placeholder="Type reason here"></textarea>
              <!--Validations-->
              <div
@@ -152,7 +152,7 @@
              class="alert alert-danger" >  
              <span *ngIf="close['closeReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
              </div>
-            <button type="submit"class="closeButton buttonRight"[disabled]="closeForm.invalid || closeSpinner" (click)="closeTicket()">
+            <button type="submit" class="closeButton buttonRight"[disabled]="closeForm.invalid || closeSpinner" (click)="closeTicket()">
               <span *ngIf="!closeSpinner">Close</span>
               <div *ngIf="closeSpinner" class="spinner"></div>
               </button>

@@ -197,7 +197,6 @@ export class CompanyTicketsComponent implements OnInit {
                   {
                     console.log(error);
                   }
-                
               )
            }
 
@@ -207,7 +206,6 @@ export class CompanyTicketsComponent implements OnInit {
         }
         
       )
-
     }
   }
 
@@ -268,7 +266,7 @@ export class CompanyTicketsComponent implements OnInit {
   performSearchOpenTicket(): void {
     if (this.searchQuery.trim() === '') {
       this.ngOnInit(); // Reset to show all agents if search query is empty
- console.log(this.ngOnInit);
+        console.log(this.ngOnInit);
       
     } else {
       this.tickets = this.tickets.filter(user =>
@@ -279,9 +277,7 @@ export class CompanyTicketsComponent implements OnInit {
     }
   }
 
-  
   empEmails:any=""
-
 
   getEmployeeAndAgent(){
 
@@ -300,9 +296,7 @@ export class CompanyTicketsComponent implements OnInit {
 
     this.http.post<[]>(url,searchEmployee).subscribe(response=>{
 
-      //console.log(response);
       this.allEmails=response;
-      //console.log(this.allEmails);
       
     },error=>{
       console.log(error);
