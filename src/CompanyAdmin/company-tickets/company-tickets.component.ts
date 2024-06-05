@@ -265,7 +265,6 @@ export class CompanyTicketsComponent implements OnInit {
     }
   }
 
-
   performSearchOpenTicket(): void {
     if (this.searchQuery.trim() === '') {
       this.ngOnInit(); // Reset to show all agents if search query is empty
