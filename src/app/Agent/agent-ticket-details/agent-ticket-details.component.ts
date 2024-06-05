@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import jwtDecode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from 'src/app/utility/services/Storage/storage.service';
@@ -17,8 +17,18 @@ import * as SockJS from 'sockjs-client';
 export class AgentTicketDetailsComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private storage: StorageService, private route: ActivatedRoute, private token: StorageService) { }
 
-  //Button to select
+  //Escalate form
+  escalateForm: FormGroup = new FormGroup({
+    escalatedTo: new FormControl('', [Validators.required]),
+    escalateReason: new FormControl('', [Validators.required]),
+  })
 
+  //closeForm
+  closeForm: FormGroup = new FormGroup({
+    closeReason: new FormControl('',[Validators.required])
+  })
+
+  //Button to select
   onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
     //console.log(selectedFile); Do something with the selected file
@@ -137,6 +147,34 @@ export class AgentTicketDetailsComponent implements OnInit {
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
+  escalateSpinner: boolean = false;
+  closeSpinner: boolean = false;
+  successMessage: string = '';
+  formSubmitted: boolean = false; 
+
+ 
+  escalateTicket() {
+    this.escalateSpinner = true;
+    setTimeout(() => {
+      this.escalateSpinner = false;
+      this.formSubmitted = true; 
+      this.successMessage = 'Ticket escalated successfully!';
+    }, 3000);
+  }
+
+  closeTicket() {
+    this.closeSpinner = true;
+    setTimeout(() => {
+      this.closeSpinner = false;
+      this.formSubmitted = true;
+      this.successMessage = 'Ticket closed successfully!';
+    }, 3000);
+  }
+
+ 
+
+  get close (){return this.closeForm.controls;}
+  get escalate (){return this.escalateForm.controls;}
 
  
 
