@@ -10,19 +10,18 @@ import { StorageService } from 'src/app/utility/services/Storage/storage.service
   templateUrl: './company-tickets.component.html',
   styleUrls: ['./company-tickets.component.css']
 })
+
 export class CompanyTicketsComponent implements OnInit {
   emailSuggestions: string[] = [];
-  
-  allEmails: string[] = [
-    'alicia@gmail.com', 'mkay@gmail.com', 'phumu@gmail.com', 'evanga@gmail.com', 'elelwani@gmail.com', 'ewe@yahoo.com'
-  ];
+  allEmails: string[] = [];
 
   assigneeSuggestions: string[] = [];
-  allAssignees: string[] = [
-    'Mufamadi Mk', 'Khoza Nh', 'Tshivhase P', 'Tshivhase G', 'Unnamed', 'Unnamed'
-  ];
+  allAssignees: string[] = [];
+  searchQuery: string = ''; // Define searchQuery property
+  tickets: any[]=[];
 
   constructor(private http: HttpClient, private storage: StorageService) {}
+
 
   @Input() message: string = '';
   @Output() close = new EventEmitter<void>();
@@ -167,6 +166,48 @@ export class CompanyTicketsComponent implements OnInit {
           this.successMessage = '';
         }, 3000);
       }, 3000);
+
+    const token = this.storage.getUser();
+    const decodedToken: any = jwtDecode(token);
+    const companyId = decodedToken.companyId;
+
+      let urlId:string ="http://localhost:8080/api/company/get-user-id";
+      let userEmail=this.ticketForm.get('email')?.value;
+
+      this.http.post<any>(urlId,userEmail).subscribe(response=>
+        {
+          console.log(response);
+
+          let ticketDetail=
+          {
+            "category":this.ticketForm.get('category')?.value,
+            "description":this.ticketForm.get('ticketBody')?.value,
+            "customerUserId":response
+          }
+          
+          if(response!=null)
+            {
+              let addTicketUrl="http://localhost:8080/api/ticket/request-service/"+companyId;
+
+              this.http.post<any>(addTicketUrl,ticketDetail).subscribe(response=>
+                {
+                  console.log(response);
+                },
+                error=>
+                  {
+                    console.log(error);
+                  }
+                
+              )
+           }
+
+        },error=>
+        {
+          console.log("Check if email is correct");
+        }
+        
+      )
+
     }
   }
 
@@ -183,8 +224,8 @@ export class CompanyTicketsComponent implements OnInit {
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
-
-    this.getEmployee();
+    this.tickets=this.tickets;
+    this.getEmployeeAndAgent();
 
     let url: string = "http://localhost:8080/api/ticket/get-tickets/" + companyId;
 
@@ -224,34 +265,65 @@ export class CompanyTicketsComponent implements OnInit {
     }
   }
 
-  empEmails:any="";
 
-  getEmployee(){
+  performSearchOpenTicket(): void {
+    if (this.searchQuery.trim() === '') {
+      this.ngOnInit(); // Reset to show all agents if search query is empty
+ console.log(this.ngOnInit);
+      
+    } else {
+      this.tickets = this.tickets.filter(user =>
+        (user.priority && user.priority.toString().toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.description && user.description.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
+        (user.category && user.category.toString().toLowerCase().includes(this.searchQuery.toLowerCase()))
+      );
+    }
+  }
+
+  
+  empEmails:any=""
+
+
+  getEmployeeAndAgent(){
 
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyId = decodedToken.companyId;
 
     let url = "http://localhost:8080/api/company/get-user-email";
+    let url2 ="http://localhost:8080/api/company/get-agent-email";
 
     let searchEmployee=
     {
-      "search":this.ticketForm.get("email")?.value,
+      "search":"",
       "companyID":companyId
     }
 
     this.http.post<[]>(url,searchEmployee).subscribe(response=>{
 
-      this.empEmails=response;
-
-      //this.allEmails=this.empEmails.map(account =>account.email)
-
+      //console.log(response);
+      this.allEmails=response;
+      //console.log(this.allEmails);
       
     },error=>{
       console.log(error);
       
     })
 
+    let searchAgent=
+    {
+      "search":"",
+      "companyID":companyId
+    }
 
+    this.http.post<[]>(url2,searchAgent).subscribe(response=>{
+
+      //console.log(response);
+      this.allAssignees=response;
+      
+    },error=>{
+      console.log(error);
+      
+    })
   }
 }

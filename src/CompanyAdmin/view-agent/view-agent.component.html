@@ -3,7 +3,7 @@
 <div class="content">
     
 
-    <div class="content-wrapper">        <h2 class="agents-name"><strong>Agent's Name</strong></h2>
+    <div class="content-wrapper">        <h2 class="agents-name"><strong>{{ agent.fullName + ' ' + agent.lastName }}</strong></h2>
         <hr/>
     <div class="row">  
         <div class="col-4">
@@ -72,14 +72,14 @@
                             </div>
             
                             <br>
+                            
                             <div class="col">
-                                <p class="form-header" style="margin-bottom: 5px; margin-top: 20px;">0000</p>
-                                <p class="form-header" id="bottomParts">0000</p>        
-                                <p class="form-header" id="bottomParts">0000</p>
+                                <p class="form-header" style="margin-bottom: 5px; margin-top: 20px;">{{closedTicketCount}}</p>
+                                <p class="form-header" id="bottomParts">{{ openTicketCount }}</p>        
+                                <p class="form-header" id="bottomParts">{{inProgressTicketCount}}</p>
                                 <p class="form-header" id="bottomParts">0000 </p> 
  
-                            </div>
-            
+                        </div>
                         </div>
 
                     
