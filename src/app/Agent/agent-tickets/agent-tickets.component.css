@@ -672,8 +672,19 @@ margin-left: 25px;
   margin-left: 25px;
   margin-bottom: 10px;
   font-style: normal;
-
-  }
+}
+.alert {
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  width: 100%;
+}
+.success {
+  background-color: #d4edda; 
+  border: 1px solid #c3e6cb; 
+  color: #155724; 
+}
 
 
 
