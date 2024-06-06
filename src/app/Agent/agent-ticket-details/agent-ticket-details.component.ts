@@ -175,6 +175,9 @@ export class AgentTicketDetailsComponent implements OnInit {
       {
         if(response!=null)
           {
+
+            console.log(response);
+            
             const ticketUpdate=
             {
               "ticketId":this.ticketId,
@@ -186,6 +189,7 @@ export class AgentTicketDetailsComponent implements OnInit {
             this.http.put(urlUpdate,ticketUpdate).subscribe(response=>
               {
                 console.log(response);
+                location.reload();
               },
               error=>
                 {
