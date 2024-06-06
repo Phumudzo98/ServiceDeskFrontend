@@ -65,7 +65,6 @@ export class CompanyLoginComponent {
 
             if(response==null)
               {
-
                 console.log("No active subscription");
                 
                 this.router.navigate(["/company-login"])

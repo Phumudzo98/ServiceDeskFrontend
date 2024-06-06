@@ -94,7 +94,7 @@
         <div class="card" style="width: 100%;margin-top:10px;">
           <div class="card-body">
             <h6>Escalate Ticket</h6>
-            <form [formGroup]="escalateForm">
+            <form [formGroup]="escalateForm" (submit)="escalateTicket()">
             <input formControlName="escalatedTo" name="name" class="escalate-input" placeholder="Escalate Ticket to" (input)="onEmailInput()" >
             <!-- Dropdown for email suggestions -->
             <ul *ngIf="emailSuggestions.length > 0" class="list-group">

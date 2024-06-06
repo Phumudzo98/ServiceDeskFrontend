@@ -65,8 +65,9 @@ export class AgentLoginComponent {
    
                    console.log("No active subscription");
                    
-                   this.router.navigate(["/agent-login"])
-                   this.storageService.clean();
+                   //this.router.navigate(["/agent-login"])
+                   //this.storageService.clean();
+                   this.router.navigate(['/agent-tickets']);
                  }
                  else{
                   this.router.navigate(['/agent-tickets']);
