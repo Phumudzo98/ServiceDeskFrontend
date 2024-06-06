@@ -454,13 +454,7 @@ margin-left: 10px;
 
 }
 
-#statusID{
-  color:#03781D;
-  background-color: #F0F9F2;
-  border: 2px solid #6DC580;
-  padding-right: 10px;
-  border-radius: 50px;
-  margin-bottom: 10px;}
+
   
   #escalated{
     color:#ff7420;
@@ -477,6 +471,27 @@ margin-left: 10px;
   border: 2px solid #E2A1A1;
   border-radius: 50px;
   }
+  .list-group {
+    background-color: #f8f9fa; 
+    border-radius: 0.25rem; 
+    max-height: 80px; 
+    overflow-y: auto;
+    margin-top: 5px; 
+    list-style: none; 
+  }
+  
+  .list-group .list-group-item {
+    padding: 10px;
+    cursor: pointer; 
+    font-size: 14px;
+    background-color: transparent; 
+    border: none; 
+  }
+  
+  .list-group .list-group-item:hover {
+    font-weight: 600;
+  }
+  
   
  
 
