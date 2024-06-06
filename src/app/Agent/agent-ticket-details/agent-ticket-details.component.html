@@ -23,12 +23,7 @@
               <div style="display: flex; margin-left: auto;">
                 <p class="form-header badge badge-secondary" id="ticketID">{{ticketId}}</p>
                 <p class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</p>
-                <div *ngIf="dataArray.status === 'open'">
                 <p class="form-header badge badge-success" id="statusID">{{dataArray.status}}</p>
-              </div>
-              <div *ngIf="dataArray.status === 'In progress'">
-                <p class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</p>
-              </div>
               </div>
             </div>
             <!-- <hr/> -->
@@ -86,22 +81,8 @@
               <div class="col">
               <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
               <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
-              <!--Status styling-->
-              <div *ngIf="dataArray.status === 'open'">
-                <p class="form-header"><span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
-              </div>
-              <!--In Progress-->
-              <div *ngIf="dataArray.status === 'In progress'">
-                <p class="form-header">Status:<span class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</span></p>
-              </div>
-              <!--closed-->
-              <div *ngIf="dataArray.status === 'closed'">
-                <p class="form-header">Status:<span class="form-header badge badge-danger" id="priorityID">{{dataArray.status}}</span></p>
-              </div>
-              <!--Escalated-->
-              <div *ngIf="dataArray.status === 'escalated'">
-                <p class="form-header">Status:<span class="form-header badge badge-success" id="escalated">{{dataArray.status}}</span></p>
-              </div>
+              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
+
               <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
               <hr/>
             </div>
@@ -114,7 +95,13 @@
           <div class="card-body">
             <h6>Escalate Ticket</h6>
             <form [formGroup]="escalateForm">
-            <input formControlName="escalatedTo" name="name" class="escalate-input" placeholder="Escalate Ticket to" >
+            <input formControlName="escalatedTo" name="name" class="escalate-input" placeholder="Escalate Ticket to" (input)="onEmailInput()" >
+            <!-- Dropdown for email suggestions -->
+            <ul *ngIf="emailSuggestions.length > 0" class="list-group">
+              <li *ngFor="let escalatedTo of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(escalatedTo)">
+                {{ i + 1 }}. {{ escalatedTo }}
+              </li>
+            </ul>
 
              <!--Validations-->
              <div

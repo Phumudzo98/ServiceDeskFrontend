@@ -16,7 +16,10 @@ import * as SockJS from 'sockjs-client';
 })
 export class AgentTicketDetailsComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private storage: StorageService, private route: ActivatedRoute, private token: StorageService) { }
+  emailSuggestions: string[] = [];
+  allEmails: string[] = ["Phumudzo Tshivhase", "Phil Foden", "M Salah", "S Mane", "S Leroy"]; 
 
+  
   //Escalate form
   escalateForm: FormGroup = new FormGroup({
     escalatedTo: new FormControl('', [Validators.required]),
@@ -115,6 +118,26 @@ export class AgentTicketDetailsComponent implements OnInit {
     this.newMessage = "";
   }
 
+    // Email suggestion handling
+    onEmailInput(): void {
+      const emailControl = this.escalateForm.get('escalatedTo');
+      if (emailControl) {
+        const query = emailControl.value;
+        if (query.length > 0) {
+          this.emailSuggestions = this.allEmails.filter(escalatedTo =>
+            escalatedTo.toLowerCase().startsWith(query.toLowerCase())
+          );
+        } else {
+          this.emailSuggestions = [];
+        }
+      }
+    }
+  
+    onSelectSuggestion(escalatedTo: string): void {
+      this.escalateForm.get('escalatedTo')?.setValue(escalatedTo);
+      this.emailSuggestions = [];
+    }
+
   isCloseTicketFormVisible = false;
 
   showDropdown: boolean = false;
@@ -145,37 +168,35 @@ export class AgentTicketDetailsComponent implements OnInit {
   
   closeTicket() {
     this.closeSpinner = true;
+
     setTimeout(() => {
       this.closeSpinner = false;
       this.formSubmitted = true;
       this.successMessage = 'Ticket closed successfully!';
-  
+
       // Disappear message after 2 seconds
       setTimeout(() => {
         this.successMessage = '';
+        // Navigate to agent-tickets after the message disappears
+        this.router.navigate(['/agent-tickets']);
       }, 2000);
-  
+
     }, 3000);
 
-      let url ="http://localhost:8080/api/ticket/update-ticket"
+    let url = "http://localhost:8080/api/ticket/update-ticket";
+    const ticketUpdate = {
+      ticketId: this.ticketId,
+      status: "Closed",
+      updateMessage: this.closeForm.value.closeReason,
+      escalatedToAgentId: ""
+    };
 
-      const ticketUpdate=
-      {
-        "ticketId":this.ticketId,
-        "status":"Closed",
-        "updateMessage":this.closeForm.value.closeReason,
-        "escalatedToAgentId":""
-      }
-
-      this.http.put(url,ticketUpdate).subscribe(response=>
-        {
-          console.log(response);
-        },error=>{
-          console.log(error);
-        }
-      )
-
-    }
+    this.http.put(url, ticketUpdate).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
+  }
 
   get close (){return this.closeForm.controls;}
   get escalate (){return this.escalateForm.controls;}
