@@ -286,7 +286,7 @@ export class CompanyTicketsComponent implements OnInit {
     const companyId = decodedToken.companyId;
 
     let url = "http://localhost:8080/api/company/get-user-email";
-    let url2 ="http://localhost:8080/api/company/get-agent-email";
+    
 
     let searchEmployee=
     {
@@ -303,20 +303,20 @@ export class CompanyTicketsComponent implements OnInit {
       
     })
 
-    let searchAgent=
-    {
-      "search":"",
-      "companyID":companyId
-    }
+    // let searchAgent=
+    // {
+    //   "search":"",
+    //   "companyID":companyId
+    // }
 
-    this.http.post<[]>(url2,searchAgent).subscribe(response=>{
+    // this.http.post<[]>(url2,searchAgent).subscribe(response=>{
 
-      //console.log(response);
-      this.allAssignees=response;
+    //   //console.log(response);
+    //   this.allAssignees=response;
       
-    },error=>{
-      console.log(error);
+    // },error=>{
+    //   console.log(error);
       
-    })
+    // })
   }
 }

@@ -17,7 +17,7 @@ import * as SockJS from 'sockjs-client';
 export class AgentTicketDetailsComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private storage: StorageService, private route: ActivatedRoute, private token: StorageService) { }
   emailSuggestions: string[] = [];
-  allEmails: string[] = ["Phumudzo Tshivhase", "Phil Foden", "M Salah", "S Mane", "S Leroy"]; 
+  allEmails: string[] = []; 
 
   
   //Escalate form
@@ -64,6 +64,7 @@ export class AgentTicketDetailsComponent implements OnInit {
       });
   
       this.connect();
+      this.getAllAgents();
   }
 
   private connect(): void {
@@ -140,8 +141,6 @@ export class AgentTicketDetailsComponent implements OnInit {
 
   isCloseTicketFormVisible = false;
 
-  
-
   showDropdown: boolean = false;
 
   toggleDropdown() {
@@ -166,6 +165,61 @@ export class AgentTicketDetailsComponent implements OnInit {
       }, 2000);
   
     }, 3000);
+
+    let url = "http://localhost:8080/api/company/get-agent-id";
+    let urlUpdate ="http://localhost:8080/api/ticket/update-ticket"
+
+    let agentEmail=this.escalateForm.get('escalatedTo')?.value
+
+    this.http.post(url,agentEmail).subscribe(response=>
+      {
+        if(response!=null)
+          {
+            const ticketUpdate=
+            {
+              "ticketId":this.ticketId,
+              "status":"Escalate",
+              "updateMessage":this.escalateForm.get('escalatedReason')?.value,
+              "escalatedToAgentId":response
+            }
+
+            this.http.put(urlUpdate,ticketUpdate).subscribe(response=>
+              {
+                console.log(response);
+              },
+              error=>
+                {
+                  console.log(error);
+                }
+            )
+
+          }
+      }
+    )
+  }
+
+  getAllAgents()
+  {
+    let getUserToken = this.token.getUser();
+    let getUserId: any = jwtDecode(getUserToken);
+    let companyId=getUserId.companyId
+
+    let url ="http://localhost:8080/api/company/get-agent-email"
+
+    const searchAgent=
+    {
+      "search":"",
+      "companyID":companyId
+    }
+      this.http.post<[]>(url,searchAgent).subscribe(response=>{
+        
+        this.allEmails=response;
+        
+      },error=>
+      {
+        console.log(error);
+        
+      })
   }
   
   closeTicket() {
@@ -199,6 +253,8 @@ export class AgentTicketDetailsComponent implements OnInit {
       console.log(error);
     });
   }
+
+  
 
   get close (){return this.closeForm.controls;}
   get escalate (){return this.escalateForm.controls;}
