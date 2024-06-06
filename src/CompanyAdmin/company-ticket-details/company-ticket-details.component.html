@@ -23,7 +23,23 @@
               <div style="display: flex; margin-left: auto;">
                 <p class="form-header badge badge-secondary" id="ticketID">{{ticketId}}</p>
                 <p class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</p>
-                <p class="form-header badge badge-success" id="statusID">{{dataArray.status}}</p>
+                 <!--Styling the status-->
+                 <div *ngIf="dataArray.status === 'Open'">
+                  <p class="form-header"><span class="form-header badge badge-danger" id="statusID">{{dataArray.status}}</span></p>
+                </div>
+              <!--In Progress-->
+              <div *ngIf="dataArray.status === 'In progress'">
+                <p class="form-header"><span class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</span></p>
+              </div>
+              <!--closed-->
+              <div *ngIf="dataArray.status === 'Closed'">
+                <p class="form-header"><span class="form-header badge badge-danger" id="priorityID">{{dataArray.status}}</span></p>
+              </div>
+              <!--Escalated-->
+              <div *ngIf="dataArray.status === 'Escalated'">
+                <p class="form-header"><span class="form-header badge badge-success" id="escalated">{{dataArray.status}}</span></p>
+              </div>
+             
               </div>
             </div>
             <!-- <hr/> -->
@@ -48,7 +64,23 @@
               <div class="col">
               <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
               <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
-              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
+                <!--Styling the status-->
+                <div *ngIf="dataArray.status === 'Open'">
+                  <p class="form-header">Status: <span class="form-header badge badge-danger" id="statusID">{{dataArray.status}}</span></p>
+                </div>
+              <!--In Progress-->
+              <div *ngIf="dataArray.status === 'In progress'">
+                <p class="form-header">Status: <span class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</span></p>
+              </div>
+              <!--closed-->
+              <div *ngIf="dataArray.status === 'Closed'">
+                <p class="form-header">Status: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.status}}</span></p>
+              </div>
+              <!--Escalated-->
+              <div *ngIf="dataArray.status === 'Escalated'">
+                <p class="form-header">Status: <span class="form-header badge badge-success" id="escalated">{{dataArray.status}}</span></p>
+              </div>
+              
               <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
             </div>
             

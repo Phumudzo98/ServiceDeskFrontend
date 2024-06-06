@@ -2,9 +2,8 @@
 <app-agent-top-menu></app-agent-top-menu>
 
 <div class="content">
-
-
-  <div class="content-wrapper">    <div class="row">
+  <div class="content-wrapper">
+    <div class="row">
       <!-- Left section -->
       <div style="display: flex;">
         <h2><strong>Ticket</strong></h2>
@@ -13,7 +12,6 @@
       </div>
       <hr>
       <div class="col-8">
-        
         <!-- Main card -->
         <div class="card" style="width: 100%;">
           <div class="card-body">
@@ -23,10 +21,24 @@
               <div style="display: flex; margin-left: auto;">
                 <p class="form-header badge badge-secondary" id="ticketID">{{ticketId}}</p>
                 <p class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</p>
-                <p class="form-header badge badge-success" id="statusID">{{dataArray.status}}</p>
+                <!--Styling the status-->
+                <div *ngIf="dataArray.status === 'Open'">
+                  <p class="form-header"><span class="form-header badge badge-danger" id="statusID">{{dataArray.status}}</span></p>
+                </div>
+              <!--In Progress-->
+              <div *ngIf="dataArray.status === 'In progress'">
+                <p class="form-header"><span class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</span></p>
+              </div>
+              <!--closed-->
+              <div *ngIf="dataArray.status === 'Closed'">
+                <p class="form-header"><span class="form-header badge badge-danger" id="priorityID">{{dataArray.status}}</span></p>
+              </div>
+              <!--Escalated-->
+              <div *ngIf="dataArray.status === 'Escalated'">
+                <p class="form-header"><span class="form-header badge badge-success" id="escalated">{{dataArray.status}}</span></p>
+              </div>
               </div>
             </div>
-            <!-- <hr/> -->
             <div class="message-body">
               <span style="color: white;">{{dataArray.description}}</span>
             </div>
@@ -34,7 +46,6 @@
               <div *ngIf="msg.sender === accountId; else elseBlock">
                 <!-- Reply section -->
                 <p class="replied">{{msg.content}} <span class="form-header"></span></p>
-                
               </div>
               <ng-template #elseBlock>
                 <div class="replied">
@@ -42,13 +53,8 @@
                 </div>
               </ng-template>
             </div>
-            <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
-            <!-- Message input section -->
-            <!-- <p>John <span class="form-header">Today, 11:30 PM</span></p> -->
-            <!-- Message input section -->
             <div class="message-input">
-              <input type="text"
-              [(ngModel)]="newMessage" placeholder="Write your response for the issue" class="text-class"/>
+              <input type="text" [(ngModel)]="newMessage" placeholder="Write your response for the issue" class="text-class"/>
               <div style="display: flex; margin-top: 20px;">
                 <div>
                   <!-- Hidden file input -->
@@ -60,13 +66,13 @@
                 </button>
                 <button (click)="sendMessage()" class="nextButton">Send</button>
               </div>
+
             </div>
+
           </div>
+
         </div>
         <button class="closeButton" routerLink="/agent-tickets">Back</button>
-
-        <!-- Bottom section card -->
-        
       </div>
       <!-- Right section card -->
       <div class="col">
@@ -79,84 +85,95 @@
                 <img src="../../../assets/images/Three Dots.svg" alt="Three dots" width="15" height="15">
               </div>
               <div class="col">
-              <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
-              <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
-              <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
+                <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
+                <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
+                <!--Styling the status-->
+                <div *ngIf="dataArray.status === 'Open'">
+                  <p class="form-header">Status: <span class="form-header badge badge-danger" id="statusID">{{dataArray.status}}</span></p>
+                </div>
+              <!--In Progress-->
+              <div *ngIf="dataArray.status === 'In progress'">
+                <p class="form-header">Status: <span class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</span></p>
+              </div>
+              <!--closed-->
+              <div *ngIf="dataArray.status === 'Closed'">
+                <p class="form-header">Status: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.status}}</span></p>
+              </div>
+              <!--Escalated-->
+              <div *ngIf="dataArray.status === 'Escalated'">
+                <p class="form-header">Status: <span class="form-header badge badge-success" id="escalated">{{dataArray.status}}</span></p>
+              </div>
+                <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
+                <hr style="margin-bottom: 5px;">
 
-              <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
-              <hr/>
+
+                <!--
+                <div class="row">
+                <div class="col">
+                <span class="form-header">Are you working on this ticket?</span>
+                </div>
+                <div class="col">
+                  <div class="col">
+                  <span class="form-header">Yes | No</span>
+                </div>
+                </div>
+                </div>-->
+              </div>
             </div>
-              
+          </div>
+        </div>
+
+        <div *ngIf="dataArray.status !== 'Closed'"> 
+          <div class="card" style="width: 100%;margin-top:10px;" *ngIf="!formSubmitted">
+            <div class="card-body">
+              <h6>Escalate Ticket</h6>
+              <form [formGroup]="escalateForm">
+                <input formControlName="escalatedTo" name="name" class="escalate-input" placeholder="Escalate Ticket to" (input)="onEmailInput()">
+                <!-- Dropdown for email suggestions -->
+                <ul *ngIf="emailSuggestions.length > 0" class="list-group">
+                  <li *ngFor="let escalatedTo of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(escalatedTo)">
+                    {{ i + 1 }}. {{ escalatedTo }}
+                  </li>
+                </ul>
+                <!-- Validations -->
+                <div *ngIf="escalate['escalatedTo'].invalid && (escalate['escalatedTo'].dirty || escalate['escalatedTo'].touched)" class="alert alert-danger">
+                  <span *ngIf="escalate['escalatedTo'].errors?.['required']" style="color:#f98f8f">Please select </span>
+                </div>
+                <textarea formControlName="escalateReason" placeholder="Type reason here"></textarea>
+                <!-- Validations -->
+                <div *ngIf="escalate['escalateReason'].invalid && (escalate['escalateReason'].dirty || escalate['escalateReason'].touched)" class="alert alert-danger">
+                  <span *ngIf="escalate['escalateReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
+                </div>
+                <button type="submit" class="escalate-button" [disabled]="escalateForm.invalid || escalateSpinner" (click)="escalateTicket()">
+                  <span *ngIf="!escalateSpinner">Escalate</span>
+                  <div *ngIf="escalateSpinner" class="spinner"></div>
+                </button>
+              </form>
             </div>
           </div>
-        </div>
-        <div *ngIf="!formSubmitted"> 
-        <div class="card" style="width: 100%;margin-top:10px;">
-          <div class="card-body">
-            <h6>Escalate Ticket</h6>
-            <form [formGroup]="escalateForm">
-            <input formControlName="escalatedTo" name="name" class="escalate-input" placeholder="Escalate Ticket to" (input)="onEmailInput()" >
-            <!-- Dropdown for email suggestions -->
-            <ul *ngIf="emailSuggestions.length > 0" class="list-group">
-              <li *ngFor="let escalatedTo of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(escalatedTo)">
-                {{ i + 1 }}. {{ escalatedTo }}
-              </li>
-            </ul>
 
-             <!--Validations-->
-             <div
-             *ngIf="escalate['escalatedTo'].invalid && (escalate['escalatedTo'].dirty || escalate['escalatedTo'].touched)"
-             class="alert alert-danger" >  
-             <span *ngIf="escalate['escalatedTo'].errors?.['required']" style="color:#f98f8f">Please select </span>
-             </div>
-
-             <textarea  formControlName="escalateReason" placeholder="Type reason here"></textarea>
-             <!--Validations-->
-             <div
-             *ngIf="escalate['escalateReason'].invalid && (escalate['escalateReason'].dirty || escalate['escalateReason'].touched)"
-             class="alert alert-danger" >  
-             <span *ngIf="escalate['escalateReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
-             </div>
-             
-            
-            <button type="submit"class="escalate-button" [disabled]="escalateForm.invalid || escalateSpinner" (click)="escalateTicket()">
-              <span *ngIf="!escalateSpinner">Escalate</span>
-              <div *ngIf="escalateSpinner" class="spinner"></div>
-              </button>
-
-        
-          </form>
+          <div class="card" style="width: 100%;margin-top:10px;" *ngIf="!formSubmitted">
+            <div class="card-body">
+              <h6>Close Ticket</h6>
+              <form [formGroup]="closeForm" (submit)="closeTicket()" style="width:100%">
+                <textarea formControlName="closeReason" placeholder="Type reason here"></textarea>
+                <!-- Validations -->
+                <div *ngIf="close['closeReason'].invalid && (close['closeReason'].dirty || close['closeReason'].touched)" class="alert alert-danger">
+                  <span *ngIf="close['closeReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
+                </div>
+                <button type="submit" class="closeButton buttonRight" [disabled]="closeForm.invalid || closeSpinner" (click)="closeTicket()">
+                  <span *ngIf="!closeSpinner">Close</span>
+                  <div *ngIf="closeSpinner" class="spinner"></div>
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
-        <div class="card" style="width: 100%;margin-top:10px;">
-          <div class="card-body">
-            <h6>Close Ticket</h6>
-            <form [formGroup]="closeForm" (submit)="closeTicket()" style="width:100%">
-            <textarea  formControlName="closeReason" placeholder="Type reason here"></textarea>
-             <!--Validations-->
-             <div
-             *ngIf="close['closeReason'].invalid && (close['closeReason'].dirty || close['closeReason'].touched)"
-             class="alert alert-danger" >  
-             <span *ngIf="close['closeReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
-             </div>
-            <button type="submit" class="closeButton buttonRight"[disabled]="closeForm.invalid || closeSpinner" (click)="closeTicket()">
-              <span *ngIf="!closeSpinner">Close</span>
-              <div *ngIf="closeSpinner" class="spinner"></div>
-              </button>
-          </form>
-          </div>
-        </div>
         </div>
 
         <div *ngIf="formSubmitted" style="margin-top: 15px;">
           <p class="success" style="width: 100%">{{ successMessage }}</p>
         </div>
-
-      
       </div>
-
     </div>
-
   </div>
-
 </div>
