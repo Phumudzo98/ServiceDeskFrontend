@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { StorageService } from 'src/app/utility/services/Storage/storage.service';
 
 @Component({
@@ -49,16 +50,30 @@ export class EmployeeLoginComponent {
       if (this.loginForm.valid) {
         this.http.post<any>(this.loginUrl, this.loginForm.value, { headers })
           .subscribe((response: any) => {
-            console.log('Login response:', response);
            // this.showAlertMessage('success', 'Logged in successfully');
             setTimeout(() => {
               this.authToken = response;
               this.storageService.saveUser(this.authToken.message);
   
-              const check =this.storageService.getUser()
-              
-             ///this.isLoggedIn = true;
-             this.router.navigate(['/employee-tickets']);
+              let getToken=this.storageService.getUser();
+              let getJwtToken:any=jwtDecode(getToken);
+              let getCompanyID = getJwtToken.companyId
+   
+             let url ="http://localhost:8080/api/subscription/get-subscription/"
+              this.http.get(url+getCompanyID).subscribe(response=>{
+   
+               if(response==null)
+                 {
+                   console.log("No active subscription");
+                   this.router.navigate(["/employee-login"])
+                   this.storageService.clean();
+                 }
+                 else{
+                  this.router.navigate(['/employee-tickets']);
+                 }
+               
+              })
+             
             }, 2000);
           }, (error: HttpErrorResponse) => {
             console.error('Error logging in:', error);

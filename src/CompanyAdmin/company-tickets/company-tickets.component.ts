@@ -27,7 +27,7 @@ export class CompanyTicketsComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
 
   ticketForm: FormGroup = new FormGroup({
-    assignee: new FormControl('', [Validators.required]),
+     //assignee: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     category: new FormControl('', [Validators.required]),
     ticketBody: new FormControl('', [Validators.required]),
@@ -197,7 +197,6 @@ export class CompanyTicketsComponent implements OnInit {
                   {
                     console.log(error);
                   }
-                
               )
            }
 
@@ -207,7 +206,6 @@ export class CompanyTicketsComponent implements OnInit {
         }
         
       )
-
     }
   }
 
@@ -268,7 +266,7 @@ export class CompanyTicketsComponent implements OnInit {
   performSearchOpenTicket(): void {
     if (this.searchQuery.trim() === '') {
       this.ngOnInit(); // Reset to show all agents if search query is empty
- console.log(this.ngOnInit);
+        console.log(this.ngOnInit);
       
     } else {
       this.tickets = this.tickets.filter(user =>
@@ -279,9 +277,7 @@ export class CompanyTicketsComponent implements OnInit {
     }
   }
 
-  
   empEmails:any=""
-
 
   getEmployeeAndAgent(){
 
@@ -290,7 +286,7 @@ export class CompanyTicketsComponent implements OnInit {
     const companyId = decodedToken.companyId;
 
     let url = "http://localhost:8080/api/company/get-user-email";
-    let url2 ="http://localhost:8080/api/company/get-agent-email";
+    
 
     let searchEmployee=
     {
@@ -300,29 +296,27 @@ export class CompanyTicketsComponent implements OnInit {
 
     this.http.post<[]>(url,searchEmployee).subscribe(response=>{
 
-      //console.log(response);
       this.allEmails=response;
-      //console.log(this.allEmails);
       
     },error=>{
       console.log(error);
       
     })
 
-    let searchAgent=
-    {
-      "search":"",
-      "companyID":companyId
-    }
+    // let searchAgent=
+    // {
+    //   "search":"",
+    //   "companyID":companyId
+    // }
 
-    this.http.post<[]>(url2,searchAgent).subscribe(response=>{
+    // this.http.post<[]>(url2,searchAgent).subscribe(response=>{
 
-      //console.log(response);
-      this.allAssignees=response;
+    //   //console.log(response);
+    //   this.allAssignees=response;
       
-    },error=>{
-      console.log(error);
+    // },error=>{
+    //   console.log(error);
       
-    })
+    // })
   }
 }

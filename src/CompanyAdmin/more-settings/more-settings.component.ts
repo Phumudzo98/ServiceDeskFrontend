@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-more-settings',
@@ -7,9 +8,12 @@ import { Component } from '@angular/core';
 })
 export class MoreSettingsComponent {
 
+  constructor(private router: Router){}
 
   primaryColor: string = '#fff'; // Default color
   secondaryColor: string = '#fff'; 
+
+  
 
  
  
@@ -40,5 +44,9 @@ onFileSelected(event: any) {
     this.logoImage = reader.result as string | ArrayBuffer; 
      };
   }
+}
+
+toDestination(){
+  this.router.navigate(['/company-subscription']);
 }
 }

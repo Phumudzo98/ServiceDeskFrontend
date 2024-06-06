@@ -82,6 +82,7 @@
               <p class="form-header">Ticket Id: <span id="ticketID" class="form-header badge badge-secondary">{{ticketId}}</span></p>
               <p class="form-header">Created : <span>{{dataArray.createdAt}}</span></p>
               <p class="form-header">Status: <span class="form-header badge badge-success" id="statusID">{{dataArray.status}}</span></p>
+
               <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
               <hr/>
             </div>
@@ -89,23 +90,69 @@
             </div>
           </div>
         </div>
+        <div *ngIf="!formSubmitted"> 
         <div class="card" style="width: 100%;margin-top:10px;">
           <div class="card-body">
-            <p>Close Ticket</p>
-            <textarea placeholder="Type reason here"></textarea>
-            <button class="closeButton">Close</button>
-          
+            <h6>Escalate Ticket</h6>
+            <form [formGroup]="escalateForm" (submit)="escalateTicket()">
+            <input formControlName="escalatedTo" name="name" class="escalate-input" placeholder="Escalate Ticket to" (input)="onEmailInput()" >
+            <!-- Dropdown for email suggestions -->
+            <ul *ngIf="emailSuggestions.length > 0" class="list-group">
+              <li *ngFor="let escalatedTo of emailSuggestions; let i = index" class="list-group-item" (click)="onSelectSuggestion(escalatedTo)">
+                {{ i + 1 }}. {{ escalatedTo }}
+              </li>
+            </ul>
+
+             <!--Validations-->
+             <div
+             *ngIf="escalate['escalatedTo'].invalid && (escalate['escalatedTo'].dirty || escalate['escalatedTo'].touched)"
+             class="alert alert-danger" >  
+             <span *ngIf="escalate['escalatedTo'].errors?.['required']" style="color:#f98f8f">Please select </span>
+             </div>
+
+             <textarea  formControlName="escalateReason" placeholder="Type reason here"></textarea>
+             <!--Validations-->
+             <div
+             *ngIf="escalate['escalateReason'].invalid && (escalate['escalateReason'].dirty || escalate['escalateReason'].touched)"
+             class="alert alert-danger" >  
+             <span *ngIf="escalate['escalateReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
+             </div>
+             
+            
+            <button type="submit"class="escalate-button" [disabled]="escalateForm.invalid || escalateSpinner" (click)="escalateTicket()">
+              <span *ngIf="!escalateSpinner">Escalate</span>
+              <div *ngIf="escalateSpinner" class="spinner"></div>
+              </button>
+
+        
+          </form>
           </div>
+        </div>
+        <div class="card" style="width: 100%;margin-top:10px;">
+          <div class="card-body">
+            <h6>Close Ticket</h6>
+            <form [formGroup]="closeForm" (submit)="closeTicket()" style="width:100%">
+            <textarea  formControlName="closeReason" placeholder="Type reason here"></textarea>
+             <!--Validations-->
+             <div
+             *ngIf="close['closeReason'].invalid && (close['closeReason'].dirty || close['closeReason'].touched)"
+             class="alert alert-danger" >  
+             <span *ngIf="close['closeReason'].errors?.['required']" style="color:#f98f8f">Please state your reason</span>
+             </div>
+            <button type="submit" class="closeButton buttonRight"[disabled]="closeForm.invalid || closeSpinner" (click)="closeTicket()">
+              <span *ngIf="!closeSpinner">Close</span>
+              <div *ngIf="closeSpinner" class="spinner"></div>
+              </button>
+          </form>
+          </div>
+        </div>
         </div>
 
-        <div class="card" style="width: 100%;margin-top:10px;">
-          <div class="card-body">
-            <p>Escalate Ticket</p>
-            <input placeholder="Name" class="escalate-input">
-            <textarea placeholder="Type reason here"></textarea>
-            <button class="escalate-button">Escalate</button>
-          </div>
+        <div *ngIf="formSubmitted" style="margin-top: 15px;">
+          <p class="success" style="width: 100%">{{ successMessage }}</p>
         </div>
+
+      
       </div>
 
     </div>

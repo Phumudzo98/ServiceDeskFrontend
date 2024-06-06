@@ -76,6 +76,8 @@ export class AgentTicketsComponent implements OnInit{
     this.http.get<any[]>(baseUrl+agentId).subscribe(data=>
       {
         this.dataArray=data;
+        
+        
       },
       error=>
       {
@@ -143,42 +145,43 @@ export class AgentTicketsComponent implements OnInit{
 
   
  
-  createTicket():void
-  {
-    
-
+  createTicket(): void {
+    // Show spinner
+    this.showSpinner = true;
+  
     const token = this.storage.getUser();
     const decodedToken: any = jwtDecode(token);
     const companyNo = decodedToken.companyId;
     const empNo = decodedToken.accountId;
-
+  
     let category = this.ticketForm.value.category;
     if (category === 'other') {
       category = this.ticketForm.value.otherCategory;
     }
-
+  
     const ticketCreate = {
       'category': category,
       'description': this.ticketForm.value.ticketBody,
       'customerUserId': `${empNo}`
     };
-
-    let url2="http://localhost:8080/api/ticket/request-service/"+companyNo;
-
-    this.http.post<any>(url2, ticketCreate).subscribe(response => {
-      console.log("Yes", response);
-      setTimeout(() => {
+  
+    let url2 = "http://localhost:8080/api/ticket/request-service/" + companyNo;
+  
+    this.http.post<any>(url2, ticketCreate).subscribe(
+      response => {
+        console.log("Yes", response);
+        // Hide spinner on success
         this.showSpinner = false;
         this.successMessage = 'Ticket created successfully!';
-        this.router.navigate(['/agent-tickets']);
+        this.router.navigate(['/agents-tickets']);
         location.reload();
-      }, 3000); // 5 seconds delay
-    },
-    //What happened
-    error => {
-      console.log("No", error);
-      this.showSpinner = false;
-    });
+      },
+      error => {
+        console.log("No", error);
+        // Hide spinner on error
+        this.showSpinner = false;
+      }
+    );
   }
 
   //Reset The filter

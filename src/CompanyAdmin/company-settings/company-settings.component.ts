@@ -577,7 +577,9 @@ resetButtonText(agentIndex: number) {
         setTimeout(() => {
           this.showSpinner = false;
           this.showAlertMessage('success', 'Profile details updated successfully');
-          window.location.reload(); 
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 2000); //
         }, Math.max(0, remainingTime));
       },
       error => {
@@ -593,6 +595,7 @@ resetButtonText(agentIndex: number) {
       }
     );
   }
+
   
   
   performSearchAgent(): void {

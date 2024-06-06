@@ -17,15 +17,11 @@ margin-bottom: 20px;
 }
 
   
-  form {
-    width: 400px;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background: #fff;
-    border-radius: 8px;
-    word-wrap: break-word;
-
+  form textarea{
+    height: 75px;
   }
+
+
   
   h1 {
     margin: 0 0 30px 0;
@@ -35,7 +31,6 @@ margin-bottom: 20px;
  
   
   input,
-  
   select {
     background: white;
     border: none;
@@ -62,7 +57,7 @@ margin-bottom: 20px;
   padding: 15px;
   width: 100%;
   background-color: #fff;
-  color: #9E9E9E;
+  color: #5b5959;
   box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
   margin-bottom: 5px;
   border: 1px solid #E7E7E7;
@@ -383,23 +378,41 @@ border-radius: 50px;}
   width: 100px;
   height: 40px;
   margin-bottom: 10px;
-  border: 2px solid #3818D9;
+  border: 1px solid #3818D9;
   padding-left: 5px;
   margin-top: 15px;
+  float: inline-end;
+}
+.closeButton
+{
+  color: #fff;
+  background-color: #E94435;
+    font-style: normal;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    margin-top: 25px;
+    border: 1px solid #E94435;
+
+}
+
+.buttonRight{
+  float:inline-end;
 }
 
 
 .escalate-input {
     background: white;
     border: none;
-    font-size: 14px;
-    height: 40px;
+    font-size: 12px;
+    height: 35px;
     margin: 0;
     outline: 0;
     padding: 15px;
     width: 100%;
     background-color: #fff;
-    color: #000;
+    color: #5b5959;
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     margin-bottom: 5px;
     border: 1px solid #E7E7E7;
@@ -410,6 +423,75 @@ border-radius: 50px;}
   {
     margin-bottom: 10px;
   }
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #fff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 35%;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .success{
+    color:#03781D;
+  }
+  #inprogress
+{
+color:#e47200;
+background-color: rgba(241, 238, 142, 0.5);
+border: 2px solid #ffff00;
+border-radius: 50px;
+margin-left: 10px;
+
+}
+
+
+  
+  #escalated{
+    color:#ff7420;
+    background-color: rgba(255, 116, 32, 0.1);
+    border: 2px solid rgba(255, 116, 32, 0.5);
+      padding-right: 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;}
+  
+  
+  #priorityID{
+  color:#BA1717;
+  background-color: #F9F2F2;
+  border: 2px solid #E2A1A1;
+  border-radius: 50px;
+  }
+  .list-group {
+    background-color: #f8f9fa; 
+    border-radius: 0.25rem; 
+    max-height: 80px; 
+    overflow-y: auto;
+    margin-top: 5px; 
+    list-style: none; 
+  }
+  
+  .list-group .list-group-item {
+    padding: 10px;
+    cursor: pointer; 
+    font-size: 14px;
+    background-color: transparent; 
+    border: none; 
+  }
+  
+  .list-group .list-group-item:hover {
+    font-weight: 600;
+  }
+  
   
  
 
