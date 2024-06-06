@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.css']
 })
-export class AdminUsersComponent {
+export class AdminUsersComponent implements OnInit {
 
 
    //Toggling through the buttons
@@ -15,6 +15,12 @@ export class AdminUsersComponent {
 
    toggleForms(form: string) {
      this.currentForm = form;
+   }
+
+   ngOnInit(): void {
+     
+    
+
    }
 
    addUsers:FormGroup = new FormGroup({
@@ -51,6 +57,8 @@ export class AdminUsersComponent {
       event.stopPropagation(); // Prevents the event from bubbling up to parent elements
       this.isDropdownOpen = !this.isDropdownOpen;
   }
+
+  
    
 
 }

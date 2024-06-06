@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'; // Import Validators
 import { Router } from '@angular/router'; // Import Router
 import { StorageService } from 'src/app/utility/services/Storage/storage.service';
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-company-login',
@@ -48,12 +49,34 @@ export class CompanyLoginComponent {
       this.http.post<any>(this.loginUrl, this.loginForm.value, { headers })
         .subscribe((response: any) => {
           console.log('Login response:', response);
+          
           //this.showAlertMessage('success', 'Logged in successfully');
           setTimeout(() => {
             this.authToken = response;
             this.storageService.saveUser(this.authToken.message);
            ///this.isLoggedIn = true;
-           this.router.navigate(['/company-dashboard']);
+           let getToken=this.storageService.getUser();
+           let getJwtToken:any=jwtDecode(getToken);
+           let getCompanyID = getJwtToken.companyId
+           //let role =getJwtToken.
+
+          let url ="http://localhost:8080/api/subscription/get-subscription/"
+           this.http.get(url+getCompanyID).subscribe(response=>{
+
+            if(response==null)
+              {
+
+                console.log("No active subscription");
+                
+                this.router.navigate(["/company-login"])
+                this.storageService.clean();
+              }
+              else{
+                this.router.navigate(['/company-dashboard']);
+              }
+            
+           })
+           
           }, 1000);
         }, (error: HttpErrorResponse) => {
           console.error('Error logging in:', error);

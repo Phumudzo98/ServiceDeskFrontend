@@ -117,8 +117,6 @@ export class AgentTicketDetailsComponent implements OnInit {
 
   isCloseTicketFormVisible = false;
 
-  
-
   showDropdown: boolean = false;
 
   toggleDropdown() {
