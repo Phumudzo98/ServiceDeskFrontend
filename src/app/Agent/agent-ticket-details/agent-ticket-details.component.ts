@@ -162,6 +162,8 @@ export class AgentTicketDetailsComponent implements OnInit {
       // Disappear message after 2 seconds
       setTimeout(() => {
         this.successMessage = '';
+        this.router.navigate(['/agent-tickets']);
+
       }, 2000);
   
     }, 3000);

@@ -80,18 +80,18 @@
                 <p class="form-header">Created: <span>{{dataArray.createdAt}}</span></p>
                 <!--Styling the status-->
                 <div *ngIf="dataArray.status === 'Open'">
-                  <p class="form-header">Status: <span class="form-header badge badge-danger">{{dataArray.status}}</span></p>
+                  <p class="form-header">Status: <span class="form-header badge badge-danger" id="statusID">{{dataArray.status}}</span></p>
                 </div>
                 <div *ngIf="dataArray.status === 'In progress'">
-                  <p class="form-header">Status: <span class="form-header badge badge-warning">{{dataArray.status}}</span></p>
+                  <p class="form-header">Status: <span class="form-header badge badge-warning" id="inprogress">{{dataArray.status}}</span></p>
                 </div>
                 <div *ngIf="dataArray.status === 'Closed'">
-                  <p class="form-header">Status: <span class="form-header badge badge-danger">{{dataArray.status}}</span></p>
+                  <p class="form-header">Status: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.status}}</span></p>
                 </div>
                 <div *ngIf="dataArray.status === 'Escalated'">
-                  <p class="form-header">Status: <span class="form-header badge badge-success">{{dataArray.status}}</span></p>
+                  <p class="form-header">Status: <span class="form-header badge badge-success" id="escalated">{{dataArray.status}}</span></p>
                 </div>
-                <p class="form-header">Priority: <span class="form-header badge badge-danger">{{dataArray.priority}}</span></p>
+                <p class="form-header">Priority: <span class="form-header badge badge-danger" id="priorityID">{{dataArray.priority}}</span></p>
                 <hr style="margin-bottom: 5px;">
               </div>
             </div>
