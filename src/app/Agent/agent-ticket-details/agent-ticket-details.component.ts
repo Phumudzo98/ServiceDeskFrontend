@@ -182,7 +182,7 @@ export class AgentTicketDetailsComponent implements OnInit {
             {
               "ticketId":this.ticketId,
               "status":"Escalate",
-              "updateMessage":this.escalateForm.get('escalatedReason')?.value,
+              "updateMessage":this.escalateForm.get('escalateReason')?.value,
               "escalatedToAgentId":response
             }
 
