@@ -319,9 +319,9 @@
                   </div>
 
                 <div class="col">
-                  <span class="form-header pointer" (click)="toggleState(0)">{{ buttonTexts[0] }}</span><br>
-                  <span class="form-header pointer" (click)="toggleState(1)">{{ buttonTexts[1] }}</span><br>
-                  <span class="form-header pointer" (click)="toggleState(2)">{{ buttonTexts[2] }}</span><br>
+                  <span class="form-header pointer" (click)="toggleState(0,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: 'Off' })">{{ buttonTexts[0] }}</span><br>
+                  <span class="form-header pointer" (click)="toggleState(1,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: 'Off' })">{{ buttonTexts[1] }}</span><br>
+                  <span class="form-header pointer" (click)="toggleState(2,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: 'Off' })">{{ buttonTexts[2] }}</span><br>
 
                 </div>
                 </div>
@@ -338,7 +338,7 @@
               </div>
 
             <div class="col">
-              <span class="form-header pointer" (click)="toggleState(3)">{{ buttonTexts[3] }}</span><br>
+              <span class="form-header pointer" (click)="toggleState(3,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: 'Off' })">{{ buttonTexts[3] }}</span><br>
         
             </div>
             </div>
@@ -361,10 +361,12 @@
               </div>
 
             <div class="col">
-              <span class="form-header pointer" (click)="toggleState(4)">{{ buttonTexts[4] }}</span><br>
-              <span class="form-header pointer" (click)="toggleState(5)">{{ buttonTexts[5] }}</span><br>
-              <span class="form-header pointer" (click)="toggleState(6)">{{ buttonTexts[6] }}</span><br>
-              <span class="form-header pointer" (click)="toggleState(7)">{{ buttonTexts[7] }}</span><br>
+             
+              <span class="form-header pointer" (click)="toggleState(4,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: 'Off' })">{{ buttonTexts[4] }}</span><br>
+              <span class="form-header pointer" (click)="toggleState(5, 'http://localhost:8080/api/company/UpdateChangeProfile', { email: this.email, profileChange: this.isOns[5] ? 'Off' : 'On' })">{{ buttonTexts[5] }}</span><br>
+              <span class="form-header pointer" (click)="toggleState(6,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: this.isOns[6] ? 'Off' : 'On' })">{{ buttonTexts[6] }}</span><br>
+              <span class="form-header pointer" (click)="toggleState(7,'http://localhost:8080/api/company/UpdateChangePassword',{ email: this.email, passwordChange: 'Off' })">{{ buttonTexts[7] }}</span><br>
+            
             </div>
             </div>
             </div>

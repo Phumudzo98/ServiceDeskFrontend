@@ -60,6 +60,13 @@ export class CompanySettingsComponent {
         this.extractFirstName();
         this.extractLastName();
         this.extractPosition();
+        // Retrieve stored state from localStorage if available
+    const storedState = localStorage.getItem('toggleState');
+    if (storedState) {
+      const state = JSON.parse(storedState);
+      this.buttonTexts = state.buttonTexts;
+      this.isOns = state.isOns;
+    }
       }
       this.route.queryParams.subscribe(params => {
         const form = params['form'];
@@ -250,14 +257,47 @@ validateNumber(control: AbstractControl): ValidationErrors | null {
          }
      }
   
-  buttonTexts: string[] = ['On', 'On', 'On', 'On', 'On','On','On','On']; 
-  isOns: boolean[] = [true, true, true, true, true, true, true, true]; 
-  
-  toggleState(index: number) {
-    this.isOns[index] = !this.isOns[index];
-    this.buttonTexts[index] = this.isOns[index] ? 'On' : 'Off';
-  }
+     private backendUrl = 'http://localhost:8080/api/company/UpdateChangePassword';
+     buttonTexts: string[] = ['On', 'On', 'On', 'On', 'On', 'On', 'On', 'On'];
+     isOns: boolean[] = [true, true, true, true, true, true, true, true];
+    
+   
+    
+  toggleState(index: number, url: string, payload: any) {
+    // Only proceed if not already showing spinner
+    if (!this.showSpinner) {
+      this.showSpinner = true; // Show spinner for the main process
 
+      // Toggle the state and update button text
+      this.isOns[index] = !this.isOns[index];
+      this.buttonTexts[index] = this.isOns[index] ? 'On' : 'Off';
+
+     // const payload = {
+       // email: this.email,
+      //  passwordChange: this.isOns[index] ? 'On' : 'Off'
+     // };
+
+      setTimeout(() => {
+        this.http.post<any>(url, payload)
+          .subscribe(
+            response => {
+              console.log('State updated successfully', response);
+              // Store the updated state in localStorage
+              localStorage.setItem('toggleState', JSON.stringify({ buttonTexts: this.buttonTexts, isOns: this.isOns }));
+            },
+            error => {
+              console.error('Error updating state', error);
+              // Revert the state and button text
+              this.isOns[index] = !this.isOns[index];
+              this.buttonTexts[index] = this.isOns[index] ? 'On' : 'Off';
+            }
+          ).add(() => {
+            this.showSpinner = false; // Hide spinner after the request completes
+          });
+      }, 2000); // Simulate a delay for the loading spinner
+    }
+  }
+   
   //Restore to default button
   restoreToDefault() {
     this.isOns = this.isOns.map(() => false);
