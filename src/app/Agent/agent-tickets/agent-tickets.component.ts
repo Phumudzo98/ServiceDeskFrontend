@@ -55,10 +55,7 @@ export class AgentTicketsComponent implements OnInit{
     const decodedToken:any = jwtDecode(token);
     const agentId=decodedToken.accountId;
     this.companyName=decodedToken.companyId;
-
-    console.log("hello");
     
-
     this.ticketForm= new FormGroup({
 
       /*email: new FormControl('',[Validators.required,Validators.email]),
@@ -69,22 +66,17 @@ export class AgentTicketsComponent implements OnInit{
   
     })
 
-
-
     let baseUrl:any="http://localhost:8080/api/ticket/get-agent-tickets/";
 
     this.http.get<any[]>(baseUrl+agentId).subscribe(data=>
       {
         this.dataArray=data;
-        
-        
       },
       error=>
       {
         console.log("No",error);
       }
     )
-    
   }
 
   showOtherCategoryInput: boolean = false;
@@ -143,8 +135,6 @@ export class AgentTicketsComponent implements OnInit{
   
   get new_ticket (){return this.ticketForm.controls;}
 
-  
- 
   createTicket(): void {
     // Show spinner
     this.showSpinner = true;
@@ -216,7 +206,6 @@ export class AgentTicketsComponent implements OnInit{
       }, 2000);
   }
 
-
   //Only displaying two tickets the next/previous will display other two tickets
   
   get paginatedData() {
@@ -237,7 +226,6 @@ export class AgentTicketsComponent implements OnInit{
     }
   }
 
-  
     //Closing the dropdwon
     closeFilter(dropdown: string) {
       this.showDropdown = false;

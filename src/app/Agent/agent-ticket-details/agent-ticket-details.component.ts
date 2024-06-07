@@ -177,17 +177,21 @@ export class AgentTicketDetailsComponent implements OnInit {
       {
         if(response!=null)
           {
+
+            console.log(response);
+            
             const ticketUpdate=
             {
               "ticketId":this.ticketId,
               "status":"Escalate",
-              "updateMessage":this.escalateForm.get('escalatedReason')?.value,
+              "updateMessage":this.escalateForm.get('escalateReason')?.value,
               "escalatedToAgentId":response
             }
 
             this.http.put(urlUpdate,ticketUpdate).subscribe(response=>
               {
                 console.log(response);
+                location.reload();
               },
               error=>
                 {
