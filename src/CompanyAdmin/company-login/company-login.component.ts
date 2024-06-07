@@ -65,10 +65,10 @@ export class CompanyLoginComponent {
 
             if(response==null)
               {
-                console.log("No active subscription");
+                //console.log("No active subscription");
                 
-                this.router.navigate(["/company-login"])
-                this.storageService.clean();
+                this.router.navigate(["/company-dashboard"])
+                //this.storageService.clean();
               }
               else{
                 this.router.navigate(['/company-dashboard']);

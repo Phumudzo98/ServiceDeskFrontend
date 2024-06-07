@@ -64,9 +64,9 @@ export class EmployeeLoginComponent {
    
                if(response==null)
                  {
-                   console.log("No active subscription");
-                   this.router.navigate(["/employee-login"])
-                   this.storageService.clean();
+                  // console.log("No active subscription");
+                   this.router.navigate(["/employee-tickets"])
+                   //this.storageService.clean();
                  }
                  else{
                   this.router.navigate(['/employee-tickets']);
